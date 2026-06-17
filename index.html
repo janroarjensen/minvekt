@@ -5,7 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#0b1120" />
   <title>Min Vektreise Cloud</title>
-  <link rel="stylesheet" href="./styles.css" />
+  <style>
+    :root{--bg:#071225;--bg2:#0d1930;--surface:rgba(255,255,255,.08);--text:#e5eefb;--muted:#9fb3d1;--line:rgba(255,255,255,.14);--accent:#5eead4;--accent2:#60a5fa;--accent3:#c084fc;--success:#22c55e;--warning:#f59e0b;--danger:#f87171;--shadow:0 20px 60px rgba(2,6,23,.35);--radius-xl:28px;--max:1380px}
+    *{box-sizing:border-box} html,body{margin:0;min-height:100%;font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(1200px 600px at 10% -10%,rgba(96,165,250,.18),transparent 50%),radial-gradient(900px 500px at 100% 0%,rgba(192,132,252,.16),transparent 45%),linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text)}
+    button,input,select,textarea{font:inherit} .app{max-width:var(--max);margin:0 auto;padding:20px 16px 70px} .glass{background:var(--surface);backdrop-filter:blur(20px);border:1px solid var(--line);box-shadow:var(--shadow)} .card{border-radius:var(--radius-xl);padding:22px}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:stretch} .hero h1{font-size:clamp(2rem,5vw,4rem);margin:10px 0 8px;line-height:1.02;letter-spacing:-.03em} .hero p{margin:0;color:var(--muted)} .hero-head{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+    .badge,.pill{display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);font-weight:800;font-size:.86rem}.pill{font-weight:700}
+    .header-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:18px}.stat{padding:16px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid var(--line)}.stat .label{font-size:.9rem;color:var(--muted)}.stat .value{font-size:clamp(1.2rem,3vw,2rem);font-weight:900;margin-top:5px;letter-spacing:-.03em}
+    .toolbar,.row-actions,.hero-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.toolbar{justify-content:space-between;margin-top:14px}.btn{border:0;border-radius:16px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.18s ease;box-shadow:0 10px 24px rgba(0,0,0,.18)}.btn:hover{transform:translateY(-1px)}.btn.primary{background:linear-gradient(135deg,var(--accent2),#2563eb);color:#fff}.btn.secondary{background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);box-shadow:none}.btn.success{background:linear-gradient(135deg,var(--success),#16a34a);color:#fff}.btn.danger{background:linear-gradient(135deg,var(--danger),#ef4444);color:#fff}.btn-full{width:100%}
+    .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px;margin-top:18px}.span-4{grid-column:span 4}.span-5{grid-column:span 5}.span-7{grid-column:span 7}.span-8{grid-column:span 8}.section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.section-title h2{margin:0;font-size:1.2rem;letter-spacing:-.02em}
+    .muted{color:var(--muted)}.tiny{font-size:.85rem}.inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.inputs-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.one-col{grid-template-columns:1fr}label{display:block;font-size:.92rem;font-weight:700;margin-bottom:6px;color:#cfe1ff}
+    input,select,textarea{width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.14);background:rgba(7,18,37,.45);color:#fff;padding:13px 14px;outline:none} input::placeholder,textarea::placeholder{color:#92a7c9} textarea{min-height:96px;resize:vertical}
+    .progress-wrap{margin-top:16px}.progress-top{display:flex;justify-content:space-between;gap:12px;font-size:.93rem}.progress{height:15px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;border:1px solid var(--line);margin-top:8px}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:999px}.bar-purple{background:linear-gradient(90deg,var(--accent3),#7c3aed)}.bar-amber{background:linear-gradient(90deg,var(--warning),#fbbf24)}
+    .ring{width:140px;height:140px;border-radius:50%;display:grid;place-items:center;margin:auto;background:conic-gradient(var(--accent) 0deg,rgba(255,255,255,.08) 0deg);border:8px solid rgba(255,255,255,.08)}.ring-inner{width:96px;height:96px;border-radius:50%;display:grid;place-items:center;background:rgba(7,18,37,.8);box-shadow:inset 0 0 0 1px var(--line)}.ring-value{font-size:2rem;font-weight:900;letter-spacing:-.04em}
+    .score-list{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:10px}.score-list li{padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid var(--line)}.stack{display:grid;gap:16px}.score-box{align-items:center}.quote-text{margin-top:10px;font-size:1.05rem;font-weight:800;line-height:1.4}
+    .habit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.habit{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid var(--line);cursor:pointer}.habit.active{background:rgba(34,197,94,.12);border-color:rgba(74,222,128,.55)}.toggle{width:54px;height:30px;border-radius:999px;background:rgba(255,255,255,.18);position:relative}.toggle::after{content:'';position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:.2s}.habit.active .toggle{background:linear-gradient(90deg,#22c55e,#4ade80)}.habit.active .toggle::after{left:27px}
+    .table-wrap{overflow:auto;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.04)} table{width:100%;border-collapse:collapse;min-width:720px} th,td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.08);text-align:left;font-size:.95rem;vertical-align:top} th{position:sticky;top:0;background:#0a162c;color:#d7e8ff;z-index:1}
+    canvas{width:100%;height:280px;border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid var(--line)} .notice{padding:14px 16px;border-radius:18px;background:rgba(250,204,21,.14);border:1px solid rgba(250,204,21,.35);color:#fff7cc}
+    .auth-shell{position:fixed;inset:0;display:grid;place-items:center;padding:18px;background:rgba(2,6,23,.65);backdrop-filter:blur(12px);z-index:99}.auth-card{width:min(520px,100%);padding:24px;border-radius:28px}.auth-title{font-size:1.8rem;margin:12px 0 6px}.auth-desc{margin:0 0 14px}.auth-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}.tab{padding:11px 12px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;font-weight:800;cursor:pointer;text-align:center}.tab.active{background:linear-gradient(135deg,var(--accent2),#2563eb)}
+    .hidden{display:none!important}.footer{margin-top:22px;text-align:center;color:var(--muted);font-size:.92rem}.full-span{grid-column:1/-1}.center{text-align:center}.mt-12{margin-top:12px}.mt-14{margin-top:14px}.mt-16{margin-top:16px}.mb-8{margin-bottom:8px}.mb-14{margin-bottom:14px}.min-h-18{min-height:18px}.sep{border-color:var(--line);border-style:solid;border-width:0 0 1px;margin:16px 0}
+    @media (max-width:1120px){.hero{grid-template-columns:1fr}.header-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.span-8,.span-7,.span-5,.span-4{grid-column:span 12}}
+    @media (max-width:760px){.app{padding:14px 12px 56px}.card{padding:18px}.header-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.inputs,.inputs-3,.habit-grid,.auth-tabs{grid-template-columns:1fr}.hero h1{font-size:2.2rem}.btn{width:100%}.toolbar{align-items:stretch}}
+  </style>
 </head>
 <body>
   <div class="auth-shell" id="authOverlay">
@@ -13,33 +34,18 @@
       <div class="badge">✨ Cloud edition • Mobilvennlig • Flerbruker</div>
       <h2 class="auth-title">Logg inn eller opprett bruker</h2>
       <p class="muted auth-desc">Data lagres per bruker i Firestore når Firebase er konfigurert.</p>
-
       <div class="auth-tabs">
         <button class="tab active" data-tab="login">Logg inn</button>
         <button class="tab" data-tab="signup">Opprett bruker</button>
         <button class="tab" data-tab="reset">Glemt passord</button>
       </div>
-
       <div id="authSetupNotice" class="notice hidden mb-14"></div>
-
       <div class="inputs one-col">
-        <div>
-          <label for="authEmail">E-post</label>
-          <input id="authEmail" type="email" placeholder="deg@epost.no" autocomplete="email" />
-        </div>
-        <div>
-          <label for="authPassword">Passord</label>
-          <input id="authPassword" type="password" placeholder="Minst 6 tegn" autocomplete="current-password" />
-        </div>
-        <div id="authNameWrap" class="hidden">
-          <label for="authName">Navn (valgfritt)</label>
-          <input id="authName" type="text" placeholder="F.eks. Jan Roar" autocomplete="name" />
-        </div>
+        <div><label for="authEmail">E-post</label><input id="authEmail" type="email" placeholder="deg@epost.no" autocomplete="email" /></div>
+        <div><label for="authPassword">Passord</label><input id="authPassword" type="password" placeholder="Minst 6 tegn" autocomplete="current-password" /></div>
+        <div id="authNameWrap" class="hidden"><label for="authName">Navn (valgfritt)</label><input id="authName" type="text" placeholder="F.eks. Jan Roar" autocomplete="name" /></div>
       </div>
-
-      <div class="row-actions mt-16">
-        <button class="btn primary btn-full" id="authActionBtn">Logg inn</button>
-      </div>
+      <div class="row-actions mt-16"><button class="btn primary btn-full" id="authActionBtn">Logg inn</button></div>
       <div id="authMessage" class="muted tiny mt-12 min-h-18"></div>
     </div>
   </div>
@@ -55,7 +61,6 @@
           </div>
           <div class="pill" id="firebaseStatusPill">Sjekker Firebase…</div>
         </div>
-
         <div class="header-grid">
           <div class="stat"><div class="label">Startvekt</div><div class="value" id="startWeightView">–</div></div>
           <div class="stat"><div class="label">Dagens vekt</div><div class="value" id="currentWeightView">–</div></div>
@@ -63,15 +68,7 @@
           <div class="stat"><div class="label">BMI</div><div class="value" id="bmiView">–</div></div>
           <div class="stat"><div class="label">Streak</div><div class="value" id="streakView">0</div></div>
         </div>
-
-        <div class="progress-wrap">
-          <div class="progress-top">
-            <div><strong>Fremgang mot mål:</strong> <span id="progressText">0 kg av 0 kg</span></div>
-            <div id="goalPercentText">0%</div>
-          </div>
-          <div class="progress"><div class="bar" id="goalBar"></div></div>
-        </div>
-
+        <div class="progress-wrap"><div class="progress-top"><div><strong>Fremgang mot mål:</strong> <span id="progressText">0 kg av 0 kg</span></div><div id="goalPercentText">0%</div></div><div class="progress"><div class="bar" id="goalBar"></div></div></div>
         <div class="toolbar">
           <div class="pill">👤 <span id="userLabel">Ikke logget inn</span></div>
           <div class="hero-actions">
@@ -83,26 +80,11 @@
           </div>
         </div>
       </div>
-
       <div class="card glass stack">
-        <div class="section-title">
-          <h2>Dagens score</h2>
-          <span class="pill" id="scorePill">Klar for en god dag</span>
-        </div>
+        <div class="section-title"><h2>Dagens score</h2><span class="pill" id="scorePill">Klar for en god dag</span></div>
         <div class="inputs score-box">
-          <div class="ring" id="scoreRing">
-            <div class="ring-inner">
-              <div>
-                <div class="ring-value" id="scoreValue">0</div>
-                <div class="tiny muted center">av 10</div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="badge">💡 Motivasjon</div>
-            <div id="quoteText" class="quote-text">Små valg, hver dag, blir store resultater over tid.</div>
-            <div class="row-actions"><button class="btn secondary" id="quoteBtn">Ny motivasjon</button></div>
-          </div>
+          <div class="ring" id="scoreRing"><div class="ring-inner"><div><div class="ring-value" id="scoreValue">0</div><div class="tiny muted center">av 10</div></div></div></div>
+          <div><div class="badge">💡 Motivasjon</div><div id="quoteText" class="quote-text">Små valg, hver dag, blir store resultater over tid.</div><div class="row-actions"><button class="btn secondary" id="quoteBtn">Ny motivasjon</button></div></div>
         </div>
         <ul class="score-list" id="scoreList"></ul>
       </div>
@@ -115,128 +97,134 @@
           <div><label for="displayName">Visningsnavn</label><input id="displayName" type="text" placeholder="Navn i appen" /></div>
           <div><label for="heightCm">Høyde (cm)</label><input id="heightCm" type="number" min="100" max="250" step="1" /></div>
           <div><label for="age">Alder</label><input id="age" type="number" min="15" max="100" step="1" /></div>
-          <div>
-            <label for="sex">Kjønn</label>
-            <select id="sex"><option value="">Velg</option><option value="male">Mann</option><option value="female">Kvinne</option></select>
-          </div>
-          <div>
-            <label for="activityLevel">Aktivitetsnivå</label>
-            <select id="activityLevel"><option value="1.2">Lavt</option><option value="1.375">Lett aktiv</option><option value="1.55">Moderat</option><option value="1.725">Høy</option><option value="1.9">Svært høy</option></select>
-          </div>
+          <div><label for="sex">Kjønn</label><select id="sex"><option value="">Velg</option><option value="male">Mann</option><option value="female">Kvinne</option></select></div>
+          <div><label for="activityLevel">Aktivitetsnivå</label><select id="activityLevel"><option value="1.2">Lavt</option><option value="1.375">Lett aktiv</option><option value="1.55">Moderat</option><option value="1.725">Høy</option><option value="1.9">Svært høy</option></select></div>
           <div><label for="manualCalorieTarget">Manuelt kalorimål</label><input id="manualCalorieTarget" type="number" min="1200" max="5000" step="10" placeholder="Valgfritt" /></div>
           <div><label for="startWeight">Startvekt (kg)</label><input id="startWeight" type="number" min="40" max="300" step="0.1" /></div>
           <div><label for="currentWeight">Dagens vekt (kg)</label><input id="currentWeight" type="number" min="40" max="300" step="0.1" /></div>
           <div><label for="goalWeight">Målvekt (kg)</label><input id="goalWeight" type="number" min="40" max="300" step="0.1" /></div>
           <div><label for="weighDate">Dato for veiing</label><input id="weighDate" type="date" /></div>
         </div>
-        <label for="whyText" class="mt-12">Ditt hvorfor</label>
-        <textarea id="whyText" placeholder="Mer energi, bedre helse, enklere hverdag, føle meg sterkere..."></textarea>
-        <div class="row-actions">
-          <button class="btn primary" id="saveProfileBtn">Lagre profil</button>
-          <button class="btn success" id="logWeightBtn">Lagre veiing</button>
-        </div>
+        <label for="whyText" class="mt-12">Ditt hvorfor</label><textarea id="whyText" placeholder="Mer energi, bedre helse, enklere hverdag, føle meg sterkere..."></textarea>
+        <div class="row-actions"><button class="btn primary" id="saveProfileBtn">Lagre profil</button><button class="btn success" id="logWeightBtn">Lagre veiing</button></div>
         <div class="notice mt-12" id="planNotice">Legg inn alder og kjønn for å få beregnet kalorimål, eller bruk manuelt mål.</div>
       </div>
 
       <div class="card glass span-8">
         <div class="section-title"><h2>Dashboard</h2><span class="badge">📈 Oversikt</span></div>
-        <div class="stack">
-          <div>
-            <div class="tiny muted mb-8">Vektutvikling</div>
-            <canvas id="weightChart" width="960" height="300"></canvas>
-          </div>
-          <div>
-            <div class="tiny muted mb-8">Minutter og kalorier siste 14 dager</div>
-            <canvas id="activityChart" width="960" height="300"></canvas>
-          </div>
-        </div>
+        <div class="stack"><div><div class="tiny muted mb-8">Vektutvikling</div><canvas id="weightChart" width="960" height="300"></canvas></div><div><div class="tiny muted mb-8">Minutter og kalorier siste 14 dager</div><canvas id="activityChart" width="960" height="300"></canvas></div></div>
       </div>
 
       <div class="card glass span-5">
         <div class="section-title"><h2>Ukemål og vaner</h2><span class="badge">🔥 Rytme</span></div>
-        <div class="inputs-3">
-          <div><label for="goalActivitiesPerWeek">Økter / uke</label><input id="goalActivitiesPerWeek" type="number" min="1" max="14" step="1" /></div>
-          <div><label for="goalMinutesPerWeek">Min / uke</label><input id="goalMinutesPerWeek" type="number" min="30" max="2000" step="10" /></div>
-          <div><label for="goalStepsPerDay">Skritt / dag</label><input id="goalStepsPerDay" type="number" min="1000" max="30000" step="500" /></div>
-        </div>
-        <div class="stack mt-14">
-          <div>
-            <div class="progress-top"><span>Aktiviteter denne uka</span><span id="weeklyActsText">0/4</span></div>
-            <div class="progress"><div class="bar" id="weeklyActsBar"></div></div>
-          </div>
-          <div>
-            <div class="progress-top"><span>Minutter denne uka</span><span id="weeklyMinsText">0/180</span></div>
-            <div class="progress"><div class="bar bar-purple" id="weeklyMinsBar"></div></div>
-          </div>
-          <div>
-            <div class="progress-top"><span>Snitt skritt / dag</span><span id="weeklyStepsText">0/8000</span></div>
-            <div class="progress"><div class="bar bar-amber" id="weeklyStepsBar"></div></div>
-          </div>
-        </div>
-        <div class="row-actions"><button class="btn primary" id="saveGoalsBtn">Lagre mål</button></div>
-        <hr class="sep" />
-        <div class="inputs">
-          <div><label for="waterGlasses">Vannglass i dag</label><input id="waterGlasses" type="number" min="0" max="30" step="1" placeholder="F.eks. 8" /></div>
-          <div><label for="dailyMood">Dagens følelse</label><select id="dailyMood"><option value="">Velg</option><option>Veldig bra</option><option>Bra</option><option>OK</option><option>Tung dag</option></select></div>
-        </div>
-        <div class="habit-grid mt-12" id="habitGrid"></div>
-        <div class="row-actions"><button class="btn success" id="saveCheckinBtn">Lagre innsjekk</button></div>
+        <div class="inputs-3"><div><label for="goalActivitiesPerWeek">Økter / uke</label><input id="goalActivitiesPerWeek" type="number" min="1" max="14" step="1" /></div><div><label for="goalMinutesPerWeek">Min / uke</label><input id="goalMinutesPerWeek" type="number" min="30" max="2000" step="10" /></div><div><label for="goalStepsPerDay">Skritt / dag</label><input id="goalStepsPerDay" type="number" min="1000" max="30000" step="500" /></div></div>
+        <div class="stack mt-14"><div><div class="progress-top"><span>Aktiviteter denne uka</span><span id="weeklyActsText">0/4</span></div><div class="progress"><div class="bar" id="weeklyActsBar"></div></div></div><div><div class="progress-top"><span>Minutter denne uka</span><span id="weeklyMinsText">0/180</span></div><div class="progress"><div class="bar bar-purple" id="weeklyMinsBar"></div></div></div><div><div class="progress-top"><span>Snitt skritt / dag</span><span id="weeklyStepsText">0/8000</span></div><div class="progress"><div class="bar bar-amber" id="weeklyStepsBar"></div></div></div></div>
+        <div class="row-actions"><button class="btn primary" id="saveGoalsBtn">Lagre mål</button></div><hr class="sep" />
+        <div class="inputs"><div><label for="waterGlasses">Vannglass i dag</label><input id="waterGlasses" type="number" min="0" max="30" step="1" placeholder="F.eks. 8" /></div><div><label for="dailyMood">Dagens følelse</label><select id="dailyMood"><option value="">Velg</option><option>Veldig bra</option><option>Bra</option><option>OK</option><option>Tung dag</option></select></div></div>
+        <div class="habit-grid mt-12" id="habitGrid"></div><div class="row-actions"><button class="btn success" id="saveCheckinBtn">Lagre innsjekk</button></div>
       </div>
 
       <div class="card glass span-7">
         <div class="section-title"><h2>Matlogg</h2><span class="badge">🥗 Kosthold</span></div>
-        <div class="inputs">
-          <div><label for="mealDate">Dato</label><input id="mealDate" type="date" /></div>
-          <div><label for="mealType">Måltid</label><select id="mealType"><option>Frokost</option><option>Lunsj</option><option>Middag</option><option>Kveldsmat</option><option>Snacks</option></select></div>
-          <div class="full-span"><label for="mealText">Hva spiste du?</label><input id="mealText" type="text" placeholder="F.eks. havregrøt med bær" /></div>
-        </div>
-        <div class="inputs-3 mt-12">
-          <div><label for="mealCalories">Kalorier</label><input id="mealCalories" type="number" min="0" step="1" placeholder="650" /></div>
-          <div><label for="mealProtein">Protein (g)</label><input id="mealProtein" type="number" min="0" step="1" placeholder="35" /></div>
-          <div><label for="mealNote">Notat</label><input id="mealNote" type="text" placeholder="Mett? Sulten?" /></div>
-        </div>
+        <div class="inputs"><div><label for="mealDate">Dato</label><input id="mealDate" type="date" /></div><div><label for="mealType">Måltid</label><select id="mealType"><option>Frokost</option><option>Lunsj</option><option>Middag</option><option>Kveldsmat</option><option>Snacks</option></select></div><div class="full-span"><label for="mealText">Hva spiste du?</label><input id="mealText" type="text" placeholder="F.eks. havregrøt med bær" /></div></div>
+        <div class="inputs-3 mt-12"><div><label for="mealCalories">Kalorier</label><input id="mealCalories" type="number" min="0" step="1" placeholder="650" /></div><div><label for="mealProtein">Protein (g)</label><input id="mealProtein" type="number" min="0" step="1" placeholder="35" /></div><div><label for="mealNote">Notat</label><input id="mealNote" type="text" placeholder="Mett? Sulten?" /></div></div>
         <div class="row-actions"><button class="btn success" id="addMealBtn">Legg til måltid</button></div>
         <div class="table-wrap mt-14"><table><thead><tr><th>Dato</th><th>Måltid</th><th>Mat</th><th>Kcal</th><th>Protein</th><th></th></tr></thead><tbody id="mealTable"></tbody></table></div>
       </div>
 
       <div class="card glass span-7">
         <div class="section-title"><h2>Aktivitetslogg + Garmin CSV</h2><span class="badge">🏃 Bevegelse</span></div>
-        <div class="inputs">
-          <div><label for="activityDate">Dato</label><input id="activityDate" type="date" /></div>
-          <div><label for="activityType">Aktivitet</label><select id="activityType"><option>Gåtur</option><option>Løping</option><option>Sykkel</option><option>Styrke</option><option>Golf</option><option>Annet</option></select></div>
-        </div>
-        <div class="inputs-3 mt-12">
-          <div><label for="activityDuration">Varighet (min)</label><input id="activityDuration" type="number" min="0" step="1" placeholder="45" /></div>
-          <div><label for="activitySteps">Skritt</label><input id="activitySteps" type="number" min="0" step="1" placeholder="8500" /></div>
-          <div><label for="activityCalories">Kalorier</label><input id="activityCalories" type="number" min="0" step="1" placeholder="350" /></div>
-        </div>
-        <label for="activityNote" class="mt-12">Notat</label>
-        <input id="activityNote" type="text" placeholder="Rolig tur, tung økt, god energi ..." />
-        <div class="row-actions">
-          <button class="btn success" id="addActivityBtn">Legg til aktivitet</button>
-          <button class="btn secondary" id="garminBtn">Importer Garmin CSV</button>
-          <button class="btn secondary" id="templateCsvBtn">Last ned CSV-mal</button>
-          <input id="garminFile" type="file" accept=".csv,text/csv" class="hidden" />
-        </div>
+        <div class="inputs"><div><label for="activityDate">Dato</label><input id="activityDate" type="date" /></div><div><label for="activityType">Aktivitet</label><select id="activityType"><option>Gåtur</option><option>Løping</option><option>Sykkel</option><option>Styrke</option><option>Golf</option><option>Annet</option></select></div></div>
+        <div class="inputs-3 mt-12"><div><label for="activityDuration">Varighet (min)</label><input id="activityDuration" type="number" min="0" step="1" placeholder="45" /></div><div><label for="activitySteps">Skritt</label><input id="activitySteps" type="number" min="0" step="1" placeholder="8500" /></div><div><label for="activityCalories">Kalorier</label><input id="activityCalories" type="number" min="0" step="1" placeholder="350" /></div></div>
+        <label for="activityNote" class="mt-12">Notat</label><input id="activityNote" type="text" placeholder="Rolig tur, tung økt, god energi ..." />
+        <div class="row-actions"><button class="btn success" id="addActivityBtn">Legg til aktivitet</button><button class="btn secondary" id="garminBtn">Importer Garmin CSV</button><button class="btn secondary" id="templateCsvBtn">Last ned CSV-mal</button><input id="garminFile" type="file" accept=".csv,text/csv" class="hidden" /></div>
         <div class="table-wrap mt-14"><table><thead><tr><th>Dato</th><th>Type</th><th>Min</th><th>Skritt</th><th>Kcal</th><th></th></tr></thead><tbody id="activityTable"></tbody></table></div>
       </div>
 
       <div class="card glass span-5">
         <div class="section-title"><h2>Status</h2><span class="badge">✅ Synkstatus</span></div>
-        <div class="stack">
-          <div class="notice" id="saveIndicator">Ingen endringer akkurat nå.</div>
-          <div class="stat"><div class="label">Måltider siste 7 dager</div><div class="value" id="weeklyMealsView">0</div></div>
-          <div class="stat"><div class="label">Aktiviteter siste 7 dager</div><div class="value" id="weeklyActsView">0</div></div>
-          <div class="stat"><div class="label">Minutter siste 7 dager</div><div class="value" id="weeklyMinutesView">0</div></div>
-          <div class="stat"><div class="label">Skritt siste 7 dager</div><div class="value" id="weeklyStepsView">0</div></div>
-        </div>
+        <div class="stack"><div class="notice" id="saveIndicator">Ingen endringer akkurat nå.</div><div class="stat"><div class="label">Måltider siste 7 dager</div><div class="value" id="weeklyMealsView">0</div></div><div class="stat"><div class="label">Aktiviteter siste 7 dager</div><div class="value" id="weeklyActsView">0</div></div><div class="stat"><div class="label">Minutter siste 7 dager</div><div class="value" id="weeklyMinutesView">0</div></div><div class="stat"><div class="label">Skritt siste 7 dager</div><div class="value" id="weeklyStepsView">0</div></div></div>
       </div>
     </section>
-
     <div class="footer">Cloud-lagring per bruker med Firebase/Firestore når konfigurasjonen er lagt inn.</div>
   </div>
 
-  <script src="./firebase-config.js"></script>
-  <script type="module" src="./app.js"></script>
+  <script>
+  window.__FIREBASE_CONFIG__ = {
+    apiKey: "AIzaSyBLj-nOSkauQwFpbg2dUysRfuAQX3lHEjc",
+    authDomain: "minvekt-6a728.firebaseapp.com",
+    databaseURL: "https://minvekt-6a728-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "minvekt-6a728",
+    storageBucket: "minvekt-6a728.firebasestorage.app",
+    messagingSenderId: "481947013806",
+    appId: "1:481947013806:web:6bdeea7fb51da4ad2e133f",
+    measurementId: "G-326ECRK19X"
+  };
+  </script>
+
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js';
+    import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js';
+    import { getFirestore, doc, getDoc, setDoc, serverTimestamp, enableIndexedDbPersistence } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js';
+    const today = new Date().toISOString().slice(0,10), APP_CACHE='vektreise_cloud_cache_v1';
+    const quotes=['Små valg, hver dag, blir store resultater over tid.','Du trenger ikke være perfekt – bare jevn.','Målet er ikke å være streng. Målet er å være stabil.','Vinn uka. Da følger resultatene etter.','Neste gode valg er alltid nærmere enn du tror.','Bygg et system du faktisk liker å bruke.'];
+    const habits=[{id:'water',text:'Drukket nok vann'},{id:'greens',text:'Spist grønt i dag'},{id:'activity',text:'Vært i aktivitet'},{id:'noSnack',text:'Holdt kontroll på småspising'}];
+    const byId=id=>document.getElementById(id), setText=(id,v)=>{const e=byId(id); if(e)e.textContent=v;}, val=id=>String((byId(id)?.value??'')).trim(), num=(id,f=0)=>{const n=parseFloat(val(id)); return Number.isFinite(n)?n:f;}, fmt=(n,d=1)=>Number(n||0).toLocaleString('no-NO',{minimumFractionDigits:d,maximumFractionDigits:d}), fmtInt=n=>Number(Math.round(Number(n||0))).toLocaleString('no-NO'), clamp=(n,min,max)=>Math.max(min,Math.min(max,n)), pct=(v,t)=>t>0?clamp(v/t*100,0,100):0, sameDay=(a,b)=>String(a||'').slice(0,10)===String(b||'').slice(0,10), parseDateSafe=s=>{const d=new Date(s); return isNaN(d)?null:d;}, cryptoRandom=()=>crypto?.randomUUID?.()||`${Date.now()}-${Math.random().toString(16).slice(2)}`, daysAgo=days=>{const d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()-days); return d;}, safe=(str='')=>String(str).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    let app=null,auth=null,db=null,firebaseReady=false,currentUser=null,saveTimer=null,authMode='login';
+    function defaultState(){return{profile:{displayName:'',heightCm:197,age:'',sex:'',activityLevel:'1.55',manualCalorieTarget:'',startWeight:120,currentWeight:120,goalWeight:110,why:''},goals:{activitiesPerWeek:4,minutesPerWeek:180,stepsPerDay:8000},weights:[{id:cryptoRandom(),date:today,weight:120}],meals:[],activities:[],checkins:{}}}
+    function cacheKey(uid='demo'){return `${APP_CACHE}_${uid}`} function mergeDeep(base,extra){const out=structuredClone?structuredClone(base):JSON.parse(JSON.stringify(base)); for(const k in extra||{}){if(extra[k]&&typeof extra[k]==='object'&&!Array.isArray(extra[k])&&out[k]&&typeof out[k]==='object'&&!Array.isArray(out[k])) out[k]=mergeDeep(out[k],extra[k]); else out[k]=extra[k]} return out}
+    function loadLocalCache(uid='demo'){try{const raw=localStorage.getItem(cacheKey(uid)); if(!raw) return defaultState(); return mergeDeep(defaultState(),JSON.parse(raw))}catch{return defaultState()}} let state=loadLocalCache(); function saveLocalCache(uid='demo'){localStorage.setItem(cacheKey(uid),JSON.stringify(state))}
+    function setNotice(text,kind='info'){const el=byId('saveIndicator'); el.textContent=text; const styles={info:['rgba(56,189,248,.14)','rgba(56,189,248,.35)','#e0f2fe'],success:['rgba(34,197,94,.14)','rgba(74,222,128,.35)','#dcfce7'],warn:['rgba(250,204,21,.14)','rgba(250,204,21,.35)','#fff7cc'],danger:['rgba(248,113,113,.14)','rgba(248,113,113,.35)','#fee2e2']}[kind]||['rgba(56,189,248,.14)','rgba(56,189,248,.35)','#e0f2fe']; el.style.background=styles[0]; el.style.borderColor=styles[1]; el.style.color=styles[2]}
+    function updateFirebaseStatus(){const pill=byId('firebaseStatusPill'); pill.textContent=firebaseReady?(currentUser?'Firebase tilkoblet • Synker per bruker':'Firebase klar • Venter på innlogging'):'Demo-modus • Legg inn Firebase-konfig'}
+    function showAuthMessage(msg=''){setText('authMessage',msg)}
+    function setAuthMode(mode){authMode=mode; document.querySelectorAll('[data-tab]').forEach(el=>el.classList.toggle('active',el.dataset.tab===mode)); byId('authNameWrap').classList.toggle('hidden',mode!=='signup'); byId('authPassword').parentElement.classList.toggle('hidden',mode==='reset'); setText('authActionBtn',mode==='login'?'Logg inn':mode==='signup'?'Opprett bruker':'Send e-post for nullstilling'); showAuthMessage('')}
+    async function initFirebase(){const cfg=window.__FIREBASE_CONFIG__; const setupNotice=byId('authSetupNotice'); if(!cfg||!cfg.apiKey||cfg.apiKey.includes('LIM_INN')){firebaseReady=false; setupNotice.classList.remove('hidden'); setupNotice.textContent='Firebase er ikke konfigurert enda.'; byId('authOverlay').classList.add('hidden'); setText('userLabel','Demo-modus (lokal)'); updateFirebaseStatus(); renderAll(); setNotice('Kjører i demo-modus.', 'warn'); return} try{app=initializeApp(cfg); auth=getAuth(app); db=getFirestore(app); try{await enableIndexedDbPersistence(db)}catch{} firebaseReady=true; updateFirebaseStatus(); onAuthStateChanged(auth,async user=>{currentUser=user||null; updateFirebaseStatus(); if(currentUser){byId('authOverlay').classList.add('hidden'); setText('userLabel',currentUser.displayName||currentUser.email||'Innlogget'); state=loadLocalCache(currentUser.uid); await pullFromCloud(); renderAll(); setNotice('Innlogget og klar. Endringer lagres automatisk til Firestore.','success')} else {setText('userLabel','Ikke logget inn'); byId('authOverlay').classList.remove('hidden'); renderAll()}})}catch(err){firebaseReady=false; setupNotice.classList.remove('hidden'); setupNotice.textContent=`Firebase kunne ikke initialiseres: ${err.message}`; byId('authOverlay').classList.remove('hidden'); updateFirebaseStatus()}}
+    async function cloudDocRef(){if(!db||!currentUser) return null; return doc(db,'users',currentUser.uid,'app','main')}
+    async function pullFromCloud(){if(!firebaseReady||!currentUser) return; try{const ref=await cloudDocRef(), snap=await getDoc(ref); if(snap.exists()){state=mergeDeep(defaultState(),snap.data()?.state||{}); saveLocalCache(currentUser.uid); setNotice('Data lastet fra skyen.','success')} else await pushToCloud(true)}catch(err){setNotice(`Kunne ikke laste skydata: ${err.message}`,'warn')}}
+    async function pushToCloud(initial=false){if(!firebaseReady||!currentUser) return; try{const ref=await cloudDocRef(); await setDoc(ref,{uid:currentUser.uid,email:currentUser.email||'',updatedAt:serverTimestamp(),appVersion:'cloud-v1',state},{merge:true}); saveLocalCache(currentUser.uid); setNotice(initial?'Førstegangslagring fullført.':'Endringer synkronisert til Firestore.','success')}catch(err){setNotice(`Synk feilet: ${err.message}`,'danger')}}
+    function scheduleSave(){saveLocalCache(currentUser?.uid||'demo'); if(!firebaseReady||!currentUser){setNotice('Lokal lagring oppdatert. Slå på Firebase for sky-synk.','warn'); return} setNotice('Endringer registrert – synker om et øyeblikk…','info'); clearTimeout(saveTimer); saveTimer=setTimeout(()=>pushToCloud(false),900)}
+    function bmi(weight,heightCm){const h=Number(heightCm||0)/100; return h>0?Number(weight||0)/(h*h):0}
+    function estimateCalories(){const manual=parseFloat(state.profile.manualCalorieTarget); if(Number.isFinite(manual)&&manual>0) return {target:manual,message:`Bruker manuelt kalorimål: ${fmtInt(manual)} kcal/dag.`}; const age=parseFloat(state.profile.age), sex=state.profile.sex, weight=parseFloat(state.profile.currentWeight), height=parseFloat(state.profile.heightCm), level=parseFloat(state.profile.activityLevel||'1.55'); if(!(Number.isFinite(age)&&age>0&&sex&&Number.isFinite(weight)&&Number.isFinite(height))) return {target:null,message:'Legg inn alder og kjønn for å beregne moderat kalorimål, eller sett manuelt mål.'}; const bmr=10*weight+6.25*height-5*age+(sex==='male'?5:-161); const maintenance=bmr*level; const target=Math.max(maintenance-500,1500); return {target,maintenance,message:`Estimert vedlikehold: ${fmtInt(maintenance)} kcal. Foreslått mål: ${fmtInt(target)} kcal/dag.`}}
+    function syncUi(){const p=state.profile; byId('displayName').value=p.displayName||''; byId('heightCm').value=p.heightCm??''; byId('age').value=p.age??''; byId('sex').value=p.sex||''; byId('activityLevel').value=p.activityLevel||'1.55'; byId('manualCalorieTarget').value=p.manualCalorieTarget||''; byId('startWeight').value=p.startWeight??''; byId('currentWeight').value=p.currentWeight??''; byId('goalWeight').value=p.goalWeight??''; byId('whyText').value=p.why||''; byId('goalActivitiesPerWeek').value=state.goals.activitiesPerWeek; byId('goalMinutesPerWeek').value=state.goals.minutesPerWeek; byId('goalStepsPerDay').value=state.goals.stepsPerDay; const c=state.checkins[today]||{habits:{},waterGlasses:'',mood:''}; byId('waterGlasses').value=c.waterGlasses||''; byId('dailyMood').value=c.mood||''; ['weighDate','mealDate','activityDate'].forEach(id=>byId(id).value ||= today); habits.forEach(h=>updateHabitUi(h.id,!!c.habits?.[h.id]))}
+    function renderSummary(){const p=state.profile; setText('startWeightView',`${fmt(p.startWeight)} kg`); setText('currentWeightView',`${fmt(p.currentWeight)} kg`); setText('goalWeightView',`${fmt(p.goalWeight)} kg`); setText('bmiView',fmt(bmi(p.currentWeight,p.heightCm),1)); const total=Math.max(0,Number(p.startWeight||0)-Number(p.goalWeight||0)); const lost=Math.max(0,Number(p.startWeight||0)-Number(p.currentWeight||0)); const progress=pct(lost,total); setText('progressText',`${fmt(lost)} kg av ${fmt(total)} kg`); setText('goalPercentText',`${fmt(progress,0)} %`); byId('goalBar').style.width=`${progress}%`; byId('planNotice').textContent=estimateCalories().message}
+    function sevenDayStats(){const from=daysAgo(6), meals=state.meals.filter(x=>parseDateSafe(x.date)>=from), acts=state.activities.filter(x=>parseDateSafe(x.date)>=from); return {meals:meals.length,acts:acts.length,minutes:acts.reduce((s,x)=>s+(parseFloat(x.duration)||0),0),steps:acts.reduce((s,x)=>s+(parseFloat(x.steps)||0),0)}}
+    function dayHasEntries(date){return state.meals.some(x=>sameDay(x.date,date))||state.activities.some(x=>sameDay(x.date,date))||state.weights.some(x=>sameDay(x.date,date))||!!state.checkins[date]} function calculateStreak(){let streak=0; const d=new Date(); d.setHours(0,0,0,0); while(true){const key=d.toISOString().slice(0,10); if(dayHasEntries(key)) streak++; else break; d.setDate(d.getDate()-1); if(streak>1000) break} return streak}
+    function renderGoals(){const week=sevenDayStats(), avgSteps=week.steps/7; setText('weeklyMealsView',String(week.meals)); setText('weeklyActsView',String(week.acts)); setText('weeklyMinutesView',fmtInt(week.minutes)); setText('weeklyStepsView',fmtInt(week.steps)); setText('weeklyActsText',`${week.acts}/${state.goals.activitiesPerWeek}`); setText('weeklyMinsText',`${fmtInt(week.minutes)}/${fmtInt(state.goals.minutesPerWeek)}`); setText('weeklyStepsText',`${fmtInt(avgSteps)}/${fmtInt(state.goals.stepsPerDay)}`); byId('weeklyActsBar').style.width=`${pct(week.acts,state.goals.activitiesPerWeek)}%`; byId('weeklyMinsBar').style.width=`${pct(week.minutes,state.goals.minutesPerWeek)}%`; byId('weeklyStepsBar').style.width=`${pct(avgSteps,state.goals.stepsPerDay)}%`; setText('streakView',String(calculateStreak()))}
+    function renderScore(){const todayMeals=state.meals.filter(x=>sameDay(x.date,today)), todayActs=state.activities.filter(x=>sameDay(x.date,today)), checkin=state.checkins[today]||{habits:{}}; const todayCalories=todayMeals.reduce((s,m)=>s+(parseFloat(m.calories)||0),0), target=estimateCalories().target, minutes=todayActs.reduce((s,a)=>s+(parseFloat(a.duration)||0),0), steps=todayActs.reduce((s,a)=>s+(parseFloat(a.steps)||0),0), activeHabits=habits.filter(h=>checkin.habits?.[h.id]).length; const breakdown=[]; let score=0; if(todayMeals.length>=3){score+=2; breakdown.push(['+2','Minst tre måltider logget i dag.'])} else if(todayMeals.length>0){score+=1; breakdown.push(['+1','Du har startet matloggen i dag.'])} else breakdown.push(['0','Ingen matlogg registrert enda i dag.']); if(minutes>=30||steps>=state.goals.stepsPerDay){score+=2; breakdown.push(['+2','Sterk aktivitet i dag.'])} else if(minutes>0||steps>0){score+=1; breakdown.push(['+1','Noe aktivitet er registrert.'])} else breakdown.push(['0','Ingen aktivitet logget enda i dag.']); if(activeHabits>=3){score+=2; breakdown.push(['+2',`Vaner huket av: ${activeHabits}/${habits.length}.`])} else if(activeHabits>=1){score+=1; breakdown.push(['+1',`Vaner huket av: ${activeHabits}/${habits.length}.`])} else breakdown.push(['0','Ingen vaner huket av enda.']); if((checkin.waterGlasses||0)>=8){score+=1; breakdown.push(['+1','Godt med vann i dag.'])} else breakdown.push(['0','Registrer minst 8 vannglass for ekstra poeng.']); if(target&&todayCalories>0){if(todayCalories<=target){score+=3; breakdown.push(['+3',`Kalorier i dag (${fmtInt(todayCalories)}) er innenfor målet.`])} else if(todayCalories<=target*1.1){score+=1; breakdown.push(['+1','Du er litt over, men fortsatt nær planen.'])} else breakdown.push(['0','Kaloriinntaket er et stykke over målet i dag.'])} else breakdown.push(['0','Kaloripoeng beregnes når du logger mat med kcal eller setter mål.']); score=clamp(score,0,10); setText('scoreValue',String(score)); byId('scoreRing').style.background=`conic-gradient(var(--accent) ${score*36}deg, rgba(255,255,255,.08) ${score*36}deg)`; setText('scorePill',score>=8?'Knallbra dag':score>=5?'Solid på vei':score>=2?'God start':'Klar for neste steg'); byId('scoreList').innerHTML=breakdown.map(([a,b])=>`<li><strong>${a}</strong> – ${safe(b)}</li>`).join('')}
+    function renderHabitGrid(){const wrap=byId('habitGrid'); wrap.innerHTML=habits.map(h=>`<div class="habit" id="habit_${h.id}" tabindex="0" role="button"><div><div style="font-weight:800">${safe(h.text)}</div><div class="tiny muted">Trykk for å veksle</div></div><div class="toggle"></div></div>`).join(''); habits.forEach(h=>{const el=byId(`habit_${h.id}`), action=()=>toggleHabit(h.id); el.addEventListener('click',action); el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault(); action()}})})}
+    function updateHabitUi(id,active){byId(`habit_${id}`)?.classList.toggle('active',!!active)}
+    function toggleHabit(id){const current=state.checkins[today]||{habits:{},waterGlasses:'',mood:''}; current.habits=current.habits||{}; current.habits[id]=!current.habits[id]; state.checkins[today]=current; updateHabitUi(id,current.habits[id]); renderScore(); scheduleSave()}
+    function renderMeals(){const tbody=byId('mealTable'); if(!state.meals.length){tbody.innerHTML=`<tr><td colspan="6" class="muted">Ingen måltider registrert enda.</td></tr>`; return} tbody.innerHTML=[...state.meals].sort((a,b)=>String(b.date).localeCompare(String(a.date))).map(item=>`<tr><td>${safe(item.date)}</td><td>${safe(item.type)}</td><td>${safe(item.text)}</td><td>${item.calories?fmtInt(item.calories):''}</td><td>${item.protein?fmtInt(item.protein):''}</td><td><button class="btn secondary" data-delmeal="${item.id}" style="padding:8px 10px">Slett</button></td></tr>`).join(''); tbody.querySelectorAll('[data-delmeal]').forEach(btn=>btn.addEventListener('click',()=>{state.meals=state.meals.filter(x=>x.id!==btn.dataset.delmeal); renderAll(); scheduleSave()}))}
+    function renderActivities(){const tbody=byId('activityTable'); if(!state.activities.length){tbody.innerHTML=`<tr><td colspan="6" class="muted">Ingen aktivitet registrert enda.</td></tr>`; return} tbody.innerHTML=[...state.activities].sort((a,b)=>String(b.date).localeCompare(String(a.date))).map(item=>`<tr><td>${safe(item.date)}</td><td>${safe(item.type)}</td><td>${item.duration?fmtInt(item.duration):''}</td><td>${item.steps?fmtInt(item.steps):''}</td><td>${item.calories?fmtInt(item.calories):''}</td><td><button class="btn secondary" data-delact="${item.id}" style="padding:8px 10px">Slett</button></td></tr>`).join(''); tbody.querySelectorAll('[data-delact]').forEach(btn=>btn.addEventListener('click',()=>{state.activities=state.activities.filter(x=>x.id!==btn.dataset.delact); renderAll(); scheduleSave()}))}
+    function drawRoundRect(ctx,x,y,w,h,r){ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath()} function drawCardBg(ctx,w,h){drawRoundRect(ctx,0,0,w,h,18); ctx.fillStyle='rgba(255,255,255,.03)'; ctx.fill(); ctx.strokeStyle='rgba(255,255,255,.12)'; ctx.stroke()}
+    function drawWeightChart(){const c=byId('weightChart'), ctx=c.getContext('2d'), w=c.width, h=c.height; ctx.clearRect(0,0,w,h); drawCardBg(ctx,w,h); const items=[...state.weights].sort((a,b)=>String(a.date).localeCompare(String(b.date))); if(!items.length){ctx.fillStyle='#9fb3d1'; ctx.fillText('Ingen veiinger ennå.',w/2-60,h/2); return} const pad={l:54,r:16,t:18,b:36}; const vals=items.map(x=>Number(x.weight)); const min=Math.min(...vals,Number(state.profile.goalWeight||0))-1, max=Math.max(...vals,Number(state.profile.startWeight||0))+1; ctx.strokeStyle='rgba(255,255,255,.12)'; ctx.fillStyle='#9fb3d1'; ctx.font='12px Segoe UI'; for(let i=0;i<5;i++){const y=pad.t+i*((h-pad.t-pad.b)/4); ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(w-pad.r,y); ctx.stroke(); const value=max-i*((max-min)/4); ctx.fillText(Number(value).toLocaleString('no-NO',{maximumFractionDigits:1}),10,y+4)} const mapX=i=>items.length===1?w/2:pad.l+i*((w-pad.l-pad.r)/(items.length-1)), mapY=v=>pad.t+((max-v)/(max-min||1))*(h-pad.t-pad.b); const gy=mapY(Number(state.profile.goalWeight||0)); ctx.setLineDash([6,5]); ctx.strokeStyle='#22c55e'; ctx.beginPath(); ctx.moveTo(pad.l,gy); ctx.lineTo(w-pad.r,gy); ctx.stroke(); ctx.setLineDash([]); ctx.strokeStyle='#60a5fa'; ctx.lineWidth=3; ctx.beginPath(); items.forEach((it,i)=>{const x=mapX(i),y=mapY(Number(it.weight)); if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y)}); ctx.stroke(); items.forEach((it,i)=>{const x=mapX(i),y=mapY(Number(it.weight)); ctx.beginPath(); ctx.arc(x,y,4.5,0,Math.PI*2); ctx.fillStyle='#5eead4'; ctx.fill(); if(i%Math.max(1,Math.ceil(items.length/6))===0||i===items.length-1){ctx.fillStyle='#9fb3d1'; ctx.fillText(String(it.date).slice(5),x-12,h-14)}})}
+    function drawActivityChart(){const c=byId('activityChart'), ctx=c.getContext('2d'), w=c.width, h=c.height; ctx.clearRect(0,0,w,h); drawCardBg(ctx,w,h); const days=[]; for(let i=13;i>=0;i--){const d=new Date(); d.setDate(d.getDate()-i); days.push(d.toISOString().slice(0,10))} const bars=days.map(d=>({date:d,minutes:state.activities.filter(a=>sameDay(a.date,d)).reduce((s,a)=>s+(parseFloat(a.duration)||0),0),calories:state.meals.filter(m=>sameDay(m.date,d)).reduce((s,m)=>s+(parseFloat(m.calories)||0),0)})); const maxVal=Math.max(60,...bars.map(b=>Math.max(b.minutes,(b.calories||0)/20))), pad={l:42,r:20,t:18,b:36}; ctx.strokeStyle='rgba(255,255,255,.12)'; for(let i=0;i<4;i++){const y=pad.t+i*((h-pad.t-pad.b)/3); ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(w-pad.r,y); ctx.stroke()} const spacing=(w-pad.l-pad.r)/bars.length; bars.forEach((b,i)=>{const x=pad.l+i*spacing+4, maxH=h-pad.t-pad.b, h1=(b.minutes/maxVal)*maxH, h2=((b.calories||0)/20/maxVal)*maxH; ctx.fillStyle='#60a5fa'; ctx.fillRect(x,h-pad.b-h1,spacing/2-6,h1); ctx.fillStyle='#f59e0b'; ctx.fillRect(x+spacing/2-2,h-pad.b-h2,spacing/2-6,h2); if(i%2===0){ctx.fillStyle='#9fb3d1'; ctx.font='11px Segoe UI'; ctx.fillText(b.date.slice(5),x-2,h-12)}}); ctx.fillStyle='#60a5fa'; ctx.fillRect(pad.l,10,14,10); ctx.fillStyle='#dbeafe'; ctx.fillText('Aktive minutter',pad.l+22,19); ctx.fillStyle='#f59e0b'; ctx.fillRect(pad.l+125,10,14,10); ctx.fillStyle='#fde68a'; ctx.fillText('Kalorier / 20',pad.l+147,19)}
+    function renderCharts(){drawWeightChart(); drawActivityChart()} function renderAll(){syncUi(); renderSummary(); renderGoals(); renderScore(); renderMeals(); renderActivities(); renderCharts(); updateFirebaseStatus()}
+    function saveProfile(){const p=state.profile; p.displayName=val('displayName'); p.heightCm=num('heightCm',p.heightCm); p.age=val('age'); p.sex=val('sex'); p.activityLevel=val('activityLevel')||'1.55'; p.manualCalorieTarget=val('manualCalorieTarget'); p.startWeight=num('startWeight',p.startWeight); p.currentWeight=num('currentWeight',p.currentWeight); p.goalWeight=num('goalWeight',p.goalWeight); p.why=val('whyText'); renderAll(); scheduleSave(); if(firebaseReady&&currentUser&&p.displayName&&currentUser.displayName!==p.displayName){updateProfile(currentUser,{displayName:p.displayName}).catch(()=>{}); setText('userLabel',p.displayName)}}
+    function logWeight(){saveProfile(); const entry={id:cryptoRandom(),date:val('weighDate')||today,weight:num('currentWeight',state.profile.currentWeight)}; state.profile.currentWeight=entry.weight; state.weights.push(entry); const map=new Map(); state.weights.forEach(item=>map.set(item.date,item)); state.weights=[...map.values()].sort((a,b)=>String(a.date).localeCompare(String(b.date))); renderAll(); scheduleSave(); setNotice('Veiing lagret.','success')}
+    function addMeal(prefill){const item=prefill||{id:cryptoRandom(),date:val('mealDate')||today,type:val('mealType'),text:val('mealText'),calories:val('mealCalories'),protein:val('mealProtein'),note:val('mealNote')}; if(!item.text){alert('Skriv inn hva du spiste.'); return} state.meals.unshift(item); ['mealText','mealCalories','mealProtein','mealNote'].forEach(id=>byId(id).value=''); renderAll(); scheduleSave()}
+    function addActivity(prefill){const item=prefill||{id:cryptoRandom(),date:val('activityDate')||today,type:val('activityType'),duration:val('activityDuration'),steps:val('activitySteps'),calories:val('activityCalories'),note:val('activityNote')}; if(!item.duration&&!item.steps&&!item.calories){alert('Legg inn minutter, skritt eller kalorier.'); return} state.activities.unshift(item); ['activityDuration','activitySteps','activityCalories','activityNote'].forEach(id=>byId(id).value=''); renderAll(); scheduleSave()}
+    function saveGoals(){state.goals.activitiesPerWeek=num('goalActivitiesPerWeek',state.goals.activitiesPerWeek); state.goals.minutesPerWeek=num('goalMinutesPerWeek',state.goals.minutesPerWeek); state.goals.stepsPerDay=num('goalStepsPerDay',state.goals.stepsPerDay); renderAll(); scheduleSave()}
+    function saveCheckin(){const current=state.checkins[today]||{habits:{}}; current.waterGlasses=num('waterGlasses',0); current.mood=val('dailyMood'); state.checkins[today]=current; renderAll(); scheduleSave()}
+    function exportJson(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='vektreise-cloud-backup.json'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),500)}
+    function importJson(file){if(!file) return; const reader=new FileReader(); reader.onload=()=>{try{state=mergeDeep(defaultState(),JSON.parse(reader.result)); renderAll(); scheduleSave(); setNotice('JSON importert.','success')}catch{alert('Kunne ikke lese JSON-filen.')}}; reader.readAsText(file)}
+    function detectDelimiter(text){const first=text.split(/
+?
+/).find(Boolean)||''; return [',',';','	'].sort((a,b)=>first.split(b).length-first.split(a).length)[0]||','}
+    function splitCsvLine(line,delimiter){const out=[]; let cur='',quoted=false; for(let i=0;i<line.length;i++){const ch=line[i]; if(ch==='"'){if(quoted&&line[i+1]==='"'){cur+='"'; i++} else quoted=!quoted} else if(ch===delimiter&&!quoted){out.push(cur); cur=''} else cur+=ch} out.push(cur); return out}
+    function parseCsv(text){const delimiter=detectDelimiter(text), lines=text.split(/
+?
+/).filter(Boolean); if(lines.length<2) return []; const headers=splitCsvLine(lines[0],delimiter).map(h=>h.trim()); return lines.slice(1).map(line=>{const cols=splitCsvLine(line,delimiter), obj={}; headers.forEach((h,i)=>obj[h]=(cols[i]||'').trim()); return obj})}
+    function findField(row,names){const keys=Object.keys(row), lower=keys.map(k=>k.toLowerCase()); for(const name of names){const idx=lower.findIndex(k=>k===name||k.includes(name)); if(idx>=0) return row[keys[idx]]} return ''}
+    function normalizeDate(value){if(!value) return ''; const raw=String(value).trim(); const direct=new Date(raw); if(!isNaN(direct)) return direct.toISOString().slice(0,10); const m=raw.match(/^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{2,4})$/); if(m){const dd=m[1].padStart(2,'0'), mm=m[2].padStart(2,'0'); let yyyy=m[3]; if(yyyy.length===2) yyyy=`20${yyyy}`; return `${yyyy}-${mm}-${dd}`} return ''}
+    function parseDurationToMinutes(v){if(v==null||v==='') return 0; const s=String(v).trim(); if(/^\d+(\.\d+)?$/.test(s)) return Math.round(parseFloat(s)); const parts=s.split(':').map(n=>n.trim()); if(parts.length===3) return Math.round(Number(parts[0])*60+Number(parts[1])+Number(parts[2])/60); if(parts.length===2) return Math.round(Number(parts[0])*60+Number(parts[1])); const h=/(\d+(?:\.\d+)?)\s*h/.exec(s), m=/(\d+(?:\.\d+)?)\s*m/.exec(s), sec=/(\d+(?:\.\d+)?)\s*s/.exec(s); return Math.round((h?Number(h[1])*60:0)+(m?Number(m[1]):0)+(sec?Number(sec[1])/60:0))}
+    function importGarmin(file){if(!file) return; const reader=new FileReader(); reader.onload=()=>{try{const rows=parseCsv(reader.result); let imported=0; rows.forEach(row=>{const date=normalizeDate(findField(row,['date','dato','activity date','start time'])), type=findField(row,['activity type','type','aktivitet'])||'Garmin-aktivitet', duration=parseDurationToMinutes(findField(row,['duration','session time','elapsed time','varighet'])), steps=parseFloat(String(findField(row,['steps','skritt'])).replace(/[^0-9.,-]/g,'').replace(',','.'))||0, calories=parseFloat(String(findField(row,['calories','kcal','energi'])).replace(/[^0-9.,-]/g,'').replace(',','.'))||0, distance=findField(row,['distance','distanse']); if(!date&&!duration&&!steps&&!calories) return; state.activities.unshift({id:cryptoRandom(),date:date||today,type,duration:duration||'',steps:steps||'',calories:calories||'',note:distance?`Importert fra Garmin • distanse ${distance}`:'Importert fra Garmin'}); imported++}); renderAll(); scheduleSave(); setNotice(`Garmin-import fullført: ${imported} rader.`,'success')}catch(err){alert(`Kunne ikke lese CSV: ${err.message}`)}}; reader.readAsText(file,'utf-8')}
+    function downloadTemplateCsv(){const csv='Date,Activity Type,Duration,Steps,Calories,Distance
+2026-06-15,Gåtur,45,8200,340,5.8
+2026-06-14,Golf,180,13000,900,9.4'; const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='garmin-import-mal.csv'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),500)}
+    async function doAuth(){if(!firebaseReady){byId('authOverlay').classList.add('hidden'); setNotice('Demo-modus aktiv. Fyll ut firebase-config.js og aktiver Email/Password i Firebase.','warn'); return} const email=val('authEmail'), password=val('authPassword'), name=val('authName'); try{showAuthMessage('Jobber…'); if(authMode==='login') await signInWithEmailAndPassword(auth,email,password); else if(authMode==='signup'){const cred=await createUserWithEmailAndPassword(auth,email,password); if(name) await updateProfile(cred.user,{displayName:name})} else {await sendPasswordResetEmail(auth,email); showAuthMessage('E-post for nullstilling sendt.'); return} showAuthMessage('OK')}catch(err){showAuthMessage(err.message)}}
+    function bind(){renderHabitGrid(); renderAll(); setText('quoteText',quotes[Math.floor(Math.random()*quotes.length)]); ['weighDate','mealDate','activityDate'].forEach(id=>byId(id).value=today); document.querySelectorAll('[data-tab]').forEach(el=>el.addEventListener('click',()=>setAuthMode(el.dataset.tab))); byId('authActionBtn').addEventListener('click',doAuth); byId('saveProfileBtn').addEventListener('click',saveProfile); byId('logWeightBtn').addEventListener('click',logWeight); byId('addMealBtn').addEventListener('click',()=>addMeal()); byId('addActivityBtn').addEventListener('click',()=>addActivity()); byId('saveGoalsBtn').addEventListener('click',saveGoals); byId('saveCheckinBtn').addEventListener('click',saveCheckin); byId('quoteBtn').addEventListener('click',()=>setText('quoteText',quotes[Math.floor(Math.random()*quotes.length)])); byId('exportBtn').addEventListener('click',exportJson); byId('importJsonBtn').addEventListener('click',()=>byId('importJsonFile').click()); byId('importJsonFile').addEventListener('change',e=>importJson(e.target.files?.[0])); byId('garminBtn').addEventListener('click',()=>byId('garminFile').click()); byId('garminFile').addEventListener('change',e=>importGarmin(e.target.files?.[0])); byId('templateCsvBtn').addEventListener('click',downloadTemplateCsv); byId('logoutBtn').addEventListener('click',async()=>{if(firebaseReady&&auth) await signOut(auth); else byId('authOverlay').classList.remove('hidden')}); byId('syncBtn').addEventListener('click',()=>{if(firebaseReady&&currentUser) pushToCloud(false); else setNotice('Ingen innlogget Firebase-bruker akkurat nå.','warn')}); window.addEventListener('resize',()=>renderCharts())}
+    bind(); initFirebase();
+  </script>
 </body>
 </html>
