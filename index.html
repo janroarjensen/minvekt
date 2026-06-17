@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1120" />
+  <title>Min Vektreise Cloud</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="auth-shell" id="authOverlay">
+    <div class="auth-card glass">
+      <div class="badge">✨ Cloud edition • Mobilvennlig • Flerbruker</div>
+      <h2 class="auth-title">Logg inn eller opprett bruker</h2>
+      <p class="muted auth-desc">Data lagres per bruker i Firestore når Firebase er konfigurert.</p>
+
+      <div class="auth-tabs">
+        <button class="tab active" data-tab="login">Logg inn</button>
+        <button class="tab" data-tab="signup">Opprett bruker</button>
+        <button class="tab" data-tab="reset">Glemt passord</button>
+      </div>
+
+      <div id="authSetupNotice" class="notice hidden mb-14"></div>
+
+      <div class="inputs one-col">
+        <div>
+          <label for="authEmail">E-post</label>
+          <input id="authEmail" type="email" placeholder="deg@epost.no" autocomplete="email" />
+        </div>
+        <div>
+          <label for="authPassword">Passord</label>
+          <input id="authPassword" type="password" placeholder="Minst 6 tegn" autocomplete="current-password" />
+        </div>
+        <div id="authNameWrap" class="hidden">
+          <label for="authName">Navn (valgfritt)</label>
+          <input id="authName" type="text" placeholder="F.eks. Jan Roar" autocomplete="name" />
+        </div>
+      </div>
+
+      <div class="row-actions mt-16">
+        <button class="btn primary btn-full" id="authActionBtn">Logg inn</button>
+      </div>
+      <div id="authMessage" class="muted tiny mt-12 min-h-18"></div>
+    </div>
+  </div>
+
+  <div class="app">
+    <section class="hero">
+      <div class="card glass">
+        <div class="hero-head">
+          <div>
+            <div class="badge">🚀 Min Vektreise Cloud</div>
+            <h1>Mer stil. Bedre mobil. Klar for GitHub + Firebase.</h1>
+            <p>Firebase Auth, Firestore-lagring per bruker, responsivt design, Garmin CSV og JSON backup/import.</p>
+          </div>
+          <div class="pill" id="firebaseStatusPill">Sjekker Firebase…</div>
+        </div>
+
+        <div class="header-grid">
+          <div class="stat"><div class="label">Startvekt</div><div class="value" id="startWeightView">–</div></div>
+          <div class="stat"><div class="label">Dagens vekt</div><div class="value" id="currentWeightView">–</div></div>
+          <div class="stat"><div class="label">Målvekt</div><div class="value" id="goalWeightView">–</div></div>
+          <div class="stat"><div class="label">BMI</div><div class="value" id="bmiView">–</div></div>
+          <div class="stat"><div class="label">Streak</div><div class="value" id="streakView">0</div></div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-top">
+            <div><strong>Fremgang mot mål:</strong> <span id="progressText">0 kg av 0 kg</span></div>
+            <div id="goalPercentText">0%</div>
+          </div>
+          <div class="progress"><div class="bar" id="goalBar"></div></div>
+        </div>
+
+        <div class="toolbar">
+          <div class="pill">👤 <span id="userLabel">Ikke logget inn</span></div>
+          <div class="hero-actions">
+            <button class="btn secondary" id="exportBtn">Eksporter JSON</button>
+            <button class="btn secondary" id="importJsonBtn">Importer JSON</button>
+            <button class="btn secondary" id="syncBtn">Synk nå</button>
+            <button class="btn danger" id="logoutBtn">Logg ut</button>
+            <input id="importJsonFile" type="file" accept="application/json" class="hidden" />
+          </div>
+        </div>
+      </div>
+
+      <div class="card glass stack">
+        <div class="section-title">
+          <h2>Dagens score</h2>
+          <span class="pill" id="scorePill">Klar for en god dag</span>
+        </div>
+        <div class="inputs score-box">
+          <div class="ring" id="scoreRing">
+            <div class="ring-inner">
+              <div>
+                <div class="ring-value" id="scoreValue">0</div>
+                <div class="tiny muted center">av 10</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="badge">💡 Motivasjon</div>
+            <div id="quoteText" class="quote-text">Små valg, hver dag, blir store resultater over tid.</div>
+            <div class="row-actions"><button class="btn secondary" id="quoteBtn">Ny motivasjon</button></div>
+          </div>
+        </div>
+        <ul class="score-list" id="scoreList"></ul>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card glass span-4">
+        <div class="section-title"><h2>Profil og plan</h2><span class="badge">⚙️ Oppsett</span></div>
+        <div class="inputs">
+          <div><label for="displayName">Visningsnavn</label><input id="displayName" type="text" placeholder="Navn i appen" /></div>
+          <div><label for="heightCm">Høyde (cm)</label><input id="heightCm" type="number" min="100" max="250" step="1" /></div>
+          <div><label for="age">Alder</label><input id="age" type="number" min="15" max="100" step="1" /></div>
+          <div>
+            <label for="sex">Kjønn</label>
+            <select id="sex"><option value="">Velg</option><option value="male">Mann</option><option value="female">Kvinne</option></select>
+          </div>
+          <div>
+            <label for="activityLevel">Aktivitetsnivå</label>
+            <select id="activityLevel"><option value="1.2">Lavt</option><option value="1.375">Lett aktiv</option><option value="1.55">Moderat</option><option value="1.725">Høy</option><option value="1.9">Svært høy</option></select>
+          </div>
+          <div><label for="manualCalorieTarget">Manuelt kalorimål</label><input id="manualCalorieTarget" type="number" min="1200" max="5000" step="10" placeholder="Valgfritt" /></div>
+          <div><label for="startWeight">Startvekt (kg)</label><input id="startWeight" type="number" min="40" max="300" step="0.1" /></div>
+          <div><label for="currentWeight">Dagens vekt (kg)</label><input id="currentWeight" type="number" min="40" max="300" step="0.1" /></div>
+          <div><label for="goalWeight">Målvekt (kg)</label><input id="goalWeight" type="number" min="40" max="300" step="0.1" /></div>
+          <div><label for="weighDate">Dato for veiing</label><input id="weighDate" type="date" /></div>
+        </div>
+        <label for="whyText" class="mt-12">Ditt hvorfor</label>
+        <textarea id="whyText" placeholder="Mer energi, bedre helse, enklere hverdag, føle meg sterkere..."></textarea>
+        <div class="row-actions">
+          <button class="btn primary" id="saveProfileBtn">Lagre profil</button>
+          <button class="btn success" id="logWeightBtn">Lagre veiing</button>
+        </div>
+        <div class="notice mt-12" id="planNotice">Legg inn alder og kjønn for å få beregnet kalorimål, eller bruk manuelt mål.</div>
+      </div>
+
+      <div class="card glass span-8">
+        <div class="section-title"><h2>Dashboard</h2><span class="badge">📈 Oversikt</span></div>
+        <div class="stack">
+          <div>
+            <div class="tiny muted mb-8">Vektutvikling</div>
+            <canvas id="weightChart" width="960" height="300"></canvas>
+          </div>
+          <div>
+            <div class="tiny muted mb-8">Minutter og kalorier siste 14 dager</div>
+            <canvas id="activityChart" width="960" height="300"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="card glass span-5">
+        <div class="section-title"><h2>Ukemål og vaner</h2><span class="badge">🔥 Rytme</span></div>
+        <div class="inputs-3">
+          <div><label for="goalActivitiesPerWeek">Økter / uke</label><input id="goalActivitiesPerWeek" type="number" min="1" max="14" step="1" /></div>
+          <div><label for="goalMinutesPerWeek">Min / uke</label><input id="goalMinutesPerWeek" type="number" min="30" max="2000" step="10" /></div>
+          <div><label for="goalStepsPerDay">Skritt / dag</label><input id="goalStepsPerDay" type="number" min="1000" max="30000" step="500" /></div>
+        </div>
+        <div class="stack mt-14">
+          <div>
+            <div class="progress-top"><span>Aktiviteter denne uka</span><span id="weeklyActsText">0/4</span></div>
+            <div class="progress"><div class="bar" id="weeklyActsBar"></div></div>
+          </div>
+          <div>
+            <div class="progress-top"><span>Minutter denne uka</span><span id="weeklyMinsText">0/180</span></div>
+            <div class="progress"><div class="bar bar-purple" id="weeklyMinsBar"></div></div>
+          </div>
+          <div>
+            <div class="progress-top"><span>Snitt skritt / dag</span><span id="weeklyStepsText">0/8000</span></div>
+            <div class="progress"><div class="bar bar-amber" id="weeklyStepsBar"></div></div>
+          </div>
+        </div>
+        <div class="row-actions"><button class="btn primary" id="saveGoalsBtn">Lagre mål</button></div>
+        <hr class="sep" />
+        <div class="inputs">
+          <div><label for="waterGlasses">Vannglass i dag</label><input id="waterGlasses" type="number" min="0" max="30" step="1" placeholder="F.eks. 8" /></div>
+          <div><label for="dailyMood">Dagens følelse</label><select id="dailyMood"><option value="">Velg</option><option>Veldig bra</option><option>Bra</option><option>OK</option><option>Tung dag</option></select></div>
+        </div>
+        <div class="habit-grid mt-12" id="habitGrid"></div>
+        <div class="row-actions"><button class="btn success" id="saveCheckinBtn">Lagre innsjekk</button></div>
+      </div>
+
+      <div class="card glass span-7">
+        <div class="section-title"><h2>Matlogg</h2><span class="badge">🥗 Kosthold</span></div>
+        <div class="inputs">
+          <div><label for="mealDate">Dato</label><input id="mealDate" type="date" /></div>
+          <div><label for="mealType">Måltid</label><select id="mealType"><option>Frokost</option><option>Lunsj</option><option>Middag</option><option>Kveldsmat</option><option>Snacks</option></select></div>
+          <div class="full-span"><label for="mealText">Hva spiste du?</label><input id="mealText" type="text" placeholder="F.eks. havregrøt med bær" /></div>
+        </div>
+        <div class="inputs-3 mt-12">
+          <div><label for="mealCalories">Kalorier</label><input id="mealCalories" type="number" min="0" step="1" placeholder="650" /></div>
+          <div><label for="mealProtein">Protein (g)</label><input id="mealProtein" type="number" min="0" step="1" placeholder="35" /></div>
+          <div><label for="mealNote">Notat</label><input id="mealNote" type="text" placeholder="Mett? Sulten?" /></div>
+        </div>
+        <div class="row-actions"><button class="btn success" id="addMealBtn">Legg til måltid</button></div>
+        <div class="table-wrap mt-14"><table><thead><tr><th>Dato</th><th>Måltid</th><th>Mat</th><th>Kcal</th><th>Protein</th><th></th></tr></thead><tbody id="mealTable"></tbody></table></div>
+      </div>
+
+      <div class="card glass span-7">
+        <div class="section-title"><h2>Aktivitetslogg + Garmin CSV</h2><span class="badge">🏃 Bevegelse</span></div>
+        <div class="inputs">
+          <div><label for="activityDate">Dato</label><input id="activityDate" type="date" /></div>
+          <div><label for="activityType">Aktivitet</label><select id="activityType"><option>Gåtur</option><option>Løping</option><option>Sykkel</option><option>Styrke</option><option>Golf</option><option>Annet</option></select></div>
+        </div>
+        <div class="inputs-3 mt-12">
+          <div><label for="activityDuration">Varighet (min)</label><input id="activityDuration" type="number" min="0" step="1" placeholder="45" /></div>
+          <div><label for="activitySteps">Skritt</label><input id="activitySteps" type="number" min="0" step="1" placeholder="8500" /></div>
+          <div><label for="activityCalories">Kalorier</label><input id="activityCalories" type="number" min="0" step="1" placeholder="350" /></div>
+        </div>
+        <label for="activityNote" class="mt-12">Notat</label>
+        <input id="activityNote" type="text" placeholder="Rolig tur, tung økt, god energi ..." />
+        <div class="row-actions">
+          <button class="btn success" id="addActivityBtn">Legg til aktivitet</button>
+          <button class="btn secondary" id="garminBtn">Importer Garmin CSV</button>
+          <button class="btn secondary" id="templateCsvBtn">Last ned CSV-mal</button>
+          <input id="garminFile" type="file" accept=".csv,text/csv" class="hidden" />
+        </div>
+        <div class="table-wrap mt-14"><table><thead><tr><th>Dato</th><th>Type</th><th>Min</th><th>Skritt</th><th>Kcal</th><th></th></tr></thead><tbody id="activityTable"></tbody></table></div>
+      </div>
+
+      <div class="card glass span-5">
+        <div class="section-title"><h2>Status</h2><span class="badge">✅ Synkstatus</span></div>
+        <div class="stack">
+          <div class="notice" id="saveIndicator">Ingen endringer akkurat nå.</div>
+          <div class="stat"><div class="label">Måltider siste 7 dager</div><div class="value" id="weeklyMealsView">0</div></div>
+          <div class="stat"><div class="label">Aktiviteter siste 7 dager</div><div class="value" id="weeklyActsView">0</div></div>
+          <div class="stat"><div class="label">Minutter siste 7 dager</div><div class="value" id="weeklyMinutesView">0</div></div>
+          <div class="stat"><div class="label">Skritt siste 7 dager</div><div class="value" id="weeklyStepsView">0</div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">Cloud-lagring per bruker med Firebase/Firestore når konfigurasjonen er lagt inn.</div>
+  </div>
+
+  <script src="./firebase-config.js"></script>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
