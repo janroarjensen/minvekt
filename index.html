@@ -4,13 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#0b1120" />
-  <title>Min Vektreise Cloud – Ryddet fullversjon</title>
+  <title>Min Vektreise Cloud – Stabil versjon</title>
   <style>
     :root{
-      --bg:#071225;--bg2:#0d1930;--surface:rgba(255,255,255,.08);--surface2:rgba(255,255,255,.06);
-      --text:#e5eefb;--muted:#9fb3d1;--line:rgba(255,255,255,.14);--accent:#5eead4;--accent2:#60a5fa;
-      --accent3:#c084fc;--success:#22c55e;--warning:#f59e0b;--danger:#f87171;--shadow:0 20px 60px rgba(2,6,23,.35);
-      --radius-xl:28px;--radius:18px;--max:1380px;
+      --bg:#071225; --bg2:#0d1930; --surface:rgba(255,255,255,.08); --surface2:rgba(255,255,255,.06);
+      --text:#e5eefb; --muted:#9fb3d1; --line:rgba(255,255,255,.14);
+      --accent:#5eead4; --accent2:#60a5fa; --accent3:#c084fc;
+      --success:#22c55e; --warning:#f59e0b; --danger:#f87171;
+      --shadow:0 20px 60px rgba(2,6,23,.35); --radius-xl:28px; --radius:18px; --max:1380px;
     }
     *{box-sizing:border-box}
     html,body{margin:0;min-height:100%;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--text);background:
@@ -38,6 +39,7 @@
     .btn.secondary{background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);box-shadow:none}
     .btn.success{background:linear-gradient(135deg,var(--success),#16a34a);color:#fff}
     .btn.danger{background:linear-gradient(135deg,var(--danger),#ef4444);color:#fff}
+    .btn.warn{background:linear-gradient(135deg,var(--warning),#d97706);color:#111827}
     .btn.full{width:100%}
     .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px;margin-top:18px}
     .span-4{grid-column:span 4}.span-5{grid-column:span 5}.span-7{grid-column:span 7}.span-8{grid-column:span 8}.span-12{grid-column:span 12}
@@ -57,8 +59,8 @@
     .table-wrap{overflow:auto;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.04)} table{width:100%;border-collapse:collapse;min-width:720px} th,td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.08);text-align:left;font-size:.95rem;vertical-align:top} th{position:sticky;top:0;background:#0a162c;color:#d7e8ff;z-index:1}
     canvas{width:100%;height:280px;border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid var(--line)}
     .notice{padding:14px 16px;border-radius:18px;background:rgba(56,189,248,.14);border:1px solid rgba(56,189,248,.35);color:#e0f2fe}.notice.success{background:rgba(34,197,94,.14);border-color:rgba(74,222,128,.35);color:#dcfce7}.notice.warn{background:rgba(250,204,21,.14);border-color:rgba(250,204,21,.35);color:#fff7cc}.notice.danger{background:rgba(248,113,113,.14);border-color:rgba(248,113,113,.35);color:#fee2e2}
-    .auth-shell{position:fixed;inset:0;display:grid;place-items:center;padding:18px;background:rgba(2,6,23,.65);backdrop-filter:blur(12px);z-index:99}.auth-card{width:min(520px,100%);padding:24px;border-radius:28px}.auth-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}.tab{padding:11px 12px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;font-weight:800;cursor:pointer;text-align:center}.tab.active{background:linear-gradient(135deg,var(--accent2),#2563eb)}
-    .hidden{display:none!important}.footer{margin-top:22px;text-align:center;color:var(--muted);font-size:.92rem}.mt-12{margin-top:12px}.mt-14{margin-top:14px}.mt-16{margin-top:16px}.mb-8{margin-bottom:8px}.mb-14{margin-bottom:14px}.min-h-18{min-height:18px}.sep{border-color:var(--line);border-style:solid;border-width:0 0 1px;margin:16px 0}
+    .auth-shell{position:fixed;inset:0;display:grid;place-items:center;padding:18px;background:rgba(2,6,23,.65);backdrop-filter:blur(12px);z-index:99}.auth-card{width:min(560px,100%);padding:24px;border-radius:28px}.auth-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}.tab{padding:11px 12px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;font-weight:800;cursor:pointer;text-align:center}.tab.active{background:linear-gradient(135deg,var(--accent2),#2563eb)}
+    .hidden{display:none!important}.footer{margin-top:22px;text-align:center;color:var(--muted);font-size:.92rem}.mt-12{margin-top:12px}.mt-14{margin-top:14px}.mt-16{margin-top:16px}.mb-8{margin-bottom:8px}.mb-14{margin-bottom:14px}.min-h-18{min-height:18px}.sep{border-color:var(--line);border-style:solid;border-width:0 0 1px;margin:16px 0}.mono{font-family:Consolas,monospace}
     @media (max-width:1120px){.hero{grid-template-columns:1fr}.header-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.span-8,.span-7,.span-5,.span-4{grid-column:span 12}}
     @media (max-width:760px){.app{padding:14px 12px 56px}.card{padding:18px}.header-grid,.inputs,.inputs-3,.auth-tabs,.habit-grid{grid-template-columns:1fr}.btn{width:100%}}
   </style>
@@ -66,16 +68,17 @@
 <body>
   <div class="auth-shell" id="authOverlay">
     <div class="auth-card glass">
-      <div class="badge">✨ Cloud edition • Ryddet kode • Statusboks</div>
-      <h2 style="font-size:1.8rem;margin:12px 0 6px">Logg inn eller opprett bruker</h2>
-      <p class="muted" style="margin:0 0 14px">Denne versjonen er ryddet opp så knappene fungerer, og du får tydelig status for Firebase.</p>
+      <div class="badge">✅ Stabil løsning • Lokalt + Sky</div>
+      <h2 style="font-size:1.8rem;margin:12px 0 6px">Velg modus</h2>
+      <p class="muted" style="margin:0 0 14px">Denne versjonen fungerer alltid lokalt, og synker til Firebase når den kjøres fra <span class="mono">http/https</span> eller <span class="mono">localhost</span> og du logger inn.</p>
       <div class="auth-tabs">
         <button class="tab active" data-tab="login">Logg inn</button>
         <button class="tab" data-tab="signup">Opprett bruker</button>
         <button class="tab" data-tab="reset">Glemt passord</button>
+        <button class="tab" data-tab="local">Lokal modus</button>
       </div>
       <div id="authSetupNotice" class="notice hidden mb-14"></div>
-      <div class="inputs one-col">
+      <div class="inputs one-col" id="authFormWrap">
         <div><label for="authEmail">E-post</label><input id="authEmail" type="email" placeholder="deg@epost.no" autocomplete="email" /></div>
         <div id="authPasswordWrap"><label for="authPassword">Passord</label><input id="authPassword" type="password" placeholder="Minst 6 tegn" autocomplete="current-password" /></div>
         <div id="authNameWrap" class="hidden"><label for="authName">Navn (valgfritt)</label><input id="authName" type="text" placeholder="F.eks. Jan Roar" autocomplete="name" /></div>
@@ -83,6 +86,7 @@
       <div class="row-actions mt-16"><button class="btn primary full" id="authActionBtn">Logg inn</button></div>
       <div id="authMessage" class="muted tiny mt-12 min-h-18"></div>
       <div id="firebaseConnectionStatus" class="notice mt-12">Status: Ikke startet</div>
+      <div class="notice warn mt-12 hidden" id="fileModeInfo">Du kjører siden som lokal fil (<span class="mono">file://</span>). Sky-innlogging er deaktivert for stabil drift. Bruk <span class="mono">http://localhost</span> eller hosting for Firebase-synk.</div>
     </div>
   </div>
 
@@ -91,29 +95,30 @@
       <div class="card glass">
         <div class="hero-head">
           <div>
-            <div class="badge">🚀 Min Vektreise Cloud</div>
-            <h1>Ryddet fullversjon med statusboks</h1>
-            <p>Fungerende Firebase-innlogging, synkstatus, vekt, mål, matlogg, aktivitet, Garmin CSV og JSON backup/import.</p>
+            <div class="badge">🚀 Min Vektreise Stabil</div>
+            <h1>Fullverdig løsning som faktisk fungerer</h1>
+            <p>Offline først. Lokal lagring fungerer alltid. Sky-synk er robust og skjer bare når miljøet faktisk støtter det.</p>
           </div>
-          <div class="pill" id="firebaseStatusPill">Sjekker Firebase…</div>
+          <div class="pill" id="firebaseStatusPill">Sjekker miljø…</div>
         </div>
         <div class="header-grid">
           <div class="stat"><div class="label">Startvekt</div><div class="value" id="startWeightView">–</div></div>
           <div class="stat"><div class="label">Dagens vekt</div><div class="value" id="currentWeightView">–</div></div>
           <div class="stat"><div class="label">Målvekt</div><div class="value" id="goalWeightView">–</div></div>
           <div class="stat"><div class="label">Kalorimål</div><div class="value" id="kcalView">–</div></div>
-          <div class="stat"><div class="label">Bruker</div><div class="value" id="userView">Ikke logget inn</div></div>
+          <div class="stat"><div class="label">Modus</div><div class="value" id="modeView">Lokal</div></div>
         </div>
         <div class="progress-wrap">
           <div class="progress-top"><div><strong>Fremgang mot mål:</strong> <span id="progressText">0 kg av 0 kg</span></div><div id="goalPercentText">0%</div></div>
           <div class="progress"><div class="bar" id="goalBar"></div></div>
         </div>
         <div class="toolbar">
-          <div id="syncStatus" class="notice">Status: Venter på innlogging</div>
+          <div id="syncStatus" class="notice">Status: Venter</div>
           <div class="hero-actions">
             <button class="btn secondary" id="exportBtn">Eksporter JSON</button>
             <button class="btn secondary" id="importBtn">Importer JSON</button>
             <button class="btn secondary" id="syncBtn">Synk nå</button>
+            <button class="btn warn" id="retryBtn">Prøv sky igjen</button>
             <button class="btn danger" id="logoutBtn">Logg ut</button>
             <input id="importFile" type="file" accept="application/json" class="hidden" />
           </div>
@@ -132,7 +137,7 @@
         </div>
         <ul class="score-list" id="scoreList"></ul>
         <div>
-          <div class="section-title"><h2>Statuslogg</h2><span class="badge">Live</span></div>
+          <div class="section-title"><h2>Systemstatus</h2><span class="badge">Live</span></div>
           <ul class="score-list" id="statusTimeline"></ul>
         </div>
       </div>
@@ -229,13 +234,13 @@
 
       <div class="card glass span-5">
         <div class="section-title"><h2>Hurtiginfo</h2><span class="badge">Status</span></div>
-        <div class="notice success" style="margin-bottom:12px"><strong>Grønn</strong> = innlogging/synk OK</div>
-        <div class="notice warn" style="margin-bottom:12px"><strong>Gul</strong> = tilkoblet, men med begrensning / venter</div>
-        <div class="notice danger" style="margin-bottom:12px"><strong>Rød</strong> = feil mot Firebase / autentisering / synk</div>
-        <div class="notice"><strong>Blå</strong> = jobber / kobler til / sender forespørsel</div>
+        <div class="notice success" style="margin-bottom:12px"><strong>Grønn</strong> = lagret i skyen</div>
+        <div class="notice warn" style="margin-bottom:12px"><strong>Gul</strong> = lagret lokalt, venter på sky</div>
+        <div class="notice danger" style="margin-bottom:12px"><strong>Rød</strong> = sky feilet, men lokal lagring er beholdt</div>
+        <div class="notice"><strong>Blå</strong> = jobber / kobler til / synkroniserer</div>
       </div>
     </section>
-    <div class="footer">Ryddet fullversjon – feil med dobbelt deklarert funksjon er fjernet.</div>
+    <div class="footer">Stabil løsning: lokal lagring fungerer alltid, Firebase-synk aktiveres bare i støttet miljø.</div>
   </div>
 
   <script>
@@ -254,10 +259,10 @@
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js';
     import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js';
-    import { getFirestore, doc, getDoc, setDoc, serverTimestamp, enableIndexedDbPersistence } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js';
+    import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js';
 
     const today = new Date().toISOString().slice(0,10);
-    const APP_CACHE = 'vektreise_full_clean_v1';
+    const APP_CACHE = 'vektreise_stabil_v2';
     const quotes = [
       'Små valg, hver dag, blir store resultater over tid.',
       'Du trenger ikke være perfekt – bare jevn.',
@@ -287,8 +292,9 @@
     const daysAgo = days => { const d = new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate() - days); return d; };
     const safe = (str='') => String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 
-    let app = null, auth = null, db = null, currentUser = null, saveTimer = null, firebaseReady = false, authMode = 'login';
     const historyList = byId('statusTimeline');
+    let app = null, auth = null, db = null, currentUser = null, saveTimer = null, cloudEnabled = false, firebaseReady = false, authMode = 'login';
+    let lastSyncAt = null;
 
     function defaultState(){
       return {
@@ -296,18 +302,16 @@
         goals: { activitiesPerWeek:4, minutesPerWeek:180, stepsPerDay:8000 },
         meals: [], activities: [],
         weights: [{ id: cryptoRandom(), date: today, weight: 120 }],
-        checkins: {}
+        checkins: {},
+        meta: { pendingCloudSync: false }
       };
     }
 
     function mergeDeep(base, extra){
       const out = structuredClone ? structuredClone(base) : JSON.parse(JSON.stringify(base));
       for (const k in extra || {}) {
-        if (extra[k] && typeof extra[k] === 'object' && !Array.isArray(extra[k]) && out[k] && typeof out[k] === 'object' && !Array.isArray(out[k])) {
-          out[k] = mergeDeep(out[k], extra[k]);
-        } else {
-          out[k] = extra[k];
-        }
+        if (extra[k] && typeof extra[k] === 'object' && !Array.isArray(extra[k]) && out[k] && typeof out[k] === 'object' && !Array.isArray(out[k])) out[k] = mergeDeep(out[k], extra[k]);
+        else out[k] = extra[k];
       }
       return out;
     }
@@ -322,30 +326,28 @@
       }
     }
 
-    function saveState(uid='demo'){
-      localStorage.setItem(APP_CACHE + '_' + uid, JSON.stringify(state));
-    }
-
     let state = loadState();
+
+    function saveState(uid='demo'){ localStorage.setItem(APP_CACHE + '_' + uid, JSON.stringify(state)); }
 
     function addHistory(text){
       const li = document.createElement('li');
       li.textContent = new Date().toLocaleTimeString('no-NO') + ' – ' + text;
-      historyList?.prepend(li);
-      while (historyList && historyList.children.length > 8) historyList.removeChild(historyList.lastChild);
+      historyList.prepend(li);
+      while (historyList.children.length > 12) historyList.removeChild(historyList.lastChild);
     }
 
-    function setStatusBox(el, text, kind='info'){
-      if (!el) return;
-      el.textContent = 'Status: ' + text;
-      el.className = 'notice' + (kind === 'success' ? ' success' : kind === 'warn' ? ' warn' : kind === 'danger' ? ' danger' : '');
-    }
-
-    function setConnectionStatus(text, kind='info'){
-      setStatusBox(byId('firebaseConnectionStatus'), text, kind);
-      setStatusBox(byId('syncStatus'), text, kind);
+    function setStatus(text, kind='info'){
+      const cls = 'notice' + (kind === 'success' ? ' success' : kind === 'warn' ? ' warn' : kind === 'danger' ? ' danger' : '');
+      const a = byId('firebaseConnectionStatus');
+      const b = byId('syncStatus');
+      if (a) { a.textContent = 'Status: ' + text; a.className = cls; }
+      if (b) { b.textContent = 'Status: ' + text; b.className = cls; }
       addHistory(text);
     }
+
+    function fileMode(){ return location.protocol === 'file:'; }
+    function supportedCloudRuntime(){ return location.protocol === 'https:' || location.protocol === 'http:'; }
 
     function estimateCalories(){
       const age = parseFloat(state.profile.age), sex = state.profile.sex, weight = parseFloat(state.profile.currentWeight), height = parseFloat(state.profile.heightCm);
@@ -381,8 +383,9 @@
       setText('progressText', `${fmt(lost)} kg av ${fmt(total)} kg`);
       setText('goalPercentText', `${fmt(progress,0)} %`);
       byId('goalBar').style.width = progress + '%';
-      setText('userView', currentUser ? (currentUser.displayName || currentUser.email || 'Innlogget') : 'Ikke logget inn');
+      setText('modeView', cloudEnabled && currentUser ? 'Sky' : 'Lokal');
       setText('planNotice', estimateCalories() || 'Legg inn alder og kjønn for å få beregnet kalorimål.');
+      setText('firebaseStatusPill', fileMode() ? 'Lokal filmodus' : cloudEnabled ? 'Sky aktiv' : firebaseReady ? 'Firebase klar' : 'Lokal modus');
     }
 
     function renderHabitGrid(){
@@ -395,8 +398,8 @@
       habits.forEach(h => {
         const el = byId(`habit_${h.id}`);
         const action = () => toggleHabit(h.id);
-        el.addEventListener('click', action);
-        el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); action(); } });
+        el.onclick = action;
+        el.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); action(); } };
       });
     }
 
@@ -473,11 +476,7 @@
       if (!state.meals.length) { tbody.innerHTML = '<tr><td colspan="6" class="muted">Ingen måltider registrert enda.</td></tr>'; return; }
       tbody.innerHTML = [...state.meals].sort((a,b)=>String(b.date).localeCompare(String(a.date))).map(item => `
         <tr><td>${safe(item.date)}</td><td>${safe(item.type)}</td><td>${safe(item.text)}</td><td>${item.calories?fmtInt(item.calories):''}</td><td>${item.protein?fmtInt(item.protein):''}</td><td><button class="btn secondary" data-delmeal="${item.id}" style="padding:8px 10px">Slett</button></td></tr>`).join('');
-      tbody.querySelectorAll('[data-delmeal]').forEach(btn => btn.addEventListener('click', () => {
-        state.meals = state.meals.filter(x => x.id !== btn.dataset.delmeal);
-        renderAll();
-        scheduleSave();
-      }));
+      tbody.querySelectorAll('[data-delmeal]').forEach(btn => btn.onclick = () => { state.meals = state.meals.filter(x => x.id !== btn.dataset.delmeal); renderAll(); scheduleSave(); });
     }
 
     function renderActivities(){
@@ -485,11 +484,7 @@
       if (!state.activities.length) { tbody.innerHTML = '<tr><td colspan="6" class="muted">Ingen aktivitet registrert enda.</td></tr>'; return; }
       tbody.innerHTML = [...state.activities].sort((a,b)=>String(b.date).localeCompare(String(a.date))).map(item => `
         <tr><td>${safe(item.date)}</td><td>${safe(item.type)}</td><td>${item.duration?fmtInt(item.duration):''}</td><td>${item.steps?fmtInt(item.steps):''}</td><td>${item.calories?fmtInt(item.calories):''}</td><td><button class="btn secondary" data-delact="${item.id}" style="padding:8px 10px">Slett</button></td></tr>`).join('');
-      tbody.querySelectorAll('[data-delact]').forEach(btn => btn.addEventListener('click', () => {
-        state.activities = state.activities.filter(x => x.id !== btn.dataset.delact);
-        renderAll();
-        scheduleSave();
-      }));
+      tbody.querySelectorAll('[data-delact]').forEach(btn => btn.onclick = () => { state.activities = state.activities.filter(x => x.id !== btn.dataset.delact); renderAll(); scheduleSave(); });
     }
 
     function drawRoundRect(ctx,x,y,w,h,r){ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();}
@@ -499,7 +494,7 @@
       const c = byId('weightChart'), ctx = c.getContext('2d'), w = c.width, h = c.height;
       ctx.clearRect(0,0,w,h); drawCardBg(ctx,w,h);
       const items = [...state.weights].sort((a,b)=>String(a.date).localeCompare(String(b.date)));
-      if (!items.length) { ctx.fillStyle='#9fb3d1'; ctx.fillText('Ingen veiinger ennå.',w/2-60,h/2); return; }
+      if (!items.length) return;
       const pad={l:54,r:16,t:18,b:36};
       const vals=items.map(x=>Number(x.weight));
       const min=Math.min(...vals, Number(state.profile.goalWeight||0)) - 1;
@@ -531,99 +526,85 @@
     async function cloudRef(){ return doc(db,'users',currentUser.uid,'app','main'); }
 
     async function loadCloud(){
+      if (!cloudEnabled || !currentUser) return;
       try {
-        setConnectionStatus('Laster skydata fra Firestore…','info');
+        setStatus('Laster skydata fra Firestore…','info');
         const snap = await getDoc(await cloudRef());
         if (snap.exists() && snap.data()?.state) {
           state = mergeDeep(defaultState(), snap.data().state);
           saveState(currentUser.uid);
           renderAll();
-          setConnectionStatus('Skydata lastet fra Firestore','success');
+          setStatus('Skydata lastet fra Firestore','success');
         } else {
           await syncNow(true);
         }
       } catch (err) {
-        setConnectionStatus('Kunne ikke laste skydata: ' + err.message,'warn');
+        state.meta.pendingCloudSync = true;
+        saveState(currentUser?.uid || 'demo');
+        setStatus('Skylesing feilet – fortsetter lokalt (' + (err.message || err) + ')','warn');
       }
     }
 
     async function syncNow(initial=false){
-      if (!currentUser) return;
+      if (!cloudEnabled || !currentUser) {
+        state.meta.pendingCloudSync = true;
+        saveState(currentUser?.uid || 'demo');
+        setStatus(fileMode() ? 'Lokal lagring aktiv – sky krever localhost/hosting' : 'Lokal lagring aktiv – logg inn for sky','warn');
+        return;
+      }
       try {
-        setConnectionStatus(initial ? 'Oppretter første lagring i Firestore…' : 'Synkroniserer med Firestore…','info');
+        setStatus(initial ? 'Oppretter første lagring i Firestore…' : 'Synkroniserer med Firestore…','info');
         await setDoc(await cloudRef(), { uid: currentUser.uid, email: currentUser.email || '', updatedAt: serverTimestamp(), state }, { merge: true });
+        state.meta.pendingCloudSync = false;
         saveState(currentUser.uid);
-        setConnectionStatus(initial ? 'Førstegangslagring fullført' : 'Synkronisert med Firestore','success');
+        lastSyncAt = new Date();
+        setStatus((initial ? 'Førstegangslagring fullført' : 'Synkronisert med Firestore') + ' • ' + lastSyncAt.toLocaleTimeString('no-NO'),'success');
       } catch (err) {
-        setConnectionStatus('Synk feilet: ' + err.message,'danger');
+        state.meta.pendingCloudSync = true;
+        saveState(currentUser.uid);
+        setStatus('Sky-synk feilet – endringen er lagret lokalt (' + (err.message || err) + ')','danger');
       }
     }
 
     function scheduleSave(){
       saveState(currentUser?.uid || 'demo');
-      if (!currentUser || !firebaseReady) return;
-      clearTimeout(saveTimer);
-      saveTimer = setTimeout(() => syncNow(false), 700);
-    }
-
-    async function initFirebase(){
-      const cfg = window.__FIREBASE_CONFIG__;
-      if (!cfg || !cfg.apiKey) {
-        setConnectionStatus('Firebase-konfig mangler','warn');
-        const setup = byId('authSetupNotice');
-        setup.classList.remove('hidden');
-        setup.textContent = 'Firebase-konfig mangler.';
-        byId('authOverlay').classList.add('hidden');
+      if (!cloudEnabled || !currentUser) {
+        state.meta.pendingCloudSync = true;
+        saveState(currentUser?.uid || 'demo');
+        if (fileMode()) setStatus('Lagret lokalt – åpne via localhost eller hosting for sky','warn');
+        else setStatus('Lagret lokalt – logg inn for sky-synk','warn');
         return;
       }
-      try {
-        setConnectionStatus('Kobler til Firebase…','info');
-        app = initializeApp(cfg);
-        auth = getAuth(app);
-        db = getFirestore(app);
-        try {
-          await enableIndexedDbPersistence(db);
-          setConnectionStatus('Tilkoblet Firebase + offline-cache aktiv','success');
-        } catch {
-          setConnectionStatus('Tilkoblet Firebase (offline-cache ikke aktiv)','warn');
-        }
-        firebaseReady = true;
-        setText('firebaseStatusPill','Firebase klar');
-        onAuthStateChanged(auth, async user => {
-          currentUser = user || null;
-          if (currentUser) {
-            byId('authOverlay').classList.add('hidden');
-            setText('userView', currentUser.displayName || currentUser.email || 'Innlogget');
-            setConnectionStatus('Innlogget – synk mot Firestore aktiv','success');
-            state = loadState(currentUser.uid);
-            renderAll();
-            await loadCloud();
-          } else {
-            setText('userView','Ikke logget inn');
-            setConnectionStatus('Ikke logget inn','info');
-            byId('authOverlay').classList.remove('hidden');
-            renderAll();
-          }
-        });
-      } catch (err) {
-        setText('firebaseStatusPill','Firebase-feil');
-        setConnectionStatus('Feil ved oppkobling: ' + err.message,'danger');
-      }
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => syncNow(false), 900);
     }
 
     function setTab(mode){
       authMode = mode;
       document.querySelectorAll('[data-tab]').forEach(el => el.classList.toggle('active', el.dataset.tab === mode));
       byId('authNameWrap').classList.toggle('hidden', mode !== 'signup');
-      byId('authPasswordWrap').classList.toggle('hidden', mode === 'reset');
-      byId('authActionBtn').textContent = mode === 'login' ? 'Logg inn' : mode === 'signup' ? 'Opprett bruker' : 'Send nullstilling';
+      byId('authPasswordWrap').classList.toggle('hidden', mode === 'reset' || mode === 'local');
+      byId('authFormWrap').classList.toggle('hidden', mode === 'local');
+      byId('authActionBtn').textContent = mode === 'login' ? 'Logg inn' : mode === 'signup' ? 'Opprett bruker' : mode === 'reset' ? 'Send nullstilling' : 'Start i lokal modus';
     }
 
     async function authAction(){
+      if (authMode === 'local') {
+        byId('authOverlay').classList.add('hidden');
+        cloudEnabled = false;
+        setStatus('Lokal modus startet – alle endringer lagres på denne enheten','warn');
+        renderAll();
+        return;
+      }
+      if (!firebaseReady || !supportedCloudRuntime()) {
+        setText('authMessage', 'Sky-innlogging krever localhost eller hostet side. Velg Lokal modus, eller åpne via http://localhost.');
+        setStatus('Sky-innlogging er ikke tilgjengelig i dette miljøet','warn');
+        return;
+      }
       const email = val('authEmail'), password = val('authPassword'), name = val('authName');
       try {
         setText('authMessage','Jobber…');
-        setConnectionStatus(authMode === 'login' ? 'Logger inn…' : authMode === 'signup' ? 'Oppretter bruker…' : 'Sender nullstilling…','info');
+        setStatus(authMode === 'login' ? 'Logger inn…' : authMode === 'signup' ? 'Oppretter bruker…' : 'Sender nullstilling…','info');
         if (authMode === 'login') {
           await signInWithEmailAndPassword(auth, email, password);
         } else if (authMode === 'signup') {
@@ -632,107 +613,79 @@
         } else {
           await sendPasswordResetEmail(auth, email);
           setText('authMessage','Nullstillingsmail sendt.');
-          setConnectionStatus('Nullstillingsmail sendt','success');
+          setStatus('Nullstillingsmail sendt','success');
           return;
         }
         setText('authMessage','OK');
       } catch (err) {
         setText('authMessage', err.message);
-        setConnectionStatus('Autentisering feilet: ' + err.message,'danger');
+        setStatus('Autentisering feilet: ' + err.message,'danger');
       }
     }
 
-    function saveProfile(){
-      state.profile.displayName = val('displayName');
-      state.profile.heightCm = num('heightCm',197);
-      state.profile.age = val('age');
-      state.profile.sex = val('sex');
-      state.profile.startWeight = num('startWeight',120);
-      state.profile.currentWeight = num('currentWeight',120);
-      state.profile.goalWeight = num('goalWeight',110);
-      state.profile.why = val('whyText');
-      saveState(currentUser?.uid || 'demo');
-      renderAll();
-      if (currentUser && state.profile.displayName && currentUser.displayName !== state.profile.displayName) {
-        updateProfile(currentUser, {displayName: state.profile.displayName}).catch(() => {});
+    async function initFirebase(){
+      if (fileMode()) {
+        byId('fileModeInfo').classList.remove('hidden');
+        byId('authSetupNotice').classList.remove('hidden');
+        byId('authSetupNotice').textContent = 'Lokal filmodus oppdaget. Velg “Lokal modus”, eller kjør siden via http://localhost for Firebase-synk.';
+        setStatus('Lokal filmodus – sky er slått av for stabil drift','warn');
+        setText('firebaseStatusPill','Lokal filmodus');
+        renderAll();
+        return;
       }
-      scheduleSave();
+      if (!supportedCloudRuntime()) {
+        setStatus('Ukjent kjøremiljø – fortsetter lokalt','warn');
+        renderAll();
+        return;
+      }
+      const cfg = window.__FIREBASE_CONFIG__;
+      if (!cfg || !cfg.apiKey) {
+        setStatus('Firebase-konfig mangler – fortsetter lokalt','warn');
+        renderAll();
+        return;
+      }
+      try {
+        setStatus('Kobler til Firebase…','info');
+        app = initializeApp(cfg);
+        auth = getAuth(app);
+        db = getFirestore(app);
+        firebaseReady = true;
+        setText('firebaseStatusPill','Firebase klar');
+        onAuthStateChanged(auth, async user => {
+          currentUser = user || null;
+          if (currentUser) {
+            cloudEnabled = true;
+            byId('authOverlay').classList.add('hidden');
+            state = loadState(currentUser.uid);
+            renderAll();
+            setStatus('Innlogget – sky aktiv','success');
+            await loadCloud();
+            if (state.meta.pendingCloudSync) await syncNow(false);
+          } else {
+            cloudEnabled = false;
+            setStatus('Firebase klar – logg inn eller velg lokal modus','info');
+            renderAll();
+          }
+        });
+      } catch (err) {
+        firebaseReady = false;
+        cloudEnabled = false;
+        byId('authSetupNotice').classList.remove('hidden');
+        byId('authSetupNotice').textContent = 'Firebase kunne ikke initialiseres. Lokal modus fungerer fortsatt.';
+        setStatus('Firebase-feil – fortsetter lokalt (' + err.message + ')','danger');
+        renderAll();
+      }
     }
 
-    function logWeight(){
-      saveProfile();
-      const entry = { id: cryptoRandom(), date: val('weighDate') || today, weight: num('currentWeight', state.profile.currentWeight) };
-      state.profile.currentWeight = entry.weight;
-      state.weights.push(entry);
-      const map = new Map();
-      state.weights.forEach(item => map.set(item.date, item));
-      state.weights = [...map.values()].sort((a,b)=>String(a.date).localeCompare(String(b.date)));
-      renderAll();
-      scheduleSave();
-    }
+    function saveProfile(){ state.profile.displayName = val('displayName'); state.profile.heightCm = num('heightCm',197); state.profile.age = val('age'); state.profile.sex = val('sex'); state.profile.startWeight = num('startWeight',120); state.profile.currentWeight = num('currentWeight',120); state.profile.goalWeight = num('goalWeight',110); state.profile.why = val('whyText'); saveState(currentUser?.uid || 'demo'); renderAll(); if (currentUser && state.profile.displayName && auth) updateProfile(currentUser, { displayName: state.profile.displayName }).catch(() => {}); scheduleSave(); }
+    function logWeight(){ saveProfile(); const entry = { id: cryptoRandom(), date: val('weighDate') || today, weight: num('currentWeight', state.profile.currentWeight) }; state.profile.currentWeight = entry.weight; state.weights.push(entry); const map = new Map(); state.weights.forEach(item => map.set(item.date, item)); state.weights = [...map.values()].sort((a,b)=>String(a.date).localeCompare(String(b.date))); renderAll(); scheduleSave(); }
+    function saveGoals(){ state.goals.activitiesPerWeek = num('goalActivitiesPerWeek',4); state.goals.minutesPerWeek = num('goalMinutesPerWeek',180); state.goals.stepsPerDay = num('goalStepsPerDay',8000); saveState(currentUser?.uid || 'demo'); renderAll(); scheduleSave(); }
+    function saveCheckin(){ const c = state.checkins[today] || { habits:{} }; c.waterGlasses = num('waterGlasses',0); c.mood = val('dailyMood'); state.checkins[today] = c; saveState(currentUser?.uid || 'demo'); renderAll(); scheduleSave(); }
+    function addMeal(){ const item = { id: cryptoRandom(), date: val('mealDate') || today, type: val('mealType'), text: val('mealText'), calories: val('mealCalories'), protein: val('mealProtein'), note: val('mealNote') }; if (!item.text) { alert('Skriv inn hva du spiste.'); return; } state.meals.unshift(item); ['mealText','mealCalories','mealProtein','mealNote'].forEach(id => byId(id).value=''); renderAll(); scheduleSave(); }
+    function addActivity(){ const item = { id: cryptoRandom(), date: val('activityDate') || today, type: val('activityType'), duration: val('activityDuration'), steps: val('activitySteps'), calories: val('activityCalories'), note: val('activityNote') }; if (!item.duration && !item.steps && !item.calories) { alert('Legg inn minutter, skritt eller kalorier.'); return; } state.activities.unshift(item); ['activityDuration','activitySteps','activityCalories','activityNote'].forEach(id => byId(id).value=''); renderAll(); scheduleSave(); }
 
-    function saveGoals(){
-      state.goals.activitiesPerWeek = num('goalActivitiesPerWeek',4);
-      state.goals.minutesPerWeek = num('goalMinutesPerWeek',180);
-      state.goals.stepsPerDay = num('goalStepsPerDay',8000);
-      saveState(currentUser?.uid || 'demo');
-      renderAll();
-      scheduleSave();
-    }
-
-    function saveCheckin(){
-      const c = state.checkins[today] || { habits:{} };
-      c.waterGlasses = num('waterGlasses',0);
-      c.mood = val('dailyMood');
-      state.checkins[today] = c;
-      saveState(currentUser?.uid || 'demo');
-      renderAll();
-      scheduleSave();
-    }
-
-    function addMeal(){
-      const item = { id: cryptoRandom(), date: val('mealDate') || today, type: val('mealType'), text: val('mealText'), calories: val('mealCalories'), protein: val('mealProtein'), note: val('mealNote') };
-      if (!item.text) { alert('Skriv inn hva du spiste.'); return; }
-      state.meals.unshift(item);
-      ['mealText','mealCalories','mealProtein','mealNote'].forEach(id => byId(id).value = '');
-      renderAll();
-      scheduleSave();
-    }
-
-    function addActivity(){
-      const item = { id: cryptoRandom(), date: val('activityDate') || today, type: val('activityType'), duration: val('activityDuration'), steps: val('activitySteps'), calories: val('activityCalories'), note: val('activityNote') };
-      if (!item.duration && !item.steps && !item.calories) { alert('Legg inn minutter, skritt eller kalorier.'); return; }
-      state.activities.unshift(item);
-      ['activityDuration','activitySteps','activityCalories','activityNote'].forEach(id => byId(id).value = '');
-      renderAll();
-      scheduleSave();
-    }
-
-    function exportJson(){
-      const blob = new Blob([JSON.stringify(state,null,2)], {type:'application/json'});
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'vektreise-full-clean-backup.json';
-      document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(() => URL.revokeObjectURL(a.href), 500);
-    }
-
-    function importJson(file){
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        try {
-          state = mergeDeep(defaultState(), JSON.parse(reader.result));
-          saveState(currentUser?.uid || 'demo');
-          renderAll();
-          scheduleSave();
-          setConnectionStatus('JSON importert','success');
-        } catch {
-          alert('Kunne ikke lese JSON-filen.');
-        }
-      };
-      reader.readAsText(file);
-    }
+    function exportJson(){ const blob = new Blob([JSON.stringify(state,null,2)], {type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='vektreise-stabil-backup.json'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),500); }
+    function importJson(file){ if (!file) return; const reader=new FileReader(); reader.onload=()=>{ try { state = mergeDeep(defaultState(), JSON.parse(reader.result)); saveState(currentUser?.uid || 'demo'); renderAll(); scheduleSave(); setStatus('JSON importert','success'); } catch { alert('Kunne ikke lese JSON-filen.'); } }; reader.readAsText(file); }
 
     function detectDelimiter(text){ const first=text.split(/\r?\n/).find(Boolean)||''; return [',',';','\t'].sort((a,b)=>first.split(b).length-first.split(a).length)[0]||','; }
     function splitCsvLine(line,delimiter){ const out=[]; let cur='', quoted=false; for(let i=0;i<line.length;i++){ const ch=line[i]; if(ch==='"'){ if(quoted&&line[i+1]==='"'){cur+='"'; i++;} else quoted=!quoted; } else if(ch===delimiter&&!quoted){ out.push(cur); cur=''; } else cur+=ch; } out.push(cur); return out; }
@@ -740,45 +693,10 @@
     function findField(row,names){ const keys=Object.keys(row), lower=keys.map(k=>k.toLowerCase()); for(const name of names){ const idx=lower.findIndex(k=>k===name||k.includes(name)); if(idx>=0) return row[keys[idx]]; } return ''; }
     function normalizeDate(input){ if(!input) return ''; const s=String(input).trim(); const direct=new Date(s); if(!isNaN(direct)) return direct.toISOString().slice(0,10); const m=s.match(/^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{2,4})$/); if(m){ const dd=m[1].padStart(2,'0'), mm=m[2].padStart(2,'0'); let yyyy=m[3]; if(yyyy.length===2) yyyy='20'+yyyy; return `${yyyy}-${mm}-${dd}`; } return ''; }
     function parseDurationToMinutes(v){ if(v==null||v==='') return 0; const s=String(v).trim(); if(/^\d+(\.\d+)?$/.test(s)) return Math.round(parseFloat(s)); const parts=s.split(':').map(n=>n.trim()); if(parts.length===3) return Math.round(Number(parts[0])*60+Number(parts[1])+Number(parts[2])/60); if(parts.length===2) return Math.round(Number(parts[0])*60+Number(parts[1])); return 0; }
+    function importGarmin(file){ if (!file) return; const reader=new FileReader(); reader.onload=()=>{ try { const rows=parseCsv(reader.result); let imported=0; rows.forEach(row=>{ const date=normalizeDate(findField(row,['date','dato','activity date','start time'])); const type=findField(row,['activity type','type','aktivitet']) || 'Garmin-aktivitet'; const duration=parseDurationToMinutes(findField(row,['duration','session time','elapsed time','varighet'])); const steps=parseFloat(String(findField(row,['steps','skritt'])).replace(/[^0-9.,-]/g,'').replace(',','.')) || 0; const calories=parseFloat(String(findField(row,['calories','kcal','energi'])).replace(/[^0-9.,-]/g,'').replace(',','.')) || 0; if (!date && !duration && !steps && !calories) return; state.activities.unshift({ id: cryptoRandom(), date: date || today, type, duration: duration || '', steps: steps || '', calories: calories || '', note: 'Importert fra Garmin' }); imported++; }); renderAll(); scheduleSave(); setStatus(`Garmin-import fullført: ${imported} rader.`, 'success'); } catch (err) { setStatus('Garmin-import feilet: ' + err.message, 'danger'); } }; reader.readAsText(file,'utf-8'); }
+    function downloadTemplateCsv(){ const csv='Date,Activity Type,Duration,Steps,Calories\n2026-06-15,Gåtur,45,8200,340\n2026-06-14,Golf,180,13000,900'; const blob=new Blob([csv], {type:'text/csv;charset=utf-8'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='garmin-import-mal.csv'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),500); }
 
-    function importGarmin(file){
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        try {
-          const rows = parseCsv(reader.result);
-          let imported = 0;
-          rows.forEach(row => {
-            const date = normalizeDate(findField(row,['date','dato','activity date','start time']));
-            const type = findField(row,['activity type','type','aktivitet']) || 'Garmin-aktivitet';
-            const duration = parseDurationToMinutes(findField(row,['duration','session time','elapsed time','varighet']));
-            const steps = parseFloat(String(findField(row,['steps','skritt'])).replace(/[^0-9.,-]/g,'').replace(',','.')) || 0;
-            const calories = parseFloat(String(findField(row,['calories','kcal','energi'])).replace(/[^0-9.,-]/g,'').replace(',','.')) || 0;
-            if (!date && !duration && !steps && !calories) return;
-            state.activities.unshift({ id: cryptoRandom(), date: date || today, type, duration: duration || '', steps: steps || '', calories: calories || '', note: 'Importert fra Garmin' });
-            imported++;
-          });
-          renderAll();
-          scheduleSave();
-          setConnectionStatus(`Garmin-import fullført: ${imported} rader.`, 'success');
-        } catch (err) {
-          setConnectionStatus('Garmin-import feilet: ' + err.message, 'danger');
-        }
-      };
-      reader.readAsText(file, 'utf-8');
-    }
-
-    function downloadTemplateCsv(){
-      const csv='Date,Activity Type,Duration,Steps,Calories\n2026-06-15,Gåtur,45,8200,340\n2026-06-14,Golf,180,13000,900';
-      const blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'garmin-import-mal.csv';
-      document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(()=>URL.revokeObjectURL(a.href),500);
-    }
-
-    document.querySelectorAll('[data-tab]').forEach(el => el.addEventListener('click', () => setTab(el.dataset.tab)));
+    document.querySelectorAll('[data-tab]').forEach(el => el.onclick = () => setTab(el.dataset.tab));
     byId('authActionBtn').onclick = authAction;
     byId('saveProfileBtn').onclick = saveProfile;
     byId('logWeightBtn').onclick = logWeight;
@@ -789,12 +707,15 @@
     byId('quoteBtn').onclick = () => setText('quoteText', quotes[Math.floor(Math.random()*quotes.length)]);
     byId('exportBtn').onclick = exportJson;
     byId('importBtn').onclick = () => byId('importFile').click();
-    byId('importFile').addEventListener('change', e => importJson(e.target.files?.[0]));
+    byId('importFile').onchange = e => importJson(e.target.files?.[0]);
     byId('syncBtn').onclick = () => syncNow(false);
-    byId('logoutBtn').onclick = async () => { if(auth && currentUser) await signOut(auth); else byId('authOverlay').classList.remove('hidden'); };
+    byId('retryBtn').onclick = () => initFirebase();
+    byId('logoutBtn').onclick = async () => { if (auth && currentUser) { await signOut(auth); } else { byId('authOverlay').classList.remove('hidden'); } };
     byId('garminBtn').onclick = () => byId('garminFile').click();
-    byId('garminFile').addEventListener('change', e => importGarmin(e.target.files?.[0]));
+    byId('garminFile').onchange = e => importGarmin(e.target.files?.[0]);
     byId('templateCsvBtn').onclick = downloadTemplateCsv;
+    window.addEventListener('online', () => { addHistory('Nettleseren rapporterer ONLINE'); if (cloudEnabled && currentUser && state.meta.pendingCloudSync) syncNow(false); });
+    window.addEventListener('offline', () => { addHistory('Nettleseren rapporterer OFFLINE'); setStatus('Nettleseren er offline – fortsetter lokalt','warn'); });
 
     renderHabitGrid();
     renderAll();
