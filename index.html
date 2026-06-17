@@ -4,45 +4,85 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#0b1120" />
-  <title>Min Vektreise Cloud – Debug</title>
+  <title>Min Vektreise Cloud – Ryddet fullversjon</title>
   <style>
-    :root{--bg:#071225;--bg2:#0d1930;--surface:rgba(255,255,255,.08);--surface2:rgba(255,255,255,.06);--text:#e5eefb;--muted:#9fb3d1;--line:rgba(255,255,255,.14);--accent:#5eead4;--accent2:#60a5fa;--success:#22c55e;--warning:#f59e0b;--danger:#f87171;--shadow:0 20px 60px rgba(2,6,23,.35);--radius-xl:28px;--max:1380px}
-    *{box-sizing:border-box} html,body{margin:0;min-height:100%;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--text);background:radial-gradient(1200px 600px at 10% -10%,rgba(96,165,250,.18),transparent 50%),radial-gradient(900px 500px at 100% 0%,rgba(192,132,252,.16),transparent 45%),linear-gradient(180deg,var(--bg),var(--bg2))}
-    button,input,select,textarea{font:inherit}.app{max-width:var(--max);margin:0 auto;padding:20px 16px 70px}.glass{background:var(--surface);backdrop-filter:blur(20px);border:1px solid var(--line);box-shadow:var(--shadow)}.card{border-radius:var(--radius-xl);padding:22px}
-    .hero{display:grid;grid-template-columns:1fr;gap:18px}.hero h1{font-size:clamp(2rem,5vw,3.2rem);margin:10px 0 8px;line-height:1.02;letter-spacing:-.03em}.hero p{margin:0;color:var(--muted)}
-    .hero-head,.toolbar,.row-actions,.section-title{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between}.badge,.pill{display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);font-weight:800;font-size:.86rem}.pill{font-weight:700}
-    .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px;margin-top:18px}.span-4{grid-column:span 4}.span-6{grid-column:span 6}.span-8{grid-column:span 8}.span-12{grid-column:span 12}
-    .inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.one-col{grid-template-columns:1fr}.full-span{grid-column:1/-1}
-    label{display:block;font-size:.92rem;font-weight:700;margin-bottom:6px;color:#cfe1ff} input,select,textarea{width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.14);background:rgba(7,18,37,.45);color:#fff;padding:13px 14px;outline:none} textarea{min-height:96px;resize:vertical}
-    .btn{border:0;border-radius:16px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.18s ease;box-shadow:0 10px 24px rgba(0,0,0,.18)}.btn:hover{transform:translateY(-1px)}.btn.primary{background:linear-gradient(135deg,var(--accent2),#2563eb);color:#fff}.btn.secondary{background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);box-shadow:none}.btn.success{background:linear-gradient(135deg,var(--success),#16a34a);color:#fff}.btn.danger{background:linear-gradient(135deg,var(--danger),#ef4444);color:#fff}.btn.full{width:100%}
+    :root{
+      --bg:#071225;--bg2:#0d1930;--surface:rgba(255,255,255,.08);--surface2:rgba(255,255,255,.06);
+      --text:#e5eefb;--muted:#9fb3d1;--line:rgba(255,255,255,.14);--accent:#5eead4;--accent2:#60a5fa;
+      --accent3:#c084fc;--success:#22c55e;--warning:#f59e0b;--danger:#f87171;--shadow:0 20px 60px rgba(2,6,23,.35);
+      --radius-xl:28px;--radius:18px;--max:1380px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--text);background:
+      radial-gradient(1200px 600px at 10% -10%,rgba(96,165,250,.18),transparent 50%),
+      radial-gradient(900px 500px at 100% 0%,rgba(192,132,252,.16),transparent 45%),
+      linear-gradient(180deg,var(--bg),var(--bg2));}
+    button,input,select,textarea{font:inherit}
+    .app{max-width:var(--max);margin:0 auto;padding:20px 16px 70px}
+    .glass{background:var(--surface);backdrop-filter:blur(20px);border:1px solid var(--line);box-shadow:var(--shadow)}
+    .card{border-radius:var(--radius-xl);padding:22px}
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:stretch}
+    .hero h1{font-size:clamp(2rem,5vw,3.8rem);margin:10px 0 8px;line-height:1.02;letter-spacing:-.03em}
+    .hero p{margin:0;color:var(--muted)}
+    .hero-head,.toolbar,.row-actions,.hero-actions,.section-title{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .hero-head,.section-title,.toolbar{justify-content:space-between}
+    .badge,.pill{display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);font-weight:800;font-size:.86rem}
+    .pill{font-weight:700}
+    .header-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:18px}
+    .stat{padding:16px;border-radius:20px;background:var(--surface2);border:1px solid var(--line)}
+    .stat .label{font-size:.9rem;color:var(--muted)}
+    .stat .value{font-size:clamp(1.1rem,3vw,1.9rem);font-weight:900;margin-top:5px;letter-spacing:-.03em}
+    .btn{border:0;border-radius:16px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.18s ease;box-shadow:0 10px 24px rgba(0,0,0,.18)}
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{background:linear-gradient(135deg,var(--accent2),#2563eb);color:#fff}
+    .btn.secondary{background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);box-shadow:none}
+    .btn.success{background:linear-gradient(135deg,var(--success),#16a34a);color:#fff}
+    .btn.danger{background:linear-gradient(135deg,var(--danger),#ef4444);color:#fff}
+    .btn.full{width:100%}
+    .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px;margin-top:18px}
+    .span-4{grid-column:span 4}.span-5{grid-column:span 5}.span-7{grid-column:span 7}.span-8{grid-column:span 8}.span-12{grid-column:span 12}
+    .section-title h2{margin:0;font-size:1.2rem;letter-spacing:-.02em}
+    .muted{color:var(--muted)}.tiny{font-size:.85rem}.center{text-align:center}
+    .inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.inputs-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.one-col{grid-template-columns:1fr}.full-span{grid-column:1/-1}
+    label{display:block;font-size:.92rem;font-weight:700;margin-bottom:6px;color:#cfe1ff}
+    input,select,textarea{width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.14);background:rgba(7,18,37,.45);color:#fff;padding:13px 14px;outline:none}
+    textarea{min-height:96px;resize:vertical} input::placeholder,textarea::placeholder{color:#92a7c9}
+    .progress-wrap{margin-top:16px}.progress-top{display:flex;justify-content:space-between;gap:12px;font-size:.93rem}.progress{height:15px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;border:1px solid var(--line);margin-top:8px}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:999px}.bar-purple{background:linear-gradient(90deg,var(--accent3),#7c3aed)}.bar-amber{background:linear-gradient(90deg,var(--warning),#fbbf24)}
+    .ring{width:140px;height:140px;border-radius:50%;display:grid;place-items:center;margin:auto;background:conic-gradient(var(--accent) 0deg,rgba(255,255,255,.08) 0deg);border:8px solid rgba(255,255,255,.08)}
+    .ring-inner{width:96px;height:96px;border-radius:50%;display:grid;place-items:center;background:rgba(7,18,37,.8);box-shadow:inset 0 0 0 1px var(--line)}
+    .ring-value{font-size:2rem;font-weight:900;letter-spacing:-.04em}
+    .score-list{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:10px}.score-list li{padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
+    .stack{display:grid;gap:16px}.score-box{align-items:center}.quote-text{margin-top:10px;font-size:1.05rem;font-weight:800;line-height:1.4}
+    .habit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.habit{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid var(--line);cursor:pointer}.habit.active{background:rgba(34,197,94,.12);border-color:rgba(74,222,128,.55)}.toggle{width:54px;height:30px;border-radius:999px;background:rgba(255,255,255,.18);position:relative}.toggle::after{content:'';position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:.2s}.habit.active .toggle{background:linear-gradient(90deg,#22c55e,#4ade80)}.habit.active .toggle::after{left:27px}
+    .table-wrap{overflow:auto;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.04)} table{width:100%;border-collapse:collapse;min-width:720px} th,td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.08);text-align:left;font-size:.95rem;vertical-align:top} th{position:sticky;top:0;background:#0a162c;color:#d7e8ff;z-index:1}
+    canvas{width:100%;height:280px;border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid var(--line)}
     .notice{padding:14px 16px;border-radius:18px;background:rgba(56,189,248,.14);border:1px solid rgba(56,189,248,.35);color:#e0f2fe}.notice.success{background:rgba(34,197,94,.14);border-color:rgba(74,222,128,.35);color:#dcfce7}.notice.warn{background:rgba(250,204,21,.14);border-color:rgba(250,204,21,.35);color:#fff7cc}.notice.danger{background:rgba(248,113,113,.14);border-color:rgba(248,113,113,.35);color:#fee2e2}
-    .table-wrap{overflow:auto;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.04)}table{width:100%;border-collapse:collapse}th,td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.08);text-align:left;vertical-align:top}th{background:#0a162c}
-    pre{margin:0;white-space:pre-wrap;word-break:break-word;font-family:Consolas,monospace;color:#dbeafe}
     .auth-shell{position:fixed;inset:0;display:grid;place-items:center;padding:18px;background:rgba(2,6,23,.65);backdrop-filter:blur(12px);z-index:99}.auth-card{width:min(520px,100%);padding:24px;border-radius:28px}.auth-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}.tab{padding:11px 12px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;font-weight:800;cursor:pointer;text-align:center}.tab.active{background:linear-gradient(135deg,var(--accent2),#2563eb)}
-    .hidden{display:none!important}.score-list{list-style:none;padding:0;margin:0;display:grid;gap:10px}.score-list li{padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
-    @media (max-width:1120px){.span-8,.span-6,.span-4{grid-column:span 12}} @media (max-width:760px){.app{padding:14px 12px 56px}.card{padding:18px}.inputs,.auth-tabs{grid-template-columns:1fr}.btn{width:100%}}
+    .hidden{display:none!important}.footer{margin-top:22px;text-align:center;color:var(--muted);font-size:.92rem}.mt-12{margin-top:12px}.mt-14{margin-top:14px}.mt-16{margin-top:16px}.mb-8{margin-bottom:8px}.mb-14{margin-bottom:14px}.min-h-18{min-height:18px}.sep{border-color:var(--line);border-style:solid;border-width:0 0 1px;margin:16px 0}
+    @media (max-width:1120px){.hero{grid-template-columns:1fr}.header-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.span-8,.span-7,.span-5,.span-4{grid-column:span 12}}
+    @media (max-width:760px){.app{padding:14px 12px 56px}.card{padding:18px}.header-grid,.inputs,.inputs-3,.auth-tabs,.habit-grid{grid-template-columns:1fr}.btn{width:100%}}
   </style>
 </head>
 <body>
   <div class="auth-shell" id="authOverlay">
     <div class="auth-card glass">
-      <div class="badge">🛠️ Debug-versjon • Firebase</div>
+      <div class="badge">✨ Cloud edition • Ryddet kode • Statusboks</div>
       <h2 style="font-size:1.8rem;margin:12px 0 6px">Logg inn eller opprett bruker</h2>
-      <p style="margin:0 0 14px;color:#9fb3d1">Denne versjonen viser detaljert status for auth, Firestore, offline-cache, nett og dokumentlesing.</p>
+      <p class="muted" style="margin:0 0 14px">Denne versjonen er ryddet opp så knappene fungerer, og du får tydelig status for Firebase.</p>
       <div class="auth-tabs">
         <button class="tab active" data-tab="login">Logg inn</button>
         <button class="tab" data-tab="signup">Opprett bruker</button>
         <button class="tab" data-tab="reset">Glemt passord</button>
       </div>
-      <div id="authSetupNotice" class="notice hidden" style="margin-bottom:14px"></div>
+      <div id="authSetupNotice" class="notice hidden mb-14"></div>
       <div class="inputs one-col">
         <div><label for="authEmail">E-post</label><input id="authEmail" type="email" placeholder="deg@epost.no" autocomplete="email" /></div>
         <div id="authPasswordWrap"><label for="authPassword">Passord</label><input id="authPassword" type="password" placeholder="Minst 6 tegn" autocomplete="current-password" /></div>
         <div id="authNameWrap" class="hidden"><label for="authName">Navn (valgfritt)</label><input id="authName" type="text" placeholder="F.eks. Jan Roar" autocomplete="name" /></div>
       </div>
-      <div class="row-actions" style="margin-top:16px"><button class="btn primary full" id="authActionBtn">Logg inn</button></div>
-      <div id="authMessage" style="margin-top:12px;min-height:18px;color:#9fb3d1"></div>
-      <div id="firebaseConnectionStatus" class="notice" style="margin-top:12px">Status: Ikke startet</div>
+      <div class="row-actions mt-16"><button class="btn primary full" id="authActionBtn">Logg inn</button></div>
+      <div id="authMessage" class="muted tiny mt-12 min-h-18"></div>
+      <div id="firebaseConnectionStatus" class="notice mt-12">Status: Ikke startet</div>
     </div>
   </div>
 
@@ -51,54 +91,151 @@
       <div class="card glass">
         <div class="hero-head">
           <div>
-            <div class="badge">🚀 Min Vektreise Cloud Debug</div>
-            <h1>Debug av Firebase / Firestore</h1>
-            <p>Bruk denne for å finne ut hvorfor klienten blir oppfattet som offline.</p>
+            <div class="badge">🚀 Min Vektreise Cloud</div>
+            <h1>Ryddet fullversjon med statusboks</h1>
+            <p>Fungerende Firebase-innlogging, synkstatus, vekt, mål, matlogg, aktivitet, Garmin CSV og JSON backup/import.</p>
           </div>
           <div class="pill" id="firebaseStatusPill">Sjekker Firebase…</div>
         </div>
-        <div class="row-actions" style="margin-top:16px">
-          <button class="btn secondary" id="runDiagBtn">Kjør diagnose</button>
-          <button class="btn secondary" id="syncBtn">Synk nå</button>
-          <button class="btn danger" id="logoutBtn">Logg ut</button>
+        <div class="header-grid">
+          <div class="stat"><div class="label">Startvekt</div><div class="value" id="startWeightView">–</div></div>
+          <div class="stat"><div class="label">Dagens vekt</div><div class="value" id="currentWeightView">–</div></div>
+          <div class="stat"><div class="label">Målvekt</div><div class="value" id="goalWeightView">–</div></div>
+          <div class="stat"><div class="label">Kalorimål</div><div class="value" id="kcalView">–</div></div>
+          <div class="stat"><div class="label">Bruker</div><div class="value" id="userView">Ikke logget inn</div></div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-top"><div><strong>Fremgang mot mål:</strong> <span id="progressText">0 kg av 0 kg</span></div><div id="goalPercentText">0%</div></div>
+          <div class="progress"><div class="bar" id="goalBar"></div></div>
+        </div>
+        <div class="toolbar">
+          <div id="syncStatus" class="notice">Status: Venter på innlogging</div>
+          <div class="hero-actions">
+            <button class="btn secondary" id="exportBtn">Eksporter JSON</button>
+            <button class="btn secondary" id="importBtn">Importer JSON</button>
+            <button class="btn secondary" id="syncBtn">Synk nå</button>
+            <button class="btn danger" id="logoutBtn">Logg ut</button>
+            <input id="importFile" type="file" accept="application/json" class="hidden" />
+          </div>
+        </div>
+      </div>
+
+      <div class="card glass stack">
+        <div class="section-title"><h2>Dagens score</h2><span class="pill" id="scorePill">Klar for en god dag</span></div>
+        <div class="inputs score-box">
+          <div class="ring" id="scoreRing"><div class="ring-inner"><div><div class="ring-value" id="scoreValue">0</div><div class="tiny muted center">av 10</div></div></div></div>
+          <div>
+            <div class="badge">💡 Motivasjon</div>
+            <div id="quoteText" class="quote-text">Små valg, hver dag, blir store resultater over tid.</div>
+            <div class="row-actions"><button class="btn secondary" id="quoteBtn">Ny motivasjon</button></div>
+          </div>
+        </div>
+        <ul class="score-list" id="scoreList"></ul>
+        <div>
+          <div class="section-title"><h2>Statuslogg</h2><span class="badge">Live</span></div>
+          <ul class="score-list" id="statusTimeline"></ul>
         </div>
       </div>
     </section>
 
     <section class="grid">
       <div class="card glass span-4">
-        <div class="section-title"><h2>Miljøstatus</h2><span class="badge">Lokal sjekk</span></div>
-        <ul class="score-list" id="envStatusList"></ul>
-      </div>
-      <div class="card glass span-8">
-        <div class="section-title"><h2>Diagnose</h2><span class="badge">Detaljer</span></div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Test</th><th>Status</th><th>Detalj</th></tr></thead>
-            <tbody id="diagTable"></tbody>
-          </table>
-        </div>
-      </div>
-      <div class="card glass span-6">
-        <div class="section-title"><h2>Debug-logg</h2><span class="badge">Live</span></div>
-        <ul class="score-list" id="statusTimeline"></ul>
-      </div>
-      <div class="card glass span-6">
-        <div class="section-title"><h2>Rå debugdata</h2><span class="badge">JSON</span></div>
-        <pre id="rawDebug">Ingen data enda.</pre>
-      </div>
-      <div class="card glass span-12">
-        <div class="section-title"><h2>Manuell test av Firestore</h2><span class="badge">Dokumentlesing</span></div>
+        <div class="section-title"><h2>Profil og plan</h2><span class="badge">⚙️ Oppsett</span></div>
         <div class="inputs">
-          <div><label for="manualUid">UID (valgfritt)</label><input id="manualUid" type="text" placeholder="Tom = innlogget bruker" /></div>
-          <div><label for="manualPath">Dokumentsti</label><input id="manualPath" type="text" value="users/{uid}/app/main" /></div>
+          <div><label for="displayName">Visningsnavn</label><input id="displayName" type="text" placeholder="Navn i appen" /></div>
+          <div><label for="heightCm">Høyde (cm)</label><input id="heightCm" type="number" min="100" max="250" step="1" value="197" /></div>
+          <div><label for="age">Alder</label><input id="age" type="number" min="15" max="100" step="1" /></div>
+          <div><label for="sex">Kjønn</label><select id="sex"><option value="">Velg</option><option value="male">Mann</option><option value="female">Kvinne</option></select></div>
+          <div><label for="startWeight">Startvekt (kg)</label><input id="startWeight" type="number" min="40" max="300" step="0.1" value="120" /></div>
+          <div><label for="currentWeight">Dagens vekt (kg)</label><input id="currentWeight" type="number" min="40" max="300" step="0.1" value="120" /></div>
+          <div><label for="goalWeight">Målvekt (kg)</label><input id="goalWeight" type="number" min="40" max="300" step="0.1" value="110" /></div>
+          <div><label for="weighDate">Dato for veiing</label><input id="weighDate" type="date" /></div>
         </div>
-        <div class="row-actions" style="margin-top:16px">
-          <button class="btn primary" id="testReadBtn">Test lesing</button>
-          <button class="btn secondary" id="clearLogBtn">Tøm logg</button>
+        <label for="whyText" class="mt-12">Ditt hvorfor</label>
+        <textarea id="whyText" placeholder="Mer energi, bedre helse, enklere hverdag..."></textarea>
+        <div class="row-actions mt-16">
+          <button class="btn primary" id="saveProfileBtn">Lagre profil</button>
+          <button class="btn success" id="logWeightBtn">Lagre veiing</button>
         </div>
+        <div class="notice mt-12" id="planNotice">Legg inn alder og kjønn for å få beregnet kalorimål.</div>
+      </div>
+
+      <div class="card glass span-8">
+        <div class="section-title"><h2>Dashboard</h2><span class="badge">📈 Oversikt</span></div>
+        <div class="stack">
+          <div><div class="tiny muted mb-8">Vektutvikling</div><canvas id="weightChart" width="960" height="300"></canvas></div>
+          <div><div class="tiny muted mb-8">Minutter og kalorier siste 14 dager</div><canvas id="activityChart" width="960" height="300"></canvas></div>
+        </div>
+      </div>
+
+      <div class="card glass span-5">
+        <div class="section-title"><h2>Ukemål og vaner</h2><span class="badge">🔥 Rytme</span></div>
+        <div class="inputs-3">
+          <div><label for="goalActivitiesPerWeek">Økter / uke</label><input id="goalActivitiesPerWeek" type="number" min="1" max="14" step="1" value="4" /></div>
+          <div><label for="goalMinutesPerWeek">Min / uke</label><input id="goalMinutesPerWeek" type="number" min="30" max="2000" step="10" value="180" /></div>
+          <div><label for="goalStepsPerDay">Skritt / dag</label><input id="goalStepsPerDay" type="number" min="1000" max="30000" step="500" value="8000" /></div>
+        </div>
+        <div class="stack mt-14">
+          <div><div class="progress-top"><span>Aktiviteter denne uka</span><span id="weeklyActsText">0/4</span></div><div class="progress"><div class="bar" id="weeklyActsBar"></div></div></div>
+          <div><div class="progress-top"><span>Minutter denne uka</span><span id="weeklyMinsText">0/180</span></div><div class="progress"><div class="bar bar-purple" id="weeklyMinsBar"></div></div></div>
+          <div><div class="progress-top"><span>Snitt skritt / dag</span><span id="weeklyStepsText">0/8000</span></div><div class="progress"><div class="bar bar-amber" id="weeklyStepsBar"></div></div></div>
+        </div>
+        <div class="row-actions mt-16"><button class="btn primary" id="saveGoalsBtn">Lagre mål</button></div>
+        <hr class="sep" />
+        <div class="inputs">
+          <div><label for="waterGlasses">Vannglass i dag</label><input id="waterGlasses" type="number" min="0" max="30" step="1" placeholder="F.eks. 8" /></div>
+          <div><label for="dailyMood">Dagens følelse</label><select id="dailyMood"><option value="">Velg</option><option>Veldig bra</option><option>Bra</option><option>OK</option><option>Tung dag</option></select></div>
+        </div>
+        <div class="habit-grid mt-12" id="habitGrid"></div>
+        <div class="row-actions mt-16"><button class="btn success" id="saveCheckinBtn">Lagre innsjekk</button></div>
+      </div>
+
+      <div class="card glass span-7">
+        <div class="section-title"><h2>Matlogg</h2><span class="badge">🥗 Kosthold</span></div>
+        <div class="inputs">
+          <div><label for="mealDate">Dato</label><input id="mealDate" type="date" /></div>
+          <div><label for="mealType">Måltid</label><select id="mealType"><option>Frokost</option><option>Lunsj</option><option>Middag</option><option>Kveldsmat</option><option>Snacks</option></select></div>
+          <div class="full-span"><label for="mealText">Hva spiste du?</label><input id="mealText" type="text" placeholder="F.eks. havregrøt med bær" /></div>
+        </div>
+        <div class="inputs-3 mt-12">
+          <div><label for="mealCalories">Kalorier</label><input id="mealCalories" type="number" min="0" step="1" placeholder="650" /></div>
+          <div><label for="mealProtein">Protein (g)</label><input id="mealProtein" type="number" min="0" step="1" placeholder="35" /></div>
+          <div><label for="mealNote">Notat</label><input id="mealNote" type="text" placeholder="Mett? Sulten?" /></div>
+        </div>
+        <div class="row-actions mt-16"><button class="btn success" id="addMealBtn">Legg til måltid</button></div>
+        <div class="table-wrap mt-14"><table><thead><tr><th>Dato</th><th>Måltid</th><th>Mat</th><th>Kcal</th><th>Protein</th><th></th></tr></thead><tbody id="mealTable"></tbody></table></div>
+      </div>
+
+      <div class="card glass span-7">
+        <div class="section-title"><h2>Aktivitetslogg + Garmin CSV</h2><span class="badge">🏃 Bevegelse</span></div>
+        <div class="inputs">
+          <div><label for="activityDate">Dato</label><input id="activityDate" type="date" /></div>
+          <div><label for="activityType">Aktivitet</label><select id="activityType"><option>Gåtur</option><option>Løping</option><option>Sykkel</option><option>Styrke</option><option>Golf</option><option>Annet</option></select></div>
+        </div>
+        <div class="inputs-3 mt-12">
+          <div><label for="activityDuration">Varighet (min)</label><input id="activityDuration" type="number" min="0" step="1" placeholder="45" /></div>
+          <div><label for="activitySteps">Skritt</label><input id="activitySteps" type="number" min="0" step="1" placeholder="8500" /></div>
+          <div><label for="activityCalories">Kalorier</label><input id="activityCalories" type="number" min="0" step="1" placeholder="350" /></div>
+        </div>
+        <label for="activityNote" class="mt-12">Notat</label><input id="activityNote" type="text" placeholder="Rolig tur, tung økt, god energi ..." />
+        <div class="row-actions mt-16">
+          <button class="btn success" id="addActivityBtn">Legg til aktivitet</button>
+          <button class="btn secondary" id="garminBtn">Importer Garmin CSV</button>
+          <button class="btn secondary" id="templateCsvBtn">Last ned CSV-mal</button>
+          <input id="garminFile" type="file" accept=".csv,text/csv" class="hidden" />
+        </div>
+        <div class="table-wrap mt-14"><table><thead><tr><th>Dato</th><th>Type</th><th>Min</th><th>Skritt</th><th>Kcal</th><th></th></tr></thead><tbody id="activityTable"></tbody></table></div>
+      </div>
+
+      <div class="card glass span-5">
+        <div class="section-title"><h2>Hurtiginfo</h2><span class="badge">Status</span></div>
+        <div class="notice success" style="margin-bottom:12px"><strong>Grønn</strong> = innlogging/synk OK</div>
+        <div class="notice warn" style="margin-bottom:12px"><strong>Gul</strong> = tilkoblet, men med begrensning / venter</div>
+        <div class="notice danger" style="margin-bottom:12px"><strong>Rød</strong> = feil mot Firebase / autentisering / synk</div>
+        <div class="notice"><strong>Blå</strong> = jobber / kobler til / sender forespørsel</div>
       </div>
     </section>
+    <div class="footer">Ryddet fullversjon – feil med dobbelt deklarert funksjon er fjernet.</div>
   </div>
 
   <script>
@@ -117,80 +254,364 @@
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js';
     import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js';
-    import { getFirestore, doc, getDoc, setDoc, serverTimestamp, enableIndexedDbPersistence, disableNetwork, enableNetwork } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js';
+    import { getFirestore, doc, getDoc, setDoc, serverTimestamp, enableIndexedDbPersistence } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js';
+
+    const today = new Date().toISOString().slice(0,10);
+    const APP_CACHE = 'vektreise_full_clean_v1';
+    const quotes = [
+      'Små valg, hver dag, blir store resultater over tid.',
+      'Du trenger ikke være perfekt – bare jevn.',
+      'Målet er ikke å være streng. Målet er å være stabil.',
+      'Vinn uka. Da følger resultatene etter.',
+      'Neste gode valg er alltid nærmere enn du tror.',
+      'Bygg et system du faktisk liker å bruke.'
+    ];
+    const habits = [
+      {id:'water',text:'Drukket nok vann'},
+      {id:'greens',text:'Spist grønt i dag'},
+      {id:'activity',text:'Vært i aktivitet'},
+      {id:'noSnack',text:'Holdt kontroll på småspising'}
+    ];
 
     const byId = id => document.getElementById(id);
     const setText = (id, value) => { const el = byId(id); if (el) el.textContent = value; };
     const val = id => String((byId(id)?.value ?? '')).trim();
+    const num = (id, fallback = 0) => { const n = parseFloat(val(id)); return Number.isFinite(n) ? n : fallback; };
+    const fmt = (n, d = 1) => Number(n || 0).toLocaleString('no-NO', { minimumFractionDigits: d, maximumFractionDigits: d });
+    const fmtInt = n => Number(Math.round(Number(n || 0))).toLocaleString('no-NO');
+    const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+    const pct = (value, total) => total > 0 ? clamp((value / total) * 100, 0, 100) : 0;
+    const sameDay = (a, b) => String(a || '').slice(0,10) === String(b || '').slice(0,10);
+    const parseDateSafe = str => { const d = new Date(str); return isNaN(d) ? null : d; };
+    const cryptoRandom = () => crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    const daysAgo = days => { const d = new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate() - days); return d; };
+    const safe = (str='') => String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+    let app = null, auth = null, db = null, currentUser = null, saveTimer = null, firebaseReady = false, authMode = 'login';
     const historyList = byId('statusTimeline');
-    const diagTable = byId('diagTable');
-    const envStatusList = byId('envStatusList');
-    const rawDebug = byId('rawDebug');
 
-    let app = null, auth = null, db = null, currentUser = null, authMode = 'login', firebaseReady = false;
-    let debug = { events: [] };
+    function defaultState(){
+      return {
+        profile: { displayName:'', heightCm:197, age:'', sex:'', startWeight:120, currentWeight:120, goalWeight:110, why:'' },
+        goals: { activitiesPerWeek:4, minutesPerWeek:180, stepsPerDay:8000 },
+        meals: [], activities: [],
+        weights: [{ id: cryptoRandom(), date: today, weight: 120 }],
+        checkins: {}
+      };
+    }
 
-    function addHistory(text, kind='info') {
+    function mergeDeep(base, extra){
+      const out = structuredClone ? structuredClone(base) : JSON.parse(JSON.stringify(base));
+      for (const k in extra || {}) {
+        if (extra[k] && typeof extra[k] === 'object' && !Array.isArray(extra[k]) && out[k] && typeof out[k] === 'object' && !Array.isArray(out[k])) {
+          out[k] = mergeDeep(out[k], extra[k]);
+        } else {
+          out[k] = extra[k];
+        }
+      }
+      return out;
+    }
+
+    function loadState(uid='demo'){
+      try {
+        const raw = localStorage.getItem(APP_CACHE + '_' + uid);
+        if (!raw) return defaultState();
+        return mergeDeep(defaultState(), JSON.parse(raw));
+      } catch {
+        return defaultState();
+      }
+    }
+
+    function saveState(uid='demo'){
+      localStorage.setItem(APP_CACHE + '_' + uid, JSON.stringify(state));
+    }
+
+    let state = loadState();
+
+    function addHistory(text){
       const li = document.createElement('li');
       li.textContent = new Date().toLocaleTimeString('no-NO') + ' – ' + text;
-      historyList.prepend(li);
-      while (historyList.children.length > 20) historyList.removeChild(historyList.lastChild);
-      debug.events.push({ time: new Date().toISOString(), text, kind });
-      refreshRawDebug();
+      historyList?.prepend(li);
+      while (historyList && historyList.children.length > 8) historyList.removeChild(historyList.lastChild);
     }
 
-    function setStatusBox(text, kind='info') {
-      const el = byId('firebaseConnectionStatus');
+    function setStatusBox(el, text, kind='info'){
+      if (!el) return;
       el.textContent = 'Status: ' + text;
       el.className = 'notice' + (kind === 'success' ? ' success' : kind === 'warn' ? ' warn' : kind === 'danger' ? ' danger' : '');
-      addHistory(text, kind);
     }
 
-    function refreshRawDebug() {
-      const payload = {
-        now: new Date().toISOString(),
-        href: location.href,
-        protocol: location.protocol,
-        online: navigator.onLine,
-        userAgent: navigator.userAgent,
-        currentUser: currentUser ? { uid: currentUser.uid, email: currentUser.email || null, displayName: currentUser.displayName || null } : null,
-        firebaseReady,
-        configPresent: !!window.__FIREBASE_CONFIG__?.apiKey,
-        config: {
-          authDomain: window.__FIREBASE_CONFIG__?.authDomain || null,
-          projectId: window.__FIREBASE_CONFIG__?.projectId || null,
-          databaseURL: window.__FIREBASE_CONFIG__?.databaseURL || null,
-          storageBucket: window.__FIREBASE_CONFIG__?.storageBucket || null,
-          measurementId: window.__FIREBASE_CONFIG__?.measurementId || null
-        },
-        debugEvents: debug.events.slice(-30)
+    function setConnectionStatus(text, kind='info'){
+      setStatusBox(byId('firebaseConnectionStatus'), text, kind);
+      setStatusBox(byId('syncStatus'), text, kind);
+      addHistory(text);
+    }
+
+    function estimateCalories(){
+      const age = parseFloat(state.profile.age), sex = state.profile.sex, weight = parseFloat(state.profile.currentWeight), height = parseFloat(state.profile.heightCm);
+      if (!(Number.isFinite(age) && sex && Number.isFinite(weight) && Number.isFinite(height))) return null;
+      const bmr = 10*weight + 6.25*height - 5*age + (sex === 'male' ? 5 : -161);
+      return Math.max(Math.round(bmr * 1.55 - 500), 1500) + ' kcal';
+    }
+
+    function syncUi(){
+      byId('displayName').value = state.profile.displayName || '';
+      byId('heightCm').value = state.profile.heightCm || 197;
+      byId('age').value = state.profile.age || '';
+      byId('sex').value = state.profile.sex || '';
+      byId('startWeight').value = state.profile.startWeight || 120;
+      byId('currentWeight').value = state.profile.currentWeight || 120;
+      byId('goalWeight').value = state.profile.goalWeight || 110;
+      byId('whyText').value = state.profile.why || '';
+      byId('goalActivitiesPerWeek').value = state.goals.activitiesPerWeek;
+      byId('goalMinutesPerWeek').value = state.goals.minutesPerWeek;
+      byId('goalStepsPerDay').value = state.goals.stepsPerDay;
+      ['weighDate','mealDate','activityDate'].forEach(id => byId(id).value ||= today);
+      const c = state.checkins[today] || {habits:{},waterGlasses:'',mood:''};
+      byId('waterGlasses').value = c.waterGlasses || '';
+      byId('dailyMood').value = c.mood || '';
+      habits.forEach(h => updateHabitUi(h.id, !!c.habits?.[h.id]));
+      setText('startWeightView', fmt(state.profile.startWeight) + ' kg');
+      setText('currentWeightView', fmt(state.profile.currentWeight) + ' kg');
+      setText('goalWeightView', fmt(state.profile.goalWeight) + ' kg');
+      setText('kcalView', estimateCalories() || '–');
+      const total = Math.max(0, Number(state.profile.startWeight) - Number(state.profile.goalWeight));
+      const lost = Math.max(0, Number(state.profile.startWeight) - Number(state.profile.currentWeight));
+      const progress = pct(lost, total);
+      setText('progressText', `${fmt(lost)} kg av ${fmt(total)} kg`);
+      setText('goalPercentText', `${fmt(progress,0)} %`);
+      byId('goalBar').style.width = progress + '%';
+      setText('userView', currentUser ? (currentUser.displayName || currentUser.email || 'Innlogget') : 'Ikke logget inn');
+      setText('planNotice', estimateCalories() || 'Legg inn alder og kjønn for å få beregnet kalorimål.');
+    }
+
+    function renderHabitGrid(){
+      const wrap = byId('habitGrid');
+      wrap.innerHTML = habits.map(h => `
+        <div class="habit" id="habit_${h.id}" tabindex="0">
+          <div><div style="font-weight:800">${safe(h.text)}</div><div class="tiny muted">Trykk for å veksle</div></div>
+          <div class="toggle"></div>
+        </div>`).join('');
+      habits.forEach(h => {
+        const el = byId(`habit_${h.id}`);
+        const action = () => toggleHabit(h.id);
+        el.addEventListener('click', action);
+        el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); action(); } });
+      });
+    }
+
+    function updateHabitUi(id, active){ byId(`habit_${id}`)?.classList.toggle('active', !!active); }
+    function toggleHabit(id){
+      const current = state.checkins[today] || { habits:{}, waterGlasses:'', mood:'' };
+      current.habits = current.habits || {};
+      current.habits[id] = !current.habits[id];
+      state.checkins[today] = current;
+      updateHabitUi(id, current.habits[id]);
+      renderScore();
+      scheduleSave();
+    }
+
+    function renderScore(){
+      const todayMeals = state.meals.filter(x => sameDay(x.date, today));
+      const todayActs = state.activities.filter(x => sameDay(x.date, today));
+      const c = state.checkins[today] || { habits:{} };
+      const calories = todayMeals.reduce((s,m) => s + (parseFloat(m.calories) || 0), 0);
+      const targetNumber = parseFloat(String(estimateCalories() || '').replace(/[^0-9]/g,'')) || 0;
+      const minutes = todayActs.reduce((s,a) => s + (parseFloat(a.duration) || 0), 0);
+      const steps = todayActs.reduce((s,a) => s + (parseFloat(a.steps) || 0), 0);
+      const activeHabits = habits.filter(h => c.habits?.[h.id]).length;
+      const breakdown = [];
+      let score = 0;
+      if (todayMeals.length >= 3) { score += 2; breakdown.push(['+2','Minst tre måltider logget i dag.']); }
+      else if (todayMeals.length > 0) { score += 1; breakdown.push(['+1','Du har startet matloggen i dag.']); }
+      else breakdown.push(['0','Ingen matlogg registrert enda i dag.']);
+      if (minutes >= 30 || steps >= state.goals.stepsPerDay) { score += 2; breakdown.push(['+2','Sterk aktivitet i dag.']); }
+      else if (minutes > 0 || steps > 0) { score += 1; breakdown.push(['+1','Noe aktivitet er registrert.']); }
+      else breakdown.push(['0','Ingen aktivitet logget enda i dag.']);
+      if (activeHabits >= 3) { score += 2; breakdown.push(['+2',`Vaner huket av: ${activeHabits}/${habits.length}.`]); }
+      else if (activeHabits >= 1) { score += 1; breakdown.push(['+1',`Vaner huket av: ${activeHabits}/${habits.length}.`]); }
+      else breakdown.push(['0','Ingen vaner huket av enda.']);
+      if ((c.waterGlasses || 0) >= 8) { score += 1; breakdown.push(['+1','Godt med vann i dag.']); }
+      else breakdown.push(['0','Registrer minst 8 vannglass for ekstra poeng.']);
+      if (targetNumber && calories > 0) {
+        if (calories <= targetNumber) { score += 3; breakdown.push(['+3',`Kalorier i dag (${fmtInt(calories)}) er innenfor målet.`]); }
+        else if (calories <= targetNumber * 1.1) { score += 1; breakdown.push(['+1','Du er litt over, men fortsatt nær planen.']); }
+        else breakdown.push(['0','Kaloriinntaket er over målet i dag.']);
+      } else breakdown.push(['0','Kaloripoeng beregnes når du logger kalorier.']);
+      score = clamp(score, 0, 10);
+      setText('scoreValue', String(score));
+      byId('scoreRing').style.background = `conic-gradient(var(--accent) ${score*36}deg, rgba(255,255,255,.08) ${score*36}deg)`;
+      setText('scorePill', score >= 8 ? 'Knallbra dag' : score >= 5 ? 'Solid på vei' : score >= 2 ? 'God start' : 'Klar for neste steg');
+      byId('scoreList').innerHTML = breakdown.map(([a,b]) => `<li><strong>${a}</strong> – ${safe(b)}</li>`).join('');
+    }
+
+    function sevenDayStats(){
+      const from = daysAgo(6);
+      const meals = state.meals.filter(x => parseDateSafe(x.date) >= from);
+      const acts = state.activities.filter(x => parseDateSafe(x.date) >= from);
+      return {
+        meals: meals.length,
+        acts: acts.length,
+        minutes: acts.reduce((s,x) => s + (parseFloat(x.duration) || 0), 0),
+        steps: acts.reduce((s,x) => s + (parseFloat(x.steps) || 0), 0)
       };
-      rawDebug.textContent = JSON.stringify(payload, null, 2);
     }
 
-    function addDiagRow(test, status, detail='') {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${test}</td><td>${status}</td><td>${detail}</td>`;
-      diagTable.appendChild(tr);
+    function renderGoals(){
+      const week = sevenDayStats();
+      const avgSteps = week.steps / 7;
+      setText('weeklyActsText', `${week.acts}/${state.goals.activitiesPerWeek}`);
+      setText('weeklyMinsText', `${fmtInt(week.minutes)}/${fmtInt(state.goals.minutesPerWeek)}`);
+      setText('weeklyStepsText', `${fmtInt(avgSteps)}/${fmtInt(state.goals.stepsPerDay)}`);
+      byId('weeklyActsBar').style.width = pct(week.acts, state.goals.activitiesPerWeek) + '%';
+      byId('weeklyMinsBar').style.width = pct(week.minutes, state.goals.minutesPerWeek) + '%';
+      byId('weeklyStepsBar').style.width = pct(avgSteps, state.goals.stepsPerDay) + '%';
     }
 
-    function clearDiag() { diagTable.innerHTML = ''; }
-
-    function renderEnvStatus() {
-      envStatusList.innerHTML = '';
-      const items = [
-        `Protokoll: ${location.protocol}`,
-        `Online ifølge nettleser: ${navigator.onLine ? 'Ja' : 'Nei'}`,
-        `Auth-domene: ${window.__FIREBASE_CONFIG__?.authDomain || 'mangler'}`,
-        `Project ID: ${window.__FIREBASE_CONFIG__?.projectId || 'mangler'}`,
-        `Kjører fra: ${location.href}`,
-        `Innlogget bruker: ${currentUser ? (currentUser.email || currentUser.uid) : 'Ingen'}`
-      ];
-      items.forEach(t => { const li = document.createElement('li'); li.textContent = t; envStatusList.appendChild(li); });
-      refreshRawDebug();
+    function renderMeals(){
+      const tbody = byId('mealTable');
+      if (!state.meals.length) { tbody.innerHTML = '<tr><td colspan="6" class="muted">Ingen måltider registrert enda.</td></tr>'; return; }
+      tbody.innerHTML = [...state.meals].sort((a,b)=>String(b.date).localeCompare(String(a.date))).map(item => `
+        <tr><td>${safe(item.date)}</td><td>${safe(item.type)}</td><td>${safe(item.text)}</td><td>${item.calories?fmtInt(item.calories):''}</td><td>${item.protein?fmtInt(item.protein):''}</td><td><button class="btn secondary" data-delmeal="${item.id}" style="padding:8px 10px">Slett</button></td></tr>`).join('');
+      tbody.querySelectorAll('[data-delmeal]').forEach(btn => btn.addEventListener('click', () => {
+        state.meals = state.meals.filter(x => x.id !== btn.dataset.delmeal);
+        renderAll();
+        scheduleSave();
+      }));
     }
 
-    function setTab(mode) {
+    function renderActivities(){
+      const tbody = byId('activityTable');
+      if (!state.activities.length) { tbody.innerHTML = '<tr><td colspan="6" class="muted">Ingen aktivitet registrert enda.</td></tr>'; return; }
+      tbody.innerHTML = [...state.activities].sort((a,b)=>String(b.date).localeCompare(String(a.date))).map(item => `
+        <tr><td>${safe(item.date)}</td><td>${safe(item.type)}</td><td>${item.duration?fmtInt(item.duration):''}</td><td>${item.steps?fmtInt(item.steps):''}</td><td>${item.calories?fmtInt(item.calories):''}</td><td><button class="btn secondary" data-delact="${item.id}" style="padding:8px 10px">Slett</button></td></tr>`).join('');
+      tbody.querySelectorAll('[data-delact]').forEach(btn => btn.addEventListener('click', () => {
+        state.activities = state.activities.filter(x => x.id !== btn.dataset.delact);
+        renderAll();
+        scheduleSave();
+      }));
+    }
+
+    function drawRoundRect(ctx,x,y,w,h,r){ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();}
+    function drawCardBg(ctx,w,h){drawRoundRect(ctx,0,0,w,h,18); ctx.fillStyle='rgba(255,255,255,.03)'; ctx.fill(); ctx.strokeStyle='rgba(255,255,255,.12)'; ctx.stroke();}
+
+    function drawWeightChart(){
+      const c = byId('weightChart'), ctx = c.getContext('2d'), w = c.width, h = c.height;
+      ctx.clearRect(0,0,w,h); drawCardBg(ctx,w,h);
+      const items = [...state.weights].sort((a,b)=>String(a.date).localeCompare(String(b.date)));
+      if (!items.length) { ctx.fillStyle='#9fb3d1'; ctx.fillText('Ingen veiinger ennå.',w/2-60,h/2); return; }
+      const pad={l:54,r:16,t:18,b:36};
+      const vals=items.map(x=>Number(x.weight));
+      const min=Math.min(...vals, Number(state.profile.goalWeight||0)) - 1;
+      const max=Math.max(...vals, Number(state.profile.startWeight||0)) + 1;
+      ctx.strokeStyle='rgba(255,255,255,.12)'; ctx.fillStyle='#9fb3d1'; ctx.font='12px Segoe UI';
+      for(let i=0;i<5;i++){ const y=pad.t+i*((h-pad.t-pad.b)/4); ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(w-pad.r,y); ctx.stroke(); const value=max-i*((max-min)/4); ctx.fillText(Number(value).toLocaleString('no-NO',{maximumFractionDigits:1}),10,y+4); }
+      const mapX=i=>items.length===1?w/2:pad.l+i*((w-pad.l-pad.r)/(items.length-1));
+      const mapY=v=>pad.t+((max-v)/(max-min||1))*(h-pad.t-pad.b);
+      ctx.strokeStyle='#60a5fa'; ctx.lineWidth=3; ctx.beginPath();
+      items.forEach((it,i)=>{ const x=mapX(i), y=mapY(Number(it.weight)); if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);});
+      ctx.stroke();
+      items.forEach((it,i)=>{ const x=mapX(i), y=mapY(Number(it.weight)); ctx.beginPath(); ctx.arc(x,y,4.5,0,Math.PI*2); ctx.fillStyle='#5eead4'; ctx.fill(); if(i%Math.max(1,Math.ceil(items.length/6))===0||i===items.length-1){ ctx.fillStyle='#9fb3d1'; ctx.fillText(String(it.date).slice(5),x-12,h-14); }});
+    }
+
+    function drawActivityChart(){
+      const c = byId('activityChart'), ctx = c.getContext('2d'), w = c.width, h = c.height;
+      ctx.clearRect(0,0,w,h); drawCardBg(ctx,w,h);
+      const days=[]; for(let i=13;i>=0;i--){ const d=new Date(); d.setDate(d.getDate()-i); days.push(d.toISOString().slice(0,10)); }
+      const bars=days.map(d=>({ date:d, minutes:state.activities.filter(a=>sameDay(a.date,d)).reduce((s,a)=>s+(parseFloat(a.duration)||0),0), calories:state.meals.filter(m=>sameDay(m.date,d)).reduce((s,m)=>s+(parseFloat(m.calories)||0),0) }));
+      const maxVal=Math.max(60,...bars.map(b=>Math.max(b.minutes,(b.calories||0)/20))); const pad={l:42,r:20,t:18,b:36};
+      ctx.strokeStyle='rgba(255,255,255,.12)'; for(let i=0;i<4;i++){ const y=pad.t+i*((h-pad.t-pad.b)/3); ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(w-pad.r,y); ctx.stroke(); }
+      const spacing=(w-pad.l-pad.r)/bars.length;
+      bars.forEach((b,i)=>{ const x=pad.l+i*spacing+4, maxH=h-pad.t-pad.b, h1=(b.minutes/maxVal)*maxH, h2=((b.calories||0)/20/maxVal)*maxH; ctx.fillStyle='#60a5fa'; ctx.fillRect(x,h-pad.b-h1,spacing/2-6,h1); ctx.fillStyle='#f59e0b'; ctx.fillRect(x+spacing/2-2,h-pad.b-h2,spacing/2-6,h2); if(i%2===0){ ctx.fillStyle='#9fb3d1'; ctx.font='11px Segoe UI'; ctx.fillText(b.date.slice(5),x-2,h-12); }});
+    }
+
+    function renderCharts(){ drawWeightChart(); drawActivityChart(); }
+    function renderAll(){ syncUi(); renderGoals(); renderMeals(); renderActivities(); renderScore(); renderCharts(); }
+
+    async function cloudRef(){ return doc(db,'users',currentUser.uid,'app','main'); }
+
+    async function loadCloud(){
+      try {
+        setConnectionStatus('Laster skydata fra Firestore…','info');
+        const snap = await getDoc(await cloudRef());
+        if (snap.exists() && snap.data()?.state) {
+          state = mergeDeep(defaultState(), snap.data().state);
+          saveState(currentUser.uid);
+          renderAll();
+          setConnectionStatus('Skydata lastet fra Firestore','success');
+        } else {
+          await syncNow(true);
+        }
+      } catch (err) {
+        setConnectionStatus('Kunne ikke laste skydata: ' + err.message,'warn');
+      }
+    }
+
+    async function syncNow(initial=false){
+      if (!currentUser) return;
+      try {
+        setConnectionStatus(initial ? 'Oppretter første lagring i Firestore…' : 'Synkroniserer med Firestore…','info');
+        await setDoc(await cloudRef(), { uid: currentUser.uid, email: currentUser.email || '', updatedAt: serverTimestamp(), state }, { merge: true });
+        saveState(currentUser.uid);
+        setConnectionStatus(initial ? 'Førstegangslagring fullført' : 'Synkronisert med Firestore','success');
+      } catch (err) {
+        setConnectionStatus('Synk feilet: ' + err.message,'danger');
+      }
+    }
+
+    function scheduleSave(){
+      saveState(currentUser?.uid || 'demo');
+      if (!currentUser || !firebaseReady) return;
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => syncNow(false), 700);
+    }
+
+    async function initFirebase(){
+      const cfg = window.__FIREBASE_CONFIG__;
+      if (!cfg || !cfg.apiKey) {
+        setConnectionStatus('Firebase-konfig mangler','warn');
+        const setup = byId('authSetupNotice');
+        setup.classList.remove('hidden');
+        setup.textContent = 'Firebase-konfig mangler.';
+        byId('authOverlay').classList.add('hidden');
+        return;
+      }
+      try {
+        setConnectionStatus('Kobler til Firebase…','info');
+        app = initializeApp(cfg);
+        auth = getAuth(app);
+        db = getFirestore(app);
+        try {
+          await enableIndexedDbPersistence(db);
+          setConnectionStatus('Tilkoblet Firebase + offline-cache aktiv','success');
+        } catch {
+          setConnectionStatus('Tilkoblet Firebase (offline-cache ikke aktiv)','warn');
+        }
+        firebaseReady = true;
+        setText('firebaseStatusPill','Firebase klar');
+        onAuthStateChanged(auth, async user => {
+          currentUser = user || null;
+          if (currentUser) {
+            byId('authOverlay').classList.add('hidden');
+            setText('userView', currentUser.displayName || currentUser.email || 'Innlogget');
+            setConnectionStatus('Innlogget – synk mot Firestore aktiv','success');
+            state = loadState(currentUser.uid);
+            renderAll();
+            await loadCloud();
+          } else {
+            setText('userView','Ikke logget inn');
+            setConnectionStatus('Ikke logget inn','info');
+            byId('authOverlay').classList.remove('hidden');
+            renderAll();
+          }
+        });
+      } catch (err) {
+        setText('firebaseStatusPill','Firebase-feil');
+        setConnectionStatus('Feil ved oppkobling: ' + err.message,'danger');
+      }
+    }
+
+    function setTab(mode){
       authMode = mode;
       document.querySelectorAll('[data-tab]').forEach(el => el.classList.toggle('active', el.dataset.tab === mode));
       byId('authNameWrap').classList.toggle('hidden', mode !== 'signup');
@@ -198,11 +619,11 @@
       byId('authActionBtn').textContent = mode === 'login' ? 'Logg inn' : mode === 'signup' ? 'Opprett bruker' : 'Send nullstilling';
     }
 
-    async function authAction() {
+    async function authAction(){
       const email = val('authEmail'), password = val('authPassword'), name = val('authName');
       try {
-        setText('authMessage', 'Jobber…');
-        setStatusBox(authMode === 'login' ? 'Logger inn…' : authMode === 'signup' ? 'Oppretter bruker…' : 'Sender nullstilling…', 'info');
+        setText('authMessage','Jobber…');
+        setConnectionStatus(authMode === 'login' ? 'Logger inn…' : authMode === 'signup' ? 'Oppretter bruker…' : 'Sender nullstilling…','info');
         if (authMode === 'login') {
           await signInWithEmailAndPassword(auth, email, password);
         } else if (authMode === 'signup') {
@@ -210,147 +631,175 @@
           if (name) await updateProfile(cred.user, { displayName: name });
         } else {
           await sendPasswordResetEmail(auth, email);
-          setText('authMessage', 'Nullstillingsmail sendt.');
-          setStatusBox('Nullstillingsmail sendt', 'success');
+          setText('authMessage','Nullstillingsmail sendt.');
+          setConnectionStatus('Nullstillingsmail sendt','success');
           return;
         }
-        setText('authMessage', 'OK');
+        setText('authMessage','OK');
       } catch (err) {
         setText('authMessage', err.message);
-        setStatusBox('Autentisering feilet: ' + err.message, 'danger');
+        setConnectionStatus('Autentisering feilet: ' + err.message,'danger');
       }
-      renderEnvStatus();
     }
 
-    async function initFirebase() {
-      const cfg = window.__FIREBASE_CONFIG__;
-      if (!cfg || !cfg.apiKey) {
-        byId('authSetupNotice').classList.remove('hidden');
-        byId('authSetupNotice').textContent = 'Firebase-konfig mangler.';
-        setStatusBox('Firebase-konfig mangler', 'warn');
-        byId('authOverlay').classList.add('hidden');
-        renderEnvStatus();
-        return;
+    function saveProfile(){
+      state.profile.displayName = val('displayName');
+      state.profile.heightCm = num('heightCm',197);
+      state.profile.age = val('age');
+      state.profile.sex = val('sex');
+      state.profile.startWeight = num('startWeight',120);
+      state.profile.currentWeight = num('currentWeight',120);
+      state.profile.goalWeight = num('goalWeight',110);
+      state.profile.why = val('whyText');
+      saveState(currentUser?.uid || 'demo');
+      renderAll();
+      if (currentUser && state.profile.displayName && currentUser.displayName !== state.profile.displayName) {
+        updateProfile(currentUser, {displayName: state.profile.displayName}).catch(() => {});
       }
-      try {
-        setStatusBox('Kobler til Firebase…', 'info');
-        app = initializeApp(cfg);
-        auth = getAuth(app);
-        db = getFirestore(app);
+      scheduleSave();
+    }
+
+    function logWeight(){
+      saveProfile();
+      const entry = { id: cryptoRandom(), date: val('weighDate') || today, weight: num('currentWeight', state.profile.currentWeight) };
+      state.profile.currentWeight = entry.weight;
+      state.weights.push(entry);
+      const map = new Map();
+      state.weights.forEach(item => map.set(item.date, item));
+      state.weights = [...map.values()].sort((a,b)=>String(a.date).localeCompare(String(b.date)));
+      renderAll();
+      scheduleSave();
+    }
+
+    function saveGoals(){
+      state.goals.activitiesPerWeek = num('goalActivitiesPerWeek',4);
+      state.goals.minutesPerWeek = num('goalMinutesPerWeek',180);
+      state.goals.stepsPerDay = num('goalStepsPerDay',8000);
+      saveState(currentUser?.uid || 'demo');
+      renderAll();
+      scheduleSave();
+    }
+
+    function saveCheckin(){
+      const c = state.checkins[today] || { habits:{} };
+      c.waterGlasses = num('waterGlasses',0);
+      c.mood = val('dailyMood');
+      state.checkins[today] = c;
+      saveState(currentUser?.uid || 'demo');
+      renderAll();
+      scheduleSave();
+    }
+
+    function addMeal(){
+      const item = { id: cryptoRandom(), date: val('mealDate') || today, type: val('mealType'), text: val('mealText'), calories: val('mealCalories'), protein: val('mealProtein'), note: val('mealNote') };
+      if (!item.text) { alert('Skriv inn hva du spiste.'); return; }
+      state.meals.unshift(item);
+      ['mealText','mealCalories','mealProtein','mealNote'].forEach(id => byId(id).value = '');
+      renderAll();
+      scheduleSave();
+    }
+
+    function addActivity(){
+      const item = { id: cryptoRandom(), date: val('activityDate') || today, type: val('activityType'), duration: val('activityDuration'), steps: val('activitySteps'), calories: val('activityCalories'), note: val('activityNote') };
+      if (!item.duration && !item.steps && !item.calories) { alert('Legg inn minutter, skritt eller kalorier.'); return; }
+      state.activities.unshift(item);
+      ['activityDuration','activitySteps','activityCalories','activityNote'].forEach(id => byId(id).value = '');
+      renderAll();
+      scheduleSave();
+    }
+
+    function exportJson(){
+      const blob = new Blob([JSON.stringify(state,null,2)], {type:'application/json'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'vektreise-full-clean-backup.json';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 500);
+    }
+
+    function importJson(file){
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
         try {
-          await enableIndexedDbPersistence(db);
-          setStatusBox('Tilkoblet Firebase + offline-cache aktiv', 'success');
-          debug.persistence = 'enabled';
+          state = mergeDeep(defaultState(), JSON.parse(reader.result));
+          saveState(currentUser?.uid || 'demo');
+          renderAll();
+          scheduleSave();
+          setConnectionStatus('JSON importert','success');
+        } catch {
+          alert('Kunne ikke lese JSON-filen.');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function detectDelimiter(text){ const first=text.split(/\r?\n/).find(Boolean)||''; return [',',';','\t'].sort((a,b)=>first.split(b).length-first.split(a).length)[0]||','; }
+    function splitCsvLine(line,delimiter){ const out=[]; let cur='', quoted=false; for(let i=0;i<line.length;i++){ const ch=line[i]; if(ch==='"'){ if(quoted&&line[i+1]==='"'){cur+='"'; i++;} else quoted=!quoted; } else if(ch===delimiter&&!quoted){ out.push(cur); cur=''; } else cur+=ch; } out.push(cur); return out; }
+    function parseCsv(text){ const delimiter=detectDelimiter(text), lines=text.split(/\r?\n/).filter(Boolean); if(lines.length<2) return []; const headers=splitCsvLine(lines[0],delimiter).map(h=>h.trim()); return lines.slice(1).map(line=>{ const cols=splitCsvLine(line,delimiter), obj={}; headers.forEach((h,i)=>obj[h]=(cols[i]||'').trim()); return obj; }); }
+    function findField(row,names){ const keys=Object.keys(row), lower=keys.map(k=>k.toLowerCase()); for(const name of names){ const idx=lower.findIndex(k=>k===name||k.includes(name)); if(idx>=0) return row[keys[idx]]; } return ''; }
+    function normalizeDate(input){ if(!input) return ''; const s=String(input).trim(); const direct=new Date(s); if(!isNaN(direct)) return direct.toISOString().slice(0,10); const m=s.match(/^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{2,4})$/); if(m){ const dd=m[1].padStart(2,'0'), mm=m[2].padStart(2,'0'); let yyyy=m[3]; if(yyyy.length===2) yyyy='20'+yyyy; return `${yyyy}-${mm}-${dd}`; } return ''; }
+    function parseDurationToMinutes(v){ if(v==null||v==='') return 0; const s=String(v).trim(); if(/^\d+(\.\d+)?$/.test(s)) return Math.round(parseFloat(s)); const parts=s.split(':').map(n=>n.trim()); if(parts.length===3) return Math.round(Number(parts[0])*60+Number(parts[1])+Number(parts[2])/60); if(parts.length===2) return Math.round(Number(parts[0])*60+Number(parts[1])); return 0; }
+
+    function importGarmin(file){
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const rows = parseCsv(reader.result);
+          let imported = 0;
+          rows.forEach(row => {
+            const date = normalizeDate(findField(row,['date','dato','activity date','start time']));
+            const type = findField(row,['activity type','type','aktivitet']) || 'Garmin-aktivitet';
+            const duration = parseDurationToMinutes(findField(row,['duration','session time','elapsed time','varighet']));
+            const steps = parseFloat(String(findField(row,['steps','skritt'])).replace(/[^0-9.,-]/g,'').replace(',','.')) || 0;
+            const calories = parseFloat(String(findField(row,['calories','kcal','energi'])).replace(/[^0-9.,-]/g,'').replace(',','.')) || 0;
+            if (!date && !duration && !steps && !calories) return;
+            state.activities.unshift({ id: cryptoRandom(), date: date || today, type, duration: duration || '', steps: steps || '', calories: calories || '', note: 'Importert fra Garmin' });
+            imported++;
+          });
+          renderAll();
+          scheduleSave();
+          setConnectionStatus(`Garmin-import fullført: ${imported} rader.`, 'success');
         } catch (err) {
-          setStatusBox('Tilkoblet Firebase (offline-cache ikke aktiv)', 'warn');
-          debug.persistence = 'failed';
-          debug.persistenceError = err?.message || String(err);
+          setConnectionStatus('Garmin-import feilet: ' + err.message, 'danger');
         }
-        firebaseReady = true;
-        setText('firebaseStatusPill', 'Firebase klar');
-        onAuthStateChanged(auth, async user => {
-          currentUser = user || null;
-          if (currentUser) {
-            byId('authOverlay').classList.add('hidden');
-            setStatusBox('Innlogget – klar for diagnose', 'success');
-          } else {
-            byId('authOverlay').classList.remove('hidden');
-            setStatusBox('Ikke logget inn', 'info');
-          }
-          renderEnvStatus();
-        });
-      } catch (err) {
-        setText('firebaseStatusPill', 'Firebase-feil');
-        setStatusBox('Feil ved oppkobling: ' + err.message, 'danger');
-        debug.initError = err?.message || String(err);
-        renderEnvStatus();
-      }
+      };
+      reader.readAsText(file, 'utf-8');
     }
 
-    async function runDiagnostics() {
-      clearDiag();
-      renderEnvStatus();
-      addDiagRow('Protocol', location.protocol === 'file:' ? 'PROBLEM' : 'OK', location.href);
-      addDiagRow('Navigator online', navigator.onLine ? 'OK' : 'PROBLEM', navigator.onLine ? 'Browser reports online' : 'Browser reports offline');
-      addDiagRow('Firebase config', window.__FIREBASE_CONFIG__?.apiKey ? 'OK' : 'PROBLEM', window.__FIREBASE_CONFIG__?.projectId || 'mangler');
-      addDiagRow('Firebase init', firebaseReady ? 'OK' : 'PROBLEM', firebaseReady ? 'Initialized' : 'Not initialized');
-      addDiagRow('Auth user', currentUser ? 'OK' : 'INFO', currentUser ? (currentUser.email || currentUser.uid) : 'No logged in user');
-      addDiagRow('Persistence', debug.persistence === 'enabled' ? 'OK' : debug.persistence === 'failed' ? 'WARN' : 'INFO', debug.persistenceError || debug.persistence || 'unknown');
-
-      if (!firebaseReady) {
-        setStatusBox('Diagnose stoppet: Firebase er ikke initialisert', 'danger');
-        return;
-      }
-
-      if (!currentUser) {
-        addDiagRow('Firestore read', 'INFO', 'Logg inn først for å teste brukerdata');
-        setStatusBox('Diagnose klar – logg inn for å teste Firestore', 'warn');
-        return;
-      }
-
-      try {
-        const ref = doc(db, 'users', currentUser.uid, 'app', 'main');
-        addDiagRow('Firestore path', 'OK', `users/${currentUser.uid}/app/main`);
-        const snap = await getDoc(ref);
-        addDiagRow('Firestore getDoc', 'OK', snap.exists() ? 'Dokument finnes' : 'Dokument finnes ikke ennå');
-        setStatusBox('Diagnose fullført – getDoc fungerte', 'success');
-      } catch (err) {
-        addDiagRow('Firestore getDoc', 'PROBLEM', err.message || String(err));
-        const msg = String(err && err.message || err);
-        if (/offline/i.test(msg)) {
-          addDiagRow('Tolkning', 'PROBLEM', 'Klienten oppfatter seg som offline. Test localhost / annen nettleser / uten extensions.');
-        } else if (/permission/i.test(msg) || /Missing or insufficient permissions/i.test(msg)) {
-          addDiagRow('Tolkning', 'PROBLEM', 'Firestore-regler blokkerer lesing.');
-        } else {
-          addDiagRow('Tolkning', 'PROBLEM', 'Uventet feil – se raw debugdata og console.');
-        }
-        setStatusBox('Diagnose fant feil ved Firestore-lesing', 'danger');
-      }
-    }
-
-    async function testRead() {
-      if (!firebaseReady) { setStatusBox('Firebase er ikke initialisert', 'danger'); return; }
-      const targetUid = val('manualUid') || currentUser?.uid || '';
-      const tpl = val('manualPath') || 'users/{uid}/app/main';
-      if (!targetUid) { setStatusBox('Ingen UID tilgjengelig for test', 'warn'); return; }
-      const resolved = tpl.replace('{uid}', targetUid).split('/').filter(Boolean);
-      if (resolved.length % 2 !== 0) { setStatusBox('Dokumentsti må ha partall antall segmenter', 'danger'); return; }
-      try {
-        setStatusBox('Tester manuell dokumentlesing…', 'info');
-        const ref = doc(db, ...resolved);
-        const snap = await getDoc(ref);
-        addDiagRow('Manuell getDoc', 'OK', snap.exists() ? 'Dokument finnes' : 'Dokument finnes ikke');
-        setStatusBox('Manuell dokumentlesing fungerte', 'success');
-      } catch (err) {
-        addDiagRow('Manuell getDoc', 'PROBLEM', err.message || String(err));
-        setStatusBox('Manuell dokumentlesing feilet: ' + (err.message || err), 'danger');
-      }
+    function downloadTemplateCsv(){
+      const csv='Date,Activity Type,Duration,Steps,Calories\n2026-06-15,Gåtur,45,8200,340\n2026-06-14,Golf,180,13000,900';
+      const blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'garmin-import-mal.csv';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(a.href),500);
     }
 
     document.querySelectorAll('[data-tab]').forEach(el => el.addEventListener('click', () => setTab(el.dataset.tab)));
     byId('authActionBtn').onclick = authAction;
-    byId('runDiagBtn').onclick = runDiagnostics;
-    byId('testReadBtn').onclick = testRead;
-    byId('clearLogBtn').onclick = () => { historyList.innerHTML=''; diagTable.innerHTML=''; debug.events=[]; refreshRawDebug(); };
-    byId('syncBtn').onclick = async () => {
-      if (!firebaseReady || !currentUser) { setStatusBox('Logg inn først for å teste synk', 'warn'); return; }
-      try {
-        setStatusBox('Tester setDoc-synk…', 'info');
-        await setDoc(doc(db, 'users', currentUser.uid, 'app', 'main'), { lastDebugSync: new Date().toISOString(), updatedAt: serverTimestamp() }, { merge: true });
-        setStatusBox('setDoc fungerte', 'success');
-      } catch (err) {
-        setStatusBox('setDoc feilet: ' + (err.message || err), 'danger');
-        addDiagRow('Firestore setDoc', 'PROBLEM', err.message || String(err));
-      }
-    };
-    byId('logoutBtn').onclick = async () => { if (auth && currentUser) await signOut(auth); else byId('authOverlay').classList.remove('hidden'); };
+    byId('saveProfileBtn').onclick = saveProfile;
+    byId('logWeightBtn').onclick = logWeight;
+    byId('saveGoalsBtn').onclick = saveGoals;
+    byId('saveCheckinBtn').onclick = saveCheckin;
+    byId('addMealBtn').onclick = addMeal;
+    byId('addActivityBtn').onclick = addActivity;
+    byId('quoteBtn').onclick = () => setText('quoteText', quotes[Math.floor(Math.random()*quotes.length)]);
+    byId('exportBtn').onclick = exportJson;
+    byId('importBtn').onclick = () => byId('importFile').click();
+    byId('importFile').addEventListener('change', e => importJson(e.target.files?.[0]));
+    byId('syncBtn').onclick = () => syncNow(false);
+    byId('logoutBtn').onclick = async () => { if(auth && currentUser) await signOut(auth); else byId('authOverlay').classList.remove('hidden'); };
+    byId('garminBtn').onclick = () => byId('garminFile').click();
+    byId('garminFile').addEventListener('change', e => importGarmin(e.target.files?.[0]));
+    byId('templateCsvBtn').onclick = downloadTemplateCsv;
 
-    window.addEventListener('online', () => { addHistory('Browser event: online', 'success'); renderEnvStatus(); });
-    window.addEventListener('offline', () => { addHistory('Browser event: offline', 'danger'); renderEnvStatus(); });
-
+    renderHabitGrid();
+    renderAll();
+    setText('quoteText', quotes[Math.floor(Math.random()*quotes.length)]);
     initFirebase();
-    renderEnvStatus();
-    refreshRawDebug();
   </script>
 </body>
 </html>
