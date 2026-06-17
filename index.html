@@ -2,430 +2,169 @@
 <html lang="no">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#0b1120" />
-  <title>Min Vektreise Cloud – RTDB PRO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Min Vektreise RTDB FIX</title>
   <style>
-    :root{--bg:#071225;--bg2:#0d1930;--surface:rgba(255,255,255,.08);--surface2:rgba(255,255,255,.06);--text:#e5eefb;--muted:#9fb3d1;--line:rgba(255,255,255,.14);--accent:#5eead4;--accent2:#60a5fa;--accent3:#c084fc;--success:#22c55e;--warning:#f59e0b;--danger:#f87171;--shadow:0 20px 60px rgba(2,6,23,.35);--radius-xl:24px;--radius:16px;--max:1440px}
-    *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--text);background:radial-gradient(1200px 600px at 10% -10%,rgba(96,165,250,.18),transparent 50%),radial-gradient(900px 500px at 100% 0%,rgba(192,132,252,.16),transparent 45%),linear-gradient(180deg,var(--bg),var(--bg2))}
-    button,input,select,textarea{font:inherit} .app{max-width:var(--max);margin:0 auto;padding:20px 16px 70px} .glass{background:var(--surface);backdrop-filter:blur(20px);border:1px solid var(--line);box-shadow:var(--shadow)} .card{border-radius:var(--radius-xl);padding:20px}
-    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:stretch}.hero h1{font-size:clamp(2rem,5vw,3.6rem);margin:10px 0 8px;line-height:1.02;letter-spacing:-.03em}.hero p{margin:0;color:var(--muted)}
-    .hero-head,.toolbar,.row-actions,.hero-actions,.section-title{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.hero-head,.toolbar,.section-title{justify-content:space-between}
-    .badge,.pill{display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);font-weight:800;font-size:.86rem}.pill{font-weight:700}
-    .header-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:18px}.stat{padding:16px;border-radius:18px;background:var(--surface2);border:1px solid var(--line)}.stat .label{font-size:.9rem;color:var(--muted)}.stat .value{font-size:clamp(1.05rem,3vw,1.8rem);font-weight:900;margin-top:5px;letter-spacing:-.03em}
-    .btn{border:0;border-radius:14px;padding:11px 15px;font-weight:800;cursor:pointer;transition:.18s ease;box-shadow:0 10px 22px rgba(0,0,0,.16)}.btn:hover{transform:translateY(-1px)}.btn.primary{background:linear-gradient(135deg,var(--accent2),#2563eb);color:#fff}.btn.secondary{background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line);box-shadow:none}.btn.success{background:linear-gradient(135deg,var(--success),#16a34a);color:#fff}.btn.danger{background:linear-gradient(135deg,var(--danger),#ef4444);color:#fff}.btn.warn{background:linear-gradient(135deg,var(--warning),#d97706);color:#111827}.btn.full{width:100%}
-    .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px;margin-top:18px}.span-4{grid-column:span 4}.span-5{grid-column:span 5}.span-6{grid-column:span 6}.span-7{grid-column:span 7}.span-8{grid-column:span 8}.span-12{grid-column:span 12}
-    .section-title h2{margin:0;font-size:1.18rem;letter-spacing:-.02em}.muted{color:var(--muted)}.tiny{font-size:.85rem}.center{text-align:center}.mono{font-family:Consolas,monospace}
-    .inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.inputs-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.one-col{grid-template-columns:1fr}.full-span{grid-column:1/-1}
-    label{display:block;font-size:.92rem;font-weight:700;margin-bottom:6px;color:#cfe1ff}input,select,textarea{width:100%;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(7,18,37,.45);color:#fff;padding:12px 13px;outline:none}textarea{min-height:96px;resize:vertical}input::placeholder,textarea::placeholder{color:#92a7c9}
-    .progress-wrap{margin-top:16px}.progress-top{display:flex;justify-content:space-between;gap:12px;font-size:.93rem}.progress{height:15px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;border:1px solid var(--line);margin-top:8px}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:999px}
-    .notice{padding:14px 16px;border-radius:16px;background:rgba(56,189,248,.14);border:1px solid rgba(56,189,248,.35);color:#e0f2fe}.notice.success{background:rgba(34,197,94,.14);border-color:rgba(74,222,128,.35);color:#dcfce7}.notice.warn{background:rgba(250,204,21,.14);border-color:rgba(250,204,21,.35);color:#fff7cc}.notice.danger{background:rgba(248,113,113,.14);border-color:rgba(248,113,113,.35);color:#fee2e2}
-    .table-wrap{overflow:auto;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.04)}table{width:100%;border-collapse:collapse;min-width:760px}th,td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.08);text-align:left;font-size:.94rem;vertical-align:top}th{position:sticky;top:0;background:#0a162c;color:#d7e8ff;z-index:1}
-    .score-list{list-style:none;padding:0;margin:0;display:grid;gap:10px}.score-list li{padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
-    .kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.kpi{padding:14px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid var(--line)}.kpi .v{font-size:1.4rem;font-weight:900;margin-top:4px}
-    .ring{width:130px;height:130px;border-radius:50%;display:grid;place-items:center;margin:auto;background:conic-gradient(var(--accent) 0deg,rgba(255,255,255,.08) 0deg);border:8px solid rgba(255,255,255,.08)}.ring-inner{width:90px;height:90px;border-radius:50%;display:grid;place-items:center;background:rgba(7,18,37,.8);box-shadow:inset 0 0 0 1px var(--line)}.ring-value{font-size:1.8rem;font-weight:900;letter-spacing:-.04em}
-    .habit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.habit{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid var(--line);cursor:pointer}.habit.active{background:rgba(34,197,94,.12);border-color:rgba(74,222,128,.55)}.toggle{width:54px;height:30px;border-radius:999px;background:rgba(255,255,255,.18);position:relative}.toggle::after{content:'';position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:.2s}.habit.active .toggle{background:linear-gradient(90deg,#22c55e,#4ade80)}.habit.active .toggle::after{left:27px}
-    .auth-shell{position:fixed;inset:0;display:grid;place-items:center;padding:18px;background:rgba(2,6,23,.65);backdrop-filter:blur(12px);z-index:99}.auth-card{width:min(560px,100%);padding:24px;border-radius:28px}.auth-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}.tab{padding:11px 12px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;font-weight:800;cursor:pointer;text-align:center}.tab.active{background:linear-gradient(135deg,var(--accent2),#2563eb)}
-    .hidden{display:none!important}.footer{margin-top:22px;text-align:center;color:var(--muted);font-size:.92rem}.mt-12{margin-top:12px}.mt-14{margin-top:14px}.mt-16{margin-top:16px}.mb-8{margin-bottom:8px}.mb-14{margin-bottom:14px}.min-h-18{min-height:18px}.sep{border-color:var(--line);border-style:solid;border-width:0 0 1px;margin:16px 0}
-    @media (max-width:1120px){.hero{grid-template-columns:1fr}.header-grid,.kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.span-8,.span-7,.span-6,.span-5,.span-4{grid-column:span 12}}
-    @media (max-width:760px){.app{padding:14px 12px 56px}.card{padding:18px}.header-grid,.inputs,.inputs-3,.auth-tabs,.habit-grid,.kpi-grid{grid-template-columns:1fr}.btn{width:100%}}
+    body{font-family:Segoe UI,Arial,sans-serif;background:#0b1220;color:#e5eefb;margin:0;padding:24px}
+    .wrap{max-width:1200px;margin:0 auto}
+    .card{background:#111a2e;border:1px solid #2a3b5f;border-radius:18px;padding:18px;margin-bottom:16px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.full{grid-column:1/-1}
+    label{display:block;margin-bottom:6px;font-weight:700} input,select,textarea,button{width:100%;box-sizing:border-box;border-radius:12px;border:1px solid #334a74;background:#0f1830;color:#fff;padding:12px} textarea{min-height:90px}
+    button{cursor:pointer;font-weight:800}.row{display:flex;gap:10px;flex-wrap:wrap}.row button{width:auto}.notice{padding:12px 14px;border-radius:14px;margin-top:12px;border:1px solid #33517d;background:#12203a}.ok{color:#86efac}.warn{color:#fde68a}.err{color:#fca5a5}.info{color:#93c5fd}
+    table{width:100%;border-collapse:collapse;min-width:680px} th,td{padding:10px 12px;border-bottom:1px solid #22314f;text-align:left;vertical-align:top} th{background:#0d162b}.table-wrap{overflow:auto;border:1px solid #22314f;border-radius:14px}
+    .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.tab.active{background:#2563eb} @media(max-width:900px){.grid,.grid3,.tabs{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <div class="auth-shell" id="authOverlay">
-    <div class="auth-card glass">
-      <div class="badge">✅ Beste løsning • RTDB + Garmin CSV</div>
-      <h2 style="font-size:1.8rem;margin:12px 0 6px">Logg inn eller velg lokal modus</h2>
-      <p class="muted" style="margin:0 0 14px">Denne versjonen lagrer i <strong>Realtime Database</strong> og har forbedret CSV-import med forhåndsvisning, kolonnemapping og støtte for både aktivitetsdata og daglige Garmin-data.</p>
-      <div class="auth-tabs">
-        <button class="tab active" data-tab="login">Logg inn</button>
-        <button class="tab" data-tab="signup">Opprett bruker</button>
-        <button class="tab" data-tab="reset">Glemt passord</button>
-        <button class="tab" data-tab="local">Lokal modus</button>
-      </div>
-      <div id="authSetupNotice" class="notice hidden mb-14"></div>
-      <div class="inputs one-col" id="authFormWrap">
-        <div><label for="authEmail">E-post</label><input id="authEmail" type="email" placeholder="deg@epost.no" autocomplete="email" /></div>
-        <div id="authPasswordWrap"><label for="authPassword">Passord</label><input id="authPassword" type="password" placeholder="Minst 6 tegn" autocomplete="current-password" /></div>
-        <div id="authNameWrap" class="hidden"><label for="authName">Navn (valgfritt)</label><input id="authName" type="text" placeholder="F.eks. Jan Roar" autocomplete="name" /></div>
-      </div>
-      <div class="row-actions mt-16"><button class="btn primary full" id="authActionBtn">Logg inn</button></div>
-      <div id="authMessage" class="muted tiny mt-12 min-h-18"></div>
-      <div id="firebaseConnectionStatus" class="notice mt-12">Status: Ikke startet</div>
-      <div class="notice warn mt-12 hidden" id="fileModeInfo">Lokal filmodus oppdaget. For Realtime Database bør du åpne via <span class="mono">http://localhost</span> eller hosting. Lokal modus virker uansett.</div>
+<div class="wrap">
+  <div class="card">
+    <h1>Min Vektreise RTDB – innlogging FIX</h1>
+    <p>Denne versjonen er forenklet for å sikre at innloggingen reagerer, og at CSV-import til Realtime Database fungerer.</p>
+    <div id="topStatus" class="notice">Status: Ikke startet</div>
+  </div>
+
+  <div class="card" id="authCard">
+    <div class="tabs">
+      <button class="tab active" data-tab="login">Logg inn</button>
+      <button class="tab" data-tab="signup">Opprett bruker</button>
+      <button class="tab" data-tab="reset">Glemt passord</button>
+      <button class="tab" data-tab="local">Lokal modus</button>
     </div>
+    <div class="grid" style="margin-top:12px" id="authForm">
+      <div><label for="authEmail">E-post</label><input id="authEmail" type="email" placeholder="deg@epost.no"></div>
+      <div id="pwWrap"><label for="authPassword">Passord</label><input id="authPassword" type="password" placeholder="Minst 6 tegn"></div>
+      <div id="nameWrap" class="full" style="display:none"><label for="authName">Navn (valgfritt)</label><input id="authName" type="text"></div>
+    </div>
+    <div class="row" style="margin-top:12px"><button id="authActionBtn">Logg inn</button><button id="logoutBtn" type="button">Logg ut</button></div>
+    <div id="authMessage" class="notice">Status: Klar</div>
   </div>
 
-  <div class="app">
-    <section class="hero">
-      <div class="card glass">
-        <div class="hero-head">
-          <div>
-            <div class="badge">🟧 Min Vektreise RTDB PRO</div>
-            <h1>Oppdatert løsning med Garmin CSV-import</h1>
-            <p>Denne versjonen bruker Realtime Database, har tydelig lokal/sky-status og en bedre Garmin CSV-import med preview og manuell mapping.</p>
-          </div>
-          <div class="pill" id="firebaseStatusPill">Sjekker miljø…</div>
-        </div>
-        <div class="header-grid">
-          <div class="stat"><div class="label">Startvekt</div><div class="value" id="startWeightView">–</div></div>
-          <div class="stat"><div class="label">Dagens vekt</div><div class="value" id="currentWeightView">–</div></div>
-          <div class="stat"><div class="label">Målvekt</div><div class="value" id="goalWeightView">–</div></div>
-          <div class="stat"><div class="label">Kalorimål</div><div class="value" id="kcalView">–</div></div>
-          <div class="stat"><div class="label">Modus</div><div class="value" id="modeView">Lokal</div></div>
-        </div>
-        <div class="progress-wrap">
-          <div class="progress-top"><div><strong>Fremgang mot mål:</strong> <span id="progressText">0 kg av 0 kg</span></div><div id="goalPercentText">0%</div></div>
-          <div class="progress"><div class="bar" id="goalBar"></div></div>
-        </div>
-        <div class="toolbar">
-          <div id="syncStatus" class="notice">Status: Venter</div>
-          <div class="hero-actions">
-            <button class="btn secondary" id="exportBtn">Eksporter JSON</button>
-            <button class="btn secondary" id="importBtn">Importer JSON</button>
-            <button class="btn secondary" id="syncBtn">Synk nå</button>
-            <button class="btn danger" id="logoutBtn">Logg ut</button>
-            <input id="importFile" type="file" accept="application/json" class="hidden" />
-          </div>
-        </div>
-      </div>
-
-      <div class="card glass stack">
-        <div class="section-title"><h2>Dagens score</h2><span class="pill" id="scorePill">Klar for en god dag</span></div>
-        <div class="inputs">
-          <div class="ring" id="scoreRing"><div class="ring-inner"><div><div class="ring-value" id="scoreValue">0</div><div class="tiny muted center">av 10</div></div></div></div>
-          <div>
-            <div class="badge">💡 Motivasjon</div>
-            <div id="quoteText" style="margin-top:10px;font-size:1.05rem;font-weight:800;line-height:1.4">Små valg, hver dag, blir store resultater over tid.</div>
-            <div class="row-actions"><button class="btn secondary" id="quoteBtn">Ny motivasjon</button></div>
-          </div>
-        </div>
-        <ul class="score-list" id="scoreList"></ul>
-        <div>
-          <div class="section-title"><h2>Systemstatus</h2><span class="badge">Live</span></div>
-          <ul class="score-list" id="statusTimeline"></ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="grid">
-      <div class="card glass span-4">
-        <div class="section-title"><h2>Profil og plan</h2><span class="badge">⚙️ Oppsett</span></div>
-        <div class="inputs">
-          <div><label for="displayName">Visningsnavn</label><input id="displayName" type="text" placeholder="Navn i appen" /></div>
-          <div><label for="heightCm">Høyde (cm)</label><input id="heightCm" type="number" min="100" max="250" step="1" value="197" /></div>
-          <div><label for="age">Alder</label><input id="age" type="number" min="15" max="100" step="1" /></div>
-          <div><label for="sex">Kjønn</label><select id="sex"><option value="">Velg</option><option value="male">Mann</option><option value="female">Kvinne</option></select></div>
-          <div><label for="startWeight">Startvekt (kg)</label><input id="startWeight" type="number" min="40" max="300" step="0.1" value="120" /></div>
-          <div><label for="currentWeight">Dagens vekt (kg)</label><input id="currentWeight" type="number" min="40" max="300" step="0.1" value="120" /></div>
-          <div><label for="goalWeight">Målvekt (kg)</label><input id="goalWeight" type="number" min="40" max="300" step="0.1" value="110" /></div>
-          <div><label for="weighDate">Dato for veiing</label><input id="weighDate" type="date" /></div>
-        </div>
-        <label for="whyText" class="mt-12">Ditt hvorfor</label>
-        <textarea id="whyText" placeholder="Mer energi, bedre helse, enklere hverdag..."></textarea>
-        <div class="row-actions mt-16">
-          <button class="btn primary" id="saveProfileBtn">Lagre profil</button>
-          <button class="btn success" id="logWeightBtn">Lagre veiing</button>
-        </div>
-        <div class="notice mt-12" id="planNotice">Legg inn alder og kjønn for å få beregnet kalorimål.</div>
-      </div>
-
-      <div class="card glass span-8">
-        <div class="section-title"><h2>Garmin daglig oversikt</h2><span class="badge">Auto/import</span></div>
-        <div class="kpi-grid">
-          <div class="kpi"><div class="muted tiny">Skritt i dag</div><div class="v" id="gSteps">–</div></div>
-          <div class="kpi"><div class="muted tiny">Kalorier i dag</div><div class="v" id="gCalories">–</div></div>
-          <div class="kpi"><div class="muted tiny">Søvn (timer)</div><div class="v" id="gSleep">–</div></div>
-          <div class="kpi"><div class="muted tiny">Hvilepuls</div><div class="v" id="gRestHr">–</div></div>
-        </div>
-        <div class="table-wrap mt-14"><table><thead><tr><th>Dato</th><th>Skritt</th><th>Kalorier</th><th>Søvn</th><th>Hvilepuls</th></tr></thead><tbody id="garminDailyTable"></tbody></table></div>
-      </div>
-
-      <div class="card glass span-5">
-        <div class="section-title"><h2>Ukemål og vaner</h2><span class="badge">🔥 Rytme</span></div>
-        <div class="inputs-3">
-          <div><label for="goalActivitiesPerWeek">Økter / uke</label><input id="goalActivitiesPerWeek" type="number" min="1" max="14" step="1" value="4" /></div>
-          <div><label for="goalMinutesPerWeek">Min / uke</label><input id="goalMinutesPerWeek" type="number" min="30" max="2000" step="10" value="180" /></div>
-          <div><label for="goalStepsPerDay">Skritt / dag</label><input id="goalStepsPerDay" type="number" min="1000" max="30000" step="500" value="8000" /></div>
-        </div>
-        <div class="stack mt-14">
-          <div><div class="progress-top"><span>Aktiviteter denne uka</span><span id="weeklyActsText">0/4</span></div><div class="progress"><div class="bar" id="weeklyActsBar"></div></div></div>
-          <div><div class="progress-top"><span>Minutter denne uka</span><span id="weeklyMinsText">0/180</span></div><div class="progress"><div class="bar" id="weeklyMinsBar"></div></div></div>
-          <div><div class="progress-top"><span>Snitt skritt / dag</span><span id="weeklyStepsText">0/8000</span></div><div class="progress"><div class="bar" id="weeklyStepsBar"></div></div></div>
-        </div>
-        <div class="row-actions mt-16"><button class="btn primary" id="saveGoalsBtn">Lagre mål</button></div>
-        <hr class="sep" />
-        <div class="inputs">
-          <div><label for="waterGlasses">Vannglass i dag</label><input id="waterGlasses" type="number" min="0" max="30" step="1" placeholder="F.eks. 8" /></div>
-          <div><label for="dailyMood">Dagens følelse</label><select id="dailyMood"><option value="">Velg</option><option>Veldig bra</option><option>Bra</option><option>OK</option><option>Tung dag</option></select></div>
-        </div>
-        <div class="habit-grid mt-12" id="habitGrid"></div>
-        <div class="row-actions mt-16"><button class="btn success" id="saveCheckinBtn">Lagre innsjekk</button></div>
-      </div>
-
-      <div class="card glass span-7">
-        <div class="section-title"><h2>Matlogg</h2><span class="badge">🥗 Kosthold</span></div>
-        <div class="inputs">
-          <div><label for="mealDate">Dato</label><input id="mealDate" type="date" /></div>
-          <div><label for="mealType">Måltid</label><select id="mealType"><option>Frokost</option><option>Lunsj</option><option>Middag</option><option>Kveldsmat</option><option>Snacks</option></select></div>
-          <div class="full-span"><label for="mealText">Hva spiste du?</label><input id="mealText" type="text" placeholder="F.eks. havregrøt med bær" /></div>
-        </div>
-        <div class="inputs-3 mt-12">
-          <div><label for="mealCalories">Kalorier</label><input id="mealCalories" type="number" min="0" step="1" placeholder="650" /></div>
-          <div><label for="mealProtein">Protein (g)</label><input id="mealProtein" type="number" min="0" step="1" placeholder="35" /></div>
-          <div><label for="mealNote">Notat</label><input id="mealNote" type="text" placeholder="Mett? Sulten?" /></div>
-        </div>
-        <div class="row-actions mt-16"><button class="btn success" id="addMealBtn">Legg til måltid</button></div>
-        <div class="table-wrap mt-14"><table><thead><tr><th>Dato</th><th>Måltid</th><th>Mat</th><th>Kcal</th><th>Protein</th><th></th></tr></thead><tbody id="mealTable"></tbody></table></div>
-      </div>
-
-      <div class="card glass span-7">
-        <div class="section-title"><h2>Aktivitetslogg</h2><span class="badge">🏃 Bevegelse</span></div>
-        <div class="inputs">
-          <div><label for="activityDate">Dato</label><input id="activityDate" type="date" /></div>
-          <div><label for="activityType">Aktivitet</label><select id="activityType"><option>Gåtur</option><option>Løping</option><option>Sykkel</option><option>Styrke</option><option>Golf</option><option>Annet</option></select></div>
-        </div>
-        <div class="inputs-3 mt-12">
-          <div><label for="activityDuration">Varighet (min)</label><input id="activityDuration" type="number" min="0" step="1" placeholder="45" /></div>
-          <div><label for="activitySteps">Skritt</label><input id="activitySteps" type="number" min="0" step="1" placeholder="8500" /></div>
-          <div><label for="activityCalories">Kalorier</label><input id="activityCalories" type="number" min="0" step="1" placeholder="350" /></div>
-        </div>
-        <label for="activityNote" class="mt-12">Notat</label><input id="activityNote" type="text" placeholder="Rolig tur, tung økt, god energi ..." />
-        <div class="row-actions mt-16"><button class="btn success" id="addActivityBtn">Legg til aktivitet</button></div>
-        <div class="table-wrap mt-14"><table><thead><tr><th>Dato</th><th>Type</th><th>Min</th><th>Skritt</th><th>Kcal</th><th></th></tr></thead><tbody id="activityTable"></tbody></table></div>
-      </div>
-
-      <div class="card glass span-5">
-        <div class="section-title"><h2>Bedre CSV-import</h2><span class="badge">Garmin</span></div>
-        <div class="inputs one-col">
-          <div>
-            <label for="csvMode">Importtype</label>
-            <select id="csvMode">
-              <option value="activity">Aktiviteter / økter</option>
-              <option value="daily">Daglige Garmin-data</option>
-            </select>
-          </div>
-          <div>
-            <label for="csvFile">CSV-fil</label>
-            <input id="csvFile" type="file" accept=".csv,text/csv" />
-          </div>
-        </div>
-        <div class="row-actions mt-16">
-          <button class="btn secondary" id="downloadTemplateBtn">Last ned valgt mal</button>
-          <button class="btn secondary" id="parseCsvBtn">Forhåndsvis CSV</button>
-        </div>
-        <div class="notice mt-14" id="csvStatus">Velg fil og trykk «Forhåndsvis CSV».</div>
-        <div class="inputs-3 mt-14" id="csvMappingWrap"></div>
-        <div class="row-actions mt-16">
-          <button class="btn primary" id="importCsvBtn">Importer til app + RTDB</button>
-          <button class="btn secondary" id="clearPreviewBtn">Tøm preview</button>
-        </div>
-        <div class="table-wrap mt-14"><table><thead><tr id="csvPreviewHead"></tr></thead><tbody id="csvPreviewBody"></tbody></table></div>
-      </div>
-
-      <div class="card glass span-12">
-        <div class="section-title"><h2>Hurtiginfo</h2><span class="badge">Status</span></div>
-        <div class="notice success" style="margin-bottom:12px"><strong>Grønn</strong> = lagret i Realtime Database</div>
-        <div class="notice warn" style="margin-bottom:12px"><strong>Gul</strong> = lagret lokalt / venter på sky</div>
-        <div class="notice danger" style="margin-bottom:12px"><strong>Rød</strong> = sky feilet, men lokal backup er trygg</div>
-        <div class="notice"><strong>Blå</strong> = kobler til / leser / skriver</div>
-      </div>
-    </section>
-    <div class="footer">RTDB PRO med forbedret Garmin CSV-import og manuell kolonnemapping.</div>
+  <div class="card">
+    <h2>Profil</h2>
+    <div class="grid3">
+      <div><label for="displayName">Navn</label><input id="displayName" type="text"></div>
+      <div><label for="currentWeight">Dagens vekt</label><input id="currentWeight" type="number" step="0.1" value="120"></div>
+      <div><label for="goalWeight">Målvekt</label><input id="goalWeight" type="number" step="0.1" value="110"></div>
+    </div>
+    <label for="whyText" style="margin-top:12px">Ditt hvorfor</label>
+    <textarea id="whyText"></textarea>
+    <div class="row" style="margin-top:12px"><button id="saveProfileBtn">Lagre profil</button><button id="syncBtn">Synk nå</button></div>
   </div>
 
-  <script>
-    window.__FIREBASE_CONFIG__ = {
-      apiKey: "AIzaSyBLj-nOSkauQwFpbg2dUysRfuAQX3lHEjc",
-      authDomain: "minvekt-6a728.firebaseapp.com",
-      databaseURL: "https://minvekt-6a728-default-rtdb.europe-west1.firebasedatabase.app",
-      projectId: "minvekt-6a728",
-      storageBucket: "minvekt-6a728.firebasestorage.app",
-      messagingSenderId: "481947013806",
-      appId: "1:481947013806:web:6bdeea7fb51da4ad2e133f",
-      measurementId: "G-326ECRK19X"
-    };
-  </script>
+  <div class="card">
+    <h2>CSV-import Garmin</h2>
+    <div class="grid">
+      <div><label for="csvMode">Importtype</label><select id="csvMode"><option value="activity">Aktiviteter</option><option value="daily">Daglige Garmin-data</option></select></div>
+      <div><label for="csvFile">CSV-fil</label><input id="csvFile" type="file" accept=".csv,text/csv"></div>
+    </div>
+    <div class="row" style="margin-top:12px"><button id="downloadTemplateBtn">Last ned mal</button><button id="parseCsvBtn">Forhåndsvis CSV</button><button id="importCsvBtn">Importer</button><button id="clearPreviewBtn">Tøm preview</button></div>
+    <div id="csvStatus" class="notice">Velg fil og trykk «Forhåndsvis CSV».</div>
+    <div id="csvMappingWrap" class="grid3" style="margin-top:12px"></div>
+    <div class="table-wrap" style="margin-top:12px"><table><thead><tr id="csvPreviewHead"></tr></thead><tbody id="csvPreviewBody"></tbody></table></div>
+  </div>
 
-  <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js';
-    import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js';
-    import { getDatabase, ref, get, set } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js';
+  <div class="card">
+    <h2>Data i appen</h2>
+    <div class="table-wrap"><table><thead><tr><th>Daglige Garmin-data</th><th>Aktiviteter</th></tr></thead><tbody><tr><td><pre id="dailyOut">{}</pre></td><td><pre id="activityOut">[]</pre></td></tr></tbody></table></div>
+  </div>
+</div>
 
-    const today = new Date().toISOString().slice(0,10);
-    const APP_CACHE = 'vektreise_rtdb_pro_v2';
-    const quotes = ['Små valg, hver dag, blir store resultater over tid.','Du trenger ikke være perfekt – bare jevn.','Målet er ikke å være streng. Målet er å være stabil.','Vinn uka. Da følger resultatene etter.','Neste gode valg er alltid nærmere enn du tror.','Bygg et system du faktisk liker å bruke.'];
-    const habits = [{id:'water',text:'Drukket nok vann'},{id:'greens',text:'Spist grønt i dag'},{id:'activity',text:'Vært i aktivitet'},{id:'noSnack',text:'Holdt kontroll på småspising'}];
-    const byId=id=>document.getElementById(id);
-    const setText=(id,v)=>{const e=byId(id); if(e)e.textContent=v;};
-    const val=id=>String((byId(id)?.value??'')).trim();
-    const num=(id,f=0)=>{const n=parseFloat(val(id)); return Number.isFinite(n)?n:f;};
-    const fmt=(n,d=1)=>Number(n||0).toLocaleString('no-NO',{minimumFractionDigits:d,maximumFractionDigits:d});
-    const fmtInt=n=>Number(Math.round(Number(n||0))).toLocaleString('no-NO');
-    const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
-    const pct=(value,total)=>total>0?clamp((value/total)*100,0,100):0;
-    const sameDay=(a,b)=>String(a||'').slice(0,10)===String(b||'').slice(0,10);
-    const parseDateSafe=s=>{const d=new Date(s); return isNaN(d)?null:d;};
-    const cryptoRandom=()=>crypto?.randomUUID?.()||`${Date.now()}-${Math.random().toString(16).slice(2)}`;
-    const daysAgo=days=>{const d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()-days); return d;};
-    const safe=(str='')=>String(str).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-    const fileMode=()=>location.protocol==='file:';
-    const cloudRuntime=()=>location.protocol==='http:'||location.protocol==='https:';
-    const historyList=byId('statusTimeline');
+<script>
+window.__FIREBASE_CONFIG__ = {
+  apiKey: "AIzaSyBLj-nOSkauQwFpbg2dUysRfuAQX3lHEjc",
+  authDomain: "minvekt-6a728.firebaseapp.com",
+  databaseURL: "https://minvekt-6a728-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "minvekt-6a728",
+  storageBucket: "minvekt-6a728.firebasestorage.app",
+  messagingSenderId: "481947013806",
+  appId: "1:481947013806:web:6bdeea7fb51da4ad2e133f",
+  measurementId: "G-326ECRK19X"
+};
+</script>
 
-    let app=null, auth=null, rtdb=null, currentUser=null, saveTimer=null, firebaseReady=false, cloudEnabled=false, authMode='login';
-    let csvData=[], csvHeaders=[];
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js';
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js';
+import { getDatabase, ref, get, set } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js';
 
-    function defaultState(){
-      return {
-        profile:{displayName:'',heightCm:197,age:'',sex:'',startWeight:120,currentWeight:120,goalWeight:110,why:''},
-        goals:{activitiesPerWeek:4,minutesPerWeek:180,stepsPerDay:8000},
-        meals:[], activities:[], weights:[{id:cryptoRandom(),date:today,weight:120}], checkins:{},
-        garminDaily:{},
-        meta:{pendingCloudSync:false,lastGarminImport:null}
-      };
-    }
-    function mergeDeep(base,extra){const out=structuredClone?structuredClone(base):JSON.parse(JSON.stringify(base)); for(const k in extra||{}){if(extra[k]&&typeof extra[k]==='object'&&!Array.isArray(extra[k])&&out[k]&&typeof out[k]==='object'&&!Array.isArray(out[k])) out[k]=mergeDeep(out[k],extra[k]); else out[k]=extra[k];} return out;}
-    function loadState(uid='demo'){try{const raw=localStorage.getItem(APP_CACHE+'_'+uid); if(!raw) return defaultState(); return mergeDeep(defaultState(), JSON.parse(raw));}catch{return defaultState();}}
-    let state=loadState();
-    function saveState(uid='demo'){localStorage.setItem(APP_CACHE+'_'+uid, JSON.stringify(state));}
-    function pathForUser(uid){return `users/${uid}/app/main`;}
-    function cloudNode(){return ref(rtdb,pathForUser(currentUser.uid));}
-    function addHistory(text){const li=document.createElement('li'); li.textContent=new Date().toLocaleTimeString('no-NO')+' – '+text; historyList.prepend(li); while(historyList.children.length>12) historyList.removeChild(historyList.lastChild);}
-    function setStatus(text, kind='info'){const cls='notice'+(kind==='success'?' success':kind==='warn'?' warn':kind==='danger'?' danger':''); const a=byId('firebaseConnectionStatus'), b=byId('syncStatus'); if(a){a.textContent='Status: '+text; a.className=cls;} if(b){b.textContent='Status: '+text; b.className=cls;} addHistory(text);}
+const $ = id => document.getElementById(id);
+const fileMode = () => location.protocol === 'file:';
+const cloudRuntime = () => location.protocol === 'http:' || location.protocol === 'https:';
+const APP_CACHE = 'vektreise_rtdb_loginfix_v1';
 
-    function estimateCalories(){const age=parseFloat(state.profile.age), sex=state.profile.sex, weight=parseFloat(state.profile.currentWeight), height=parseFloat(state.profile.heightCm); if(!(Number.isFinite(age)&&sex&&Number.isFinite(weight)&&Number.isFinite(height))) return null; const bmr=10*weight+6.25*height-5*age+(sex==='male'?5:-161); return Math.max(Math.round(bmr*1.55-500),1500)+' kcal';}
-    function syncUi(){
-      byId('displayName').value=state.profile.displayName||''; byId('heightCm').value=state.profile.heightCm||197; byId('age').value=state.profile.age||''; byId('sex').value=state.profile.sex||''; byId('startWeight').value=state.profile.startWeight||120; byId('currentWeight').value=state.profile.currentWeight||120; byId('goalWeight').value=state.profile.goalWeight||110; byId('whyText').value=state.profile.why||''; byId('goalActivitiesPerWeek').value=state.goals.activitiesPerWeek; byId('goalMinutesPerWeek').value=state.goals.minutesPerWeek; byId('goalStepsPerDay').value=state.goals.stepsPerDay; ['weighDate','mealDate','activityDate'].forEach(id=>byId(id).value ||= today); const c=state.checkins[today]||{habits:{},waterGlasses:'',mood:''}; byId('waterGlasses').value=c.waterGlasses||''; byId('dailyMood').value=c.mood||''; habits.forEach(h=>updateHabitUi(h.id,!!c.habits?.[h.id]));
-      setText('startWeightView',fmt(state.profile.startWeight)+' kg'); setText('currentWeightView',fmt(state.profile.currentWeight)+' kg'); setText('goalWeightView',fmt(state.profile.goalWeight)+' kg'); setText('kcalView',estimateCalories()||'–'); const total=Math.max(0,Number(state.profile.startWeight)-Number(state.profile.goalWeight)); const lost=Math.max(0,Number(state.profile.startWeight)-Number(state.profile.currentWeight)); const progress=pct(lost,total); setText('progressText',`${fmt(lost)} kg av ${fmt(total)} kg`); setText('goalPercentText',`${fmt(progress,0)} %`); byId('goalBar').style.width=progress+'%'; setText('modeView', cloudEnabled && currentUser ? 'Sky' : 'Lokal'); setText('firebaseStatusPill', fileMode() ? 'Lokal filmodus' : cloudEnabled ? 'RTDB aktiv' : firebaseReady ? 'Firebase klar' : 'Lokal modus'); setText('planNotice', estimateCalories() || 'Legg inn alder og kjønn for å få beregnet kalorimål.');
-    }
+let app=null, auth=null, db=null, user=null, authMode='login', csvHeaders=[], csvRows=[];
+let state = loadState();
 
-    function renderHabitGrid(){const wrap=byId('habitGrid'); wrap.innerHTML=habits.map(h=>`<div class="habit" id="habit_${h.id}" tabindex="0"><div><div style="font-weight:800">${safe(h.text)}</div><div class="tiny muted">Trykk for å veksle</div></div><div class="toggle"></div></div>`).join(''); habits.forEach(h=>{const el=byId(`habit_${h.id}`), action=()=>toggleHabit(h.id); el.onclick=action; el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault(); action();}};});}
-    function updateHabitUi(id,active){byId(`habit_${id}`)?.classList.toggle('active',!!active);}
-    function toggleHabit(id){const current=state.checkins[today]||{habits:{},waterGlasses:'',mood:''}; current.habits=current.habits||{}; current.habits[id]=!current.habits[id]; state.checkins[today]=current; updateHabitUi(id,current.habits[id]); renderScore(); scheduleSave();}
+function defaultState(){return {profile:{displayName:'',currentWeight:120,goalWeight:110,why:''},garminDaily:{},activities:[],meta:{pendingCloudSync:false}};}
+function mergeDeep(base, extra){const out=structuredClone?structuredClone(base):JSON.parse(JSON.stringify(base)); for(const k in extra||{}){ if(extra[k]&&typeof extra[k]==='object'&&!Array.isArray(extra[k])&&out[k]&&typeof out[k]==='object'&&!Array.isArray(out[k])) out[k]=mergeDeep(out[k], extra[k]); else out[k]=extra[k]; } return out;}
+function loadState(uid='demo'){try{const raw=localStorage.getItem(APP_CACHE+'_'+uid); if(!raw) return defaultState(); return mergeDeep(defaultState(), JSON.parse(raw));}catch{return defaultState();}}
+function saveState(uid='demo'){localStorage.setItem(APP_CACHE+'_'+uid, JSON.stringify(state));}
+function pathForUser(uid){return `users/${uid}/app/main`;}
+function updateStatus(text, cls='info'){ $('topStatus').textContent='Status: '+text; $('authMessage').textContent='Status: '+text; $('topStatus').className='notice '+cls; $('authMessage').className='notice '+cls; }
+function renderState(){ $('displayName').value=state.profile.displayName||''; $('currentWeight').value=state.profile.currentWeight||120; $('goalWeight').value=state.profile.goalWeight||110; $('whyText').value=state.profile.why||''; $('dailyOut').textContent=JSON.stringify(state.garminDaily, null, 2); $('activityOut').textContent=JSON.stringify(state.activities, null, 2);} 
+function setTab(mode){ authMode=mode; document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active', b.dataset.tab===mode)); $('nameWrap').style.display = mode==='signup' ? '' : 'none'; $('pwWrap').style.display = (mode==='reset' || mode==='local') ? 'none' : ''; $('authForm').style.display = mode==='local' ? 'none' : 'grid'; $('authActionBtn').textContent = mode==='login' ? 'Logg inn' : mode==='signup' ? 'Opprett bruker' : mode==='reset' ? 'Send nullstilling' : 'Start lokal modus'; }
 
-    function renderGarminDaily(){
-      const tbody=byId('garminDailyTable');
-      const rows=Object.entries(state.garminDaily||{}).sort((a,b)=>String(b[0]).localeCompare(String(a[0])));
-      if(!rows.length){tbody.innerHTML='<tr><td colspan="5" class="muted">Ingen Garmin-dagsdata importert enda.</td></tr>'; setText('gSteps','–'); setText('gCalories','–'); setText('gSleep','–'); setText('gRestHr','–'); return;}
-      tbody.innerHTML=rows.slice(0,20).map(([date,d])=>`<tr><td>${safe(date)}</td><td>${d.steps?fmtInt(d.steps):''}</td><td>${d.calories?fmtInt(d.calories):''}</td><td>${d.sleepHours?fmt(d.sleepHours,1):''}</td><td>${d.restingHr?fmtInt(d.restingHr):''}</td></tr>`).join('');
-      const todayData=state.garminDaily[today] || rows[0][1];
-      setText('gSteps', todayData?.steps ? fmtInt(todayData.steps) : '–');
-      setText('gCalories', todayData?.calories ? fmtInt(todayData.calories) : '–');
-      setText('gSleep', todayData?.sleepHours ? fmt(todayData.sleepHours,1) : '–');
-      setText('gRestHr', todayData?.restingHr ? fmtInt(todayData.restingHr) : '–');
-    }
+function detectDelimiter(text){ const first=text.split(/\r?\n/).find(Boolean)||''; return [',',';','\t'].sort((a,b)=>first.split(b).length-first.split(a).length)[0] || ','; }
+function splitCsvLine(line, delimiter){ const out=[]; let cur='', quoted=false; for(let i=0;i<line.length;i++){ const ch=line[i]; if(ch==='"'){ if(quoted && line[i+1]==='"'){ cur+='"'; i++; } else quoted=!quoted; } else if(ch===delimiter && !quoted){ out.push(cur); cur=''; } else cur+=ch; } out.push(cur); return out; }
+function parseCsv(text){ const delimiter=detectDelimiter(text), lines=text.split(/\r?\n/).filter(Boolean); if(lines.length<2) return {headers:[], rows:[]}; const headers=splitCsvLine(lines[0], delimiter).map(h=>h.trim()); const rows=lines.slice(1).map(line=>{ const cols=splitCsvLine(line, delimiter), obj={}; headers.forEach((h,i)=>obj[h]=(cols[i]||'').trim()); return obj;}); return {headers, rows}; }
+function normalizeKey(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9æøå]/g,''); }
+const AUTO={date:['date','dato'], type:['activity type','type','aktivitet'], duration:['duration','varighet'], steps:['steps','skritt'], calories:['calories','kcal','energi'], note:['note','notat'], sleepHours:['sleep','sleephours','søvn'], restingHr:['restinghr','resting hr','hvilepuls'], weight:['weight','vekt']};
+const MAPS={activity:[['date','Dato'],['type','Aktivitetstype'],['duration','Varighet'],['steps','Skritt'],['calories','Kalorier'],['note','Notat']], daily:[['date','Dato'],['steps','Skritt'],['calories','Kalorier'],['sleepHours','Søvn (timer)'],['restingHr','Hvilepuls'],['weight','Kroppsvekt']]};
+function guessHeader(field){ const arr=AUTO[field]||[]; return csvHeaders.find(h=>arr.some(x=>normalizeKey(h).includes(normalizeKey(x)))) || ''; }
+function buildMappingUI(){ const mode=$('csvMode').value; const wrap=$('csvMappingWrap'); wrap.innerHTML=''; MAPS[mode].forEach(([field,label])=>{ const div=document.createElement('div'); div.innerHTML=`<label>${label}</label><select id="map_${field}"><option value="">-- ikke brukt --</option>${csvHeaders.map(h=>`<option value="${h}">${h}</option>`).join('')}</select>`; wrap.appendChild(div); const sel=div.querySelector('select'); sel.value=guessHeader(field); }); }
+function renderPreview(){ const head=$('csvPreviewHead'), body=$('csvPreviewBody'); head.innerHTML=''; body.innerHTML=''; csvHeaders.forEach(h=>{ const th=document.createElement('th'); th.textContent=h; head.appendChild(th);}); csvRows.slice(0,15).forEach(r=>{ const tr=document.createElement('tr'); csvHeaders.forEach(h=>{ const td=document.createElement('td'); td.textContent=r[h]||''; tr.appendChild(td);}); body.appendChild(tr);}); }
+function parseDate(v){ if(!v) return ''; const s=String(v).trim(); const d=new Date(s); if(!isNaN(d)) return d.toISOString().slice(0,10); const m=s.match(/^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{2,4})$/); if(m){ let y=m[3]; if(y.length===2) y='20'+y; return `${y}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`;} return ''; }
+function parseNum(v){ if(v==null||v==='') return ''; const n=parseFloat(String(v).replace(/\s/g,'').replace(',','.').replace(/[^0-9.-]/g,'')); return Number.isFinite(n)?n:''; }
+function parseDuration(v){ if(v==null||v==='') return ''; const s=String(v).trim(); if(/^\d+(\.\d+)?$/.test(s)) return Math.round(parseFloat(s)); const p=s.split(':').map(x=>x.trim()); if(p.length===3) return Math.round(Number(p[0])*60+Number(p[1])+Number(p[2])/60); if(p.length===2) return Math.round(Number(p[0])*60+Number(p[1])); return parseNum(s); }
+function mapVal(field,row){ const sel=$(`map_${field}`); return sel && sel.value ? row[sel.value] : ''; }
 
-    function renderScore(){const todayMeals=state.meals.filter(x=>sameDay(x.date,today)), todayActs=state.activities.filter(x=>sameDay(x.date,today)), c=state.checkins[today]||{habits:{}}; const calories=todayMeals.reduce((s,m)=>s+(parseFloat(m.calories)||0),0); const targetNum=parseFloat(String(estimateCalories()||'').replace(/[^0-9]/g,''))||0; const minutes=todayActs.reduce((s,a)=>s+(parseFloat(a.duration)||0),0), steps=(state.garminDaily?.[today]?.steps||0)+todayActs.reduce((s,a)=>s+(parseFloat(a.steps)||0),0), activeHabits=habits.filter(h=>c.habits?.[h.id]).length; const breakdown=[]; let score=0; if(todayMeals.length>=3){score+=2;breakdown.push(['+2','Minst tre måltider logget i dag.']);} else if(todayMeals.length>0){score+=1;breakdown.push(['+1','Du har startet matloggen i dag.']);} else breakdown.push(['0','Ingen matlogg registrert enda i dag.']); if(minutes>=30||steps>=state.goals.stepsPerDay){score+=2;breakdown.push(['+2','Sterk aktivitet i dag.']);} else if(minutes>0||steps>0){score+=1;breakdown.push(['+1','Noe aktivitet er registrert.']);} else breakdown.push(['0','Ingen aktivitet logget enda i dag.']); if(activeHabits>=3){score+=2;breakdown.push(['+2',`Vaner huket av: ${activeHabits}/${habits.length}.`]);} else if(activeHabits>=1){score+=1;breakdown.push(['+1',`Vaner huket av: ${activeHabits}/${habits.length}.`]);} else breakdown.push(['0','Ingen vaner huket av enda.']); if((c.waterGlasses||0)>=8){score+=1;breakdown.push(['+1','Godt med vann i dag.']);} else breakdown.push(['0','Registrer minst 8 vannglass for ekstra poeng.']); if(targetNum && calories>0){if(calories<=targetNum){score+=3;breakdown.push(['+3',`Kalorier i dag (${fmtInt(calories)}) er innenfor målet.`]);} else if(calories<=targetNum*1.1){score+=1;breakdown.push(['+1','Du er litt over, men fortsatt nær planen.']);} else breakdown.push(['0','Kaloriinntaket er over målet i dag.']);} else breakdown.push(['0','Kaloripoeng beregnes når du logger kalorier.']); score=clamp(score,0,10); setText('scoreValue',String(score)); byId('scoreRing').style.background=`conic-gradient(var(--accent) ${score*36}deg, rgba(255,255,255,.08) ${score*36}deg)`; setText('scorePill',score>=8?'Knallbra dag':score>=5?'Solid på vei':score>=2?'God start':'Klar for neste steg'); byId('scoreList').innerHTML=breakdown.map(([a,b])=>`<li><strong>${a}</strong> – ${safe(b)}</li>`).join('');}
+$('parseCsvBtn').onclick = async ()=>{ const file=$('csvFile').files?.[0]; if(!file){ $('csvStatus').textContent='Velg en CSV-fil først.'; return; } const text=await file.text(); const parsed=parseCsv(text); csvHeaders=parsed.headers; csvRows=parsed.rows; if(!csvHeaders.length){ $('csvStatus').textContent='Fant ingen gyldige CSV-data.'; return; } buildMappingUI(); renderPreview(); $('csvStatus').textContent=`Lest ${csvRows.length} rader. Sjekk mapping før import.`; };
+$('clearPreviewBtn').onclick = ()=>{ csvHeaders=[]; csvRows=[]; $('csvMappingWrap').innerHTML=''; $('csvPreviewHead').innerHTML=''; $('csvPreviewBody').innerHTML=''; $('csvStatus').textContent='Preview tømt.'; $('csvFile').value=''; };
+$('downloadTemplateBtn').onclick = ()=>{ const mode=$('csvMode').value; const csv = mode==='activity' ? 'Date,Activity Type,Duration,Steps,Calories,Note\n2026-06-17,Gåtur,45,8200,340,Rolig økt\n2026-06-16,Golf,180,13000,900,18 hull' : 'Date,Steps,Calories,SleepHours,RestingHR,Weight\n2026-06-17,8432,2741,7.1,51,119.4\n2026-06-16,10221,2890,6.8,52,119.8'; const blob=new Blob([csv], {type:'text/csv;charset=utf-8'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download = mode==='activity' ? 'garmin-aktivitet-mal.csv' : 'garmin-daglig-mal.csv'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),500); };
+$('importCsvBtn').onclick = async ()=>{ if(!csvRows.length){ $('csvStatus').textContent='Ingen preview-data å importere.'; return; } const mode=$('csvMode').value; let imported=0, skipped=0; if(mode==='activity'){ csvRows.forEach(r=>{ const date=parseDate(mapVal('date',r)); const type=mapVal('type',r)||'Garmin-import'; const duration=parseDuration(mapVal('duration',r)); const steps=parseNum(mapVal('steps',r)); const calories=parseNum(mapVal('calories',r)); const note=mapVal('note',r)||'Importert fra CSV'; if(!date&&!duration&&!steps&&!calories){ skipped++; return; } state.activities.unshift({id:crypto.randomUUID?.()||String(Date.now())+Math.random(), date:date||new Date().toISOString().slice(0,10), type, duration:duration||'', steps:steps||'', calories:calories||'', note}); imported++; }); } else { csvRows.forEach(r=>{ const date=parseDate(mapVal('date',r)); if(!date){ skipped++; return; } const entry=state.garminDaily[date]||{}; const steps=parseNum(mapVal('steps',r)); const calories=parseNum(mapVal('calories',r)); const sleepHours=parseNum(mapVal('sleepHours',r)); const restingHr=parseNum(mapVal('restingHr',r)); const weight=parseNum(mapVal('weight',r)); state.garminDaily[date] = {...entry, ...(steps!==''?{steps}:{}), ...(calories!==''?{calories}:{}), ...(sleepHours!==''?{sleepHours}:{}), ...(restingHr!==''?{restingHr}:{}), ...(weight!==''?{weight}:{}), source:'csv'}; imported++; }); } renderState(); saveState(user?.uid||'demo'); if(user){ await syncNow(false); } $('csvStatus').textContent=`Import ferdig. Importert: ${imported}. Hoppet over: ${skipped}.`; updateStatus(`CSV importert (${mode}) – ${imported} rader`, 'ok'); };
 
-    function sevenDayStats(){const from=daysAgo(6), acts=state.activities.filter(x=>parseDateSafe(x.date)>=from), daily=Object.entries(state.garminDaily||{}).filter(([d])=>parseDateSafe(d)>=from); const dailySteps=daily.reduce((s,[,v])=>s+(parseFloat(v.steps)||0),0); return {acts:acts.length, minutes:acts.reduce((s,x)=>s+(parseFloat(x.duration)||0),0), steps:acts.reduce((s,x)=>s+(parseFloat(x.steps)||0),0)+dailySteps};}
-    function renderGoals(){const week=sevenDayStats(), avgSteps=week.steps/7; setText('weeklyActsText',`${week.acts}/${state.goals.activitiesPerWeek}`); setText('weeklyMinsText',`${fmtInt(week.minutes)}/${fmtInt(state.goals.minutesPerWeek)}`); setText('weeklyStepsText',`${fmtInt(avgSteps)}/${fmtInt(state.goals.stepsPerDay)}`); byId('weeklyActsBar').style.width=pct(week.acts,state.goals.activitiesPerWeek)+'%'; byId('weeklyMinsBar').style.width=pct(week.minutes,state.goals.minutesPerWeek)+'%'; byId('weeklyStepsBar').style.width=pct(avgSteps,state.goals.stepsPerDay)+'%';}
-    function renderMeals(){const tbody=byId('mealTable'); if(!state.meals.length){tbody.innerHTML='<tr><td colspan="6" class="muted">Ingen måltider registrert enda.</td></tr>'; return;} tbody.innerHTML=[...state.meals].sort((a,b)=>String(b.date).localeCompare(String(a.date))).map(item=>`<tr><td>${safe(item.date)}</td><td>${safe(item.type)}</td><td>${safe(item.text)}</td><td>${item.calories?fmtInt(item.calories):''}</td><td>${item.protein?fmtInt(item.protein):''}</td><td><button class="btn secondary" data-delmeal="${item.id}" style="padding:8px 10px">Slett</button></td></tr>`).join(''); tbody.querySelectorAll('[data-delmeal]').forEach(btn=>btn.onclick=()=>{state.meals=state.meals.filter(x=>x.id!==btn.dataset.delmeal); renderAll(); scheduleSave();});}
-    function renderActivities(){const tbody=byId('activityTable'); if(!state.activities.length){tbody.innerHTML='<tr><td colspan="6" class="muted">Ingen aktivitet registrert enda.</td></tr>'; return;} tbody.innerHTML=[...state.activities].sort((a,b)=>String(b.date).localeCompare(String(a.date))).map(item=>`<tr><td>${safe(item.date)}</td><td>${safe(item.type)}</td><td>${item.duration?fmtInt(item.duration):''}</td><td>${item.steps?fmtInt(item.steps):''}</td><td>${item.calories?fmtInt(item.calories):''}</td><td><button class="btn secondary" data-delact="${item.id}" style="padding:8px 10px">Slett</button></td></tr>`).join(''); tbody.querySelectorAll('[data-delact]').forEach(btn=>btn.onclick=()=>{state.activities=state.activities.filter(x=>x.id!==btn.dataset.delact); renderAll(); scheduleSave();});}
+$('saveProfileBtn').onclick = async ()=>{ state.profile.displayName=$('displayName').value.trim(); state.profile.currentWeight=parseNum($('currentWeight').value)||120; state.profile.goalWeight=parseNum($('goalWeight').value)||110; state.profile.why=$('whyText').value; saveState(user?.uid||'demo'); renderState(); if(user && state.profile.displayName) updateProfile(user,{displayName:state.profile.displayName}).catch(()=>{}); await syncNow(false); };
+$('addActivityBtn').onclick = async ()=>{ const item={id:crypto.randomUUID?.()||String(Date.now())+Math.random(), date:$('activityDate').value || today, type:$('activityType').value, duration:parseNum($('activityDuration').value)||'', steps:parseNum($('activitySteps').value)||'', calories:parseNum($('activityCalories').value)||'', note:$('activityNote').value.trim()}; if(!item.duration && !item.steps && !item.calories){ alert('Legg inn minutter, skritt eller kalorier.'); return; } state.activities.unshift(item); ['activityDuration','activitySteps','activityCalories','activityNote'].forEach(id=>$(id).value=''); renderState(); saveState(user?.uid||'demo'); await syncNow(false); };
+$('exportBtn').onclick = ()=>{ const blob=new Blob([JSON.stringify(state,null,2)], {type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='vektreise-rtdb-fix-backup.json'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),500); };
+$('importBtn').onclick = ()=> $('importFile').click();
+$('importFile').onchange = async e=>{ const f=e.target.files?.[0]; if(!f) return; const text=await f.text(); state=mergeDeep(defaultState(), JSON.parse(text)); renderState(); saveState(user?.uid||'demo'); await syncNow(false); updateStatus('JSON importert', 'ok'); };
+$('syncBtn').onclick = ()=>syncNow(false);
+$('logoutBtn').onclick = async ()=>{ try{ if(auth && user) await signOut(auth); else updateStatus('Ikke logget inn', 'warn'); } catch(err){ updateStatus('Logout feilet: '+(err.message||err), 'err'); } };
 
-    function drawRoundRect(ctx,x,y,w,h,r){ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();}
-    function drawCardBg(ctx,w,h){drawRoundRect(ctx,0,0,w,h,18); ctx.fillStyle='rgba(255,255,255,.03)'; ctx.fill(); ctx.strokeStyle='rgba(255,255,255,.12)'; ctx.stroke();}
-    function drawWeightChart(){const c=document.createElement('canvas');}
-    function renderAll(){syncUi(); renderGoals(); renderMeals(); renderActivities(); renderGarminDaily(); renderScore();}
+$('authActionBtn').onclick = async ()=>{
+  if(authMode==='local'){ $('authCard').style.display='none'; updateStatus('Lokal modus startet – alle endringer lagres lokalt', 'warn'); return; }
+  if(!firebaseReady || !cloudRuntime()){ updateStatus('Sky-innlogging krever localhost eller hostet side', 'warn'); return; }
+  try{
+    updateStatus(authMode==='login'?'Logger inn…':authMode==='signup'?'Oppretter bruker…':'Sender nullstilling…', 'info');
+    const email=$('authEmail').value.trim(); const password=$('authPassword').value; const name=$('authName').value.trim();
+    if(authMode==='login') await signInWithEmailAndPassword(auth, email, password);
+    else if(authMode==='signup'){ const cred=await createUserWithEmailAndPassword(auth, email, password); if(name) await updateProfile(cred.user,{displayName:name}); }
+    else { await sendPasswordResetEmail(auth, email); updateStatus('Nullstillingsmail sendt', 'ok'); return; }
+  } catch(err){ updateStatus('Autentisering feilet: ' + (err.message||err), 'err'); }
+};
 
-    async function loadCloud(){if(!cloudEnabled||!currentUser) return; try{setStatus('Laster skydata fra Realtime Database…','info'); const snap=await get(cloudNode()); if(snap.exists()&&snap.val()?.state){state=mergeDeep(defaultState(),snap.val().state); saveState(currentUser.uid); renderAll(); setStatus('Skydata lastet fra Realtime Database','success');} else {await syncNow(true);}} catch(err){state.meta.pendingCloudSync=true; saveState(currentUser?.uid||'demo'); setStatus('Sky-lesing feilet – fortsetter lokalt ('+(err.message||err)+')','warn');}}
-    async function syncNow(initial=false){if(!cloudEnabled||!currentUser){state.meta.pendingCloudSync=true; saveState(currentUser?.uid||'demo'); setStatus(fileMode()?'Lagret lokalt – åpne via localhost eller hosting for sky':'Lagret lokalt – logg inn for sky-synk','warn'); return;} try{setStatus(initial?'Oppretter første lagring i Realtime Database…':'Synkroniserer med Realtime Database…','info'); await set(cloudNode(), { uid: currentUser.uid, email: currentUser.email||'', updatedAt: new Date().toISOString(), state }); state.meta.pendingCloudSync=false; saveState(currentUser.uid); setStatus((initial?'Førstegangslagring fullført':'Synkronisert med Realtime Database')+' • '+new Date().toLocaleTimeString('no-NO'),'success');} catch(err){state.meta.pendingCloudSync=true; saveState(currentUser.uid); setStatus('Sky-synk feilet – endringen er lagret lokalt ('+(err.message||err)+')','danger');}}
-    function scheduleSave(){saveState(currentUser?.uid||'demo'); if(!cloudEnabled||!currentUser){state.meta.pendingCloudSync=true; saveState(currentUser?.uid||'demo'); setStatus(fileMode()?'Lagret lokalt – åpne via localhost eller hosting for sky':'Lagret lokalt – logg inn for sky-synk','warn'); return;} clearTimeout(saveTimer); saveTimer=setTimeout(()=>syncNow(false),900);}
+async function syncNow(initial=false){ if(!cloudEnabled || !user){ saveState(user?.uid||'demo'); updateStatus(fileMode()?'Lagret lokalt – åpne via localhost for sky':'Lagret lokalt – logg inn for sky', 'warn'); return; } try{ updateStatus(initial?'Oppretter første lagring i RTDB…':'Synkroniserer med RTDB…', 'info'); await set(ref(db, pathForUser(user.uid)), {uid:user.uid, email:user.email||'', updatedAt:new Date().toISOString(), state}); saveState(user.uid); updateStatus((initial?'Førstegangslagring fullført':'Synkronisert med RTDB') + ' • ' + new Date().toLocaleTimeString('no-NO'), 'ok'); } catch(err){ updateStatus('RTDB-synk feilet: ' + (err.message||err), 'err'); } }
 
-    function setTab(mode){authMode=mode; document.querySelectorAll('[data-tab]').forEach(el=>el.classList.toggle('active',el.dataset.tab===mode)); byId('authNameWrap').classList.toggle('hidden',mode!=='signup'); byId('authPasswordWrap').classList.toggle('hidden',mode==='reset'||mode==='local'); byId('authFormWrap').classList.toggle('hidden',mode==='local'); byId('authActionBtn').textContent=mode==='login'?'Logg inn':mode==='signup'?'Opprett bruker':mode==='reset'?'Send nullstilling':'Start i lokal modus';}
-    async function authAction(){if(authMode==='local'){byId('authOverlay').classList.add('hidden'); cloudEnabled=false; setStatus('Lokal modus startet – alle endringer lagres på denne enheten','warn'); renderAll(); return;} if(!firebaseReady||!cloudRuntime()){setText('authMessage','Sky-innlogging krever localhost eller hostet side. Velg Lokal modus, eller åpne via http://localhost.'); setStatus('Sky-innlogging er ikke tilgjengelig i dette miljøet','warn'); return;} const email=val('authEmail'), password=val('authPassword'), name=val('authName'); try{setText('authMessage','Jobber…'); setStatus(authMode==='login'?'Logger inn…':authMode==='signup'?'Oppretter bruker…':'Sender nullstilling…','info'); if(authMode==='login'){await signInWithEmailAndPassword(auth,email,password);} else if(authMode==='signup'){const cred=await createUserWithEmailAndPassword(auth,email,password); if(name) await updateProfile(cred.user,{displayName:name});} else {await sendPasswordResetEmail(auth,email); setText('authMessage','Nullstillingsmail sendt.'); setStatus('Nullstillingsmail sendt','success'); return;} setText('authMessage','OK');} catch(err){setText('authMessage',err.message); setStatus('Autentisering feilet: '+err.message,'danger');}}
-    async function initFirebase(){if(fileMode()){byId('fileModeInfo').classList.remove('hidden'); byId('authSetupNotice').classList.remove('hidden'); byId('authSetupNotice').textContent='Lokal filmodus oppdaget. Velg “Lokal modus”, eller kjør siden via http://localhost for Firebase-synk.'; setStatus('Lokal filmodus – sky er slått av for stabil drift','warn'); setText('firebaseStatusPill','Lokal filmodus'); renderAll(); return;} if(!cloudRuntime()){setStatus('Ukjent kjøremiljø – fortsetter lokalt','warn'); renderAll(); return;} const cfg=window.__FIREBASE_CONFIG__; if(!cfg||!cfg.apiKey||!cfg.databaseURL){setStatus('Firebase-konfig mangler databaseURL – fortsetter lokalt','warn'); renderAll(); return;} try{setStatus('Kobler til Firebase…','info'); app=initializeApp(cfg); auth=getAuth(app); rtdb=getDatabase(app); firebaseReady=true; setText('firebaseStatusPill','Firebase klar'); onAuthStateChanged(auth, async user=>{currentUser=user||null; if(currentUser){cloudEnabled=true; byId('authOverlay').classList.add('hidden'); state=loadState(currentUser.uid); renderAll(); setStatus('Innlogget – RTDB aktiv','success'); await loadCloud(); if(state.meta.pendingCloudSync) await syncNow(false);} else {cloudEnabled=false; setStatus('Firebase klar – logg inn eller velg lokal modus','info'); renderAll();}});} catch(err){firebaseReady=false; cloudEnabled=false; byId('authSetupNotice').classList.remove('hidden'); byId('authSetupNotice').textContent='Firebase kunne ikke initialiseres. Lokal modus fungerer fortsatt.'; setStatus('Firebase-feil – fortsetter lokalt ('+err.message+')','danger'); renderAll();}}
+async function loadCloud(){ if(!cloudEnabled || !user) return; try{ updateStatus('Laster skydata fra RTDB…', 'info'); const snap=await get(ref(db, pathForUser(user.uid))); if(snap.exists() && snap.val()?.state){ state=mergeDeep(defaultState(), snap.val().state); saveState(user.uid); renderState(); updateStatus('Skydata lastet fra RTDB', 'ok'); } else { await syncNow(true); } } catch(err){ updateStatus('Kunne ikke lese RTDB – fortsetter lokalt: ' + (err.message||err), 'warn'); } }
 
-    // App handling
-    function saveProfile(){state.profile.displayName=val('displayName'); state.profile.heightCm=num('heightCm',197); state.profile.age=val('age'); state.profile.sex=val('sex'); state.profile.startWeight=num('startWeight',120); state.profile.currentWeight=num('currentWeight',120); state.profile.goalWeight=num('goalWeight',110); state.profile.why=val('whyText'); saveState(currentUser?.uid||'demo'); renderAll(); if(currentUser&&state.profile.displayName&&auth) updateProfile(currentUser,{displayName:state.profile.displayName}).catch(()=>{}); scheduleSave();}
-    function logWeight(){saveProfile(); const entry={id:cryptoRandom(),date:val('weighDate')||today,weight:num('currentWeight',state.profile.currentWeight)}; state.profile.currentWeight=entry.weight; state.weights.push(entry); const map=new Map(); state.weights.forEach(item=>map.set(item.date,item)); state.weights=[...map.values()].sort((a,b)=>String(a.date).localeCompare(String(b.date))); renderAll(); scheduleSave();}
-    function saveGoals(){state.goals.activitiesPerWeek=num('goalActivitiesPerWeek',4); state.goals.minutesPerWeek=num('goalMinutesPerWeek',180); state.goals.stepsPerDay=num('goalStepsPerDay',8000); saveState(currentUser?.uid||'demo'); renderAll(); scheduleSave();}
-    function saveCheckin(){const c=state.checkins[today]||{habits:{}}; c.waterGlasses=num('waterGlasses',0); c.mood=val('dailyMood'); state.checkins[today]=c; saveState(currentUser?.uid||'demo'); renderAll(); scheduleSave();}
-    function addMeal(){const item={id:cryptoRandom(),date:val('mealDate')||today,type:val('mealType'),text:val('mealText'),calories:val('mealCalories'),protein:val('mealProtein'),note:val('mealNote')}; if(!item.text){alert('Skriv inn hva du spiste.'); return;} state.meals.unshift(item); ['mealText','mealCalories','mealProtein','mealNote'].forEach(id=>byId(id).value=''); renderAll(); scheduleSave();}
-    function addActivity(){const item={id:cryptoRandom(),date:val('activityDate')||today,type:val('activityType'),duration:val('activityDuration'),steps:val('activitySteps'),calories:val('activityCalories'),note:val('activityNote')}; if(!item.duration&&!item.steps&&!item.calories){alert('Legg inn minutter, skritt eller kalorier.'); return;} state.activities.unshift(item); ['activityDuration','activitySteps','activityCalories','activityNote'].forEach(id=>byId(id).value=''); renderAll(); scheduleSave();}
+async function initFirebase(){
+  if(fileMode()){ $('fileModeInfo').classList.remove('hidden'); $('authSetupNotice').classList.remove('hidden'); $('authSetupNotice').textContent='Lokal filmodus oppdaget. Velg Lokal modus eller åpne via http://localhost for sky.'; updateStatus('Lokal filmodus – sky er slått av', 'warn'); renderState(); return; }
+  const cfg=window.__FIREBASE_CONFIG__;
+  if(!cfg || !cfg.apiKey || !cfg.databaseURL){ updateStatus('Firebase-konfig mangler databaseURL', 'warn'); renderState(); return; }
+  try{
+    updateStatus('Kobler til Firebase…', 'info');
+    app=initializeApp(cfg); auth=getAuth(app); db=getDatabase(app); firebaseReady=true;
+    onAuthStateChanged(auth, async u=>{
+      user=u||null;
+      if(user){ cloudEnabled=true; $('authCard').style.display='none'; state=loadState(user.uid); renderState(); updateStatus('Innlogget – RTDB aktiv', 'ok'); await loadCloud(); }
+      else { cloudEnabled=false; updateStatus('Firebase klar – logg inn eller velg lokal modus', 'info'); renderState(); }
+    });
+  } catch(err){ updateStatus('Firebase-feil: ' + (err.message||err), 'err'); renderState(); }
+}
 
-    function exportJson(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='vektreise-rtdb-pro-backup.json'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),500);}
-    function importJson(file){if(!file) return; const reader=new FileReader(); reader.onload=()=>{try{state=mergeDeep(defaultState(),JSON.parse(reader.result)); saveState(currentUser?.uid||'demo'); renderAll(); scheduleSave(); setStatus('JSON importert','success');}catch{alert('Kunne ikke lese JSON-filen.');}}; reader.readAsText(file);}
-
-    // CSV logic
-    function detectDelimiter(text){const first=text.split(/\r?\n/).find(Boolean)||''; return [',',';','\t'].sort((a,b)=>first.split(b).length-first.split(a).length)[0]||',';}
-    function splitCsvLine(line,delimiter){const out=[]; let cur='', quoted=false; for(let i=0;i<line.length;i++){const ch=line[i]; if(ch==='"'){ if(quoted&&line[i+1]==='"'){cur+='"'; i++;} else quoted=!quoted; } else if(ch===delimiter&&!quoted){ out.push(cur); cur=''; } else cur+=ch; } out.push(cur); return out; }
-    function parseCsv(text){const delimiter=detectDelimiter(text), lines=text.split(/\r?\n/).filter(Boolean); if(lines.length<2) return {headers:[],rows:[]}; const headers=splitCsvLine(lines[0],delimiter).map(h=>h.trim()); const rows=lines.slice(1).map(line=>{const cols=splitCsvLine(line,delimiter); const obj={}; headers.forEach((h,i)=>obj[h]=(cols[i]||'').trim()); return obj;}); return {headers,rows};}
-
-    const mappingOptions = {
-      activity: [
-        ['date','Dato'],['type','Aktivitetstype'],['duration','Varighet (min eller hh:mm:ss)'],['steps','Skritt'],['calories','Kalorier'],['note','Notat']
-      ],
-      daily: [
-        ['date','Dato'],['steps','Skritt'],['calories','Kalorier'],['sleepHours','Søvn (timer)'],['restingHr','Hvilepuls'],['weight','Kroppsvekt']
-      ]
-    };
-    const autoGuess = {
-      date:['date','dato','day','calendar date'],
-      type:['activity type','type','aktivitet','sport'],
-      duration:['duration','varighet','session time','elapsed time'],
-      steps:['steps','skritt','step count'],
-      calories:['calories','kcal','energi'],
-      note:['note','notat','comment'],
-      sleepHours:['sleep','sleep hours','søvn','sleephours'],
-      restingHr:['restinghr','resting hr','hvilepuls','resting heart rate'],
-      weight:['weight','vekt','bodyweight']
-    };
-    function normalizeKey(s){return String(s||'').toLowerCase().replace(/[^a-z0-9æøå]/g,'');}
-    function guessHeader(field){const n=autoGuess[field]||[]; const found=csvHeaders.find(h=>n.some(x=>normalizeKey(h).includes(normalizeKey(x)))); return found||'';}
-    function buildMappingUI(){const mode=val('csvMode')||'activity'; const wrap=byId('csvMappingWrap'); wrap.innerHTML=''; mappingOptions[mode].forEach(([field,label])=>{const div=document.createElement('div'); div.innerHTML=`<label for="map_${field}">${label}</label><select id="map_${field}"><option value="">-- ikke brukt --</option>${csvHeaders.map(h=>`<option value="${h}">${h}</option>`).join('')}</select>`; wrap.appendChild(div); const sel=div.querySelector('select'); sel.value=guessHeader(field);});}
-    function renderCsvPreview(){const head=byId('csvPreviewHead'), body=byId('csvPreviewBody'); head.innerHTML=''; body.innerHTML=''; csvHeaders.forEach(h=>{const th=document.createElement('th'); th.textContent=h; head.appendChild(th);}); csvData.slice(0,15).forEach(row=>{const tr=document.createElement('tr'); csvHeaders.forEach(h=>{const td=document.createElement('td'); td.textContent=row[h]||''; tr.appendChild(td);}); body.appendChild(tr);});}
-    async function loadCsvPreview(){const file=byId('csvFile').files?.[0]; if(!file){byId('csvStatus').textContent='Velg en CSV-fil først.'; return;} const text=await file.text(); const parsed=parseCsv(text); csvHeaders=parsed.headers; csvData=parsed.rows; if(!csvHeaders.length){byId('csvStatus').textContent='Fant ingen gyldige CSV-data.'; return;} buildMappingUI(); renderCsvPreview(); byId('csvStatus').textContent=`Lest ${csvData.length} rader med ${csvHeaders.length} kolonner. Sjekk mapping før import.`;}
-    function mapVal(field, row){const sel=byId(`map_${field}`); const key=sel?.value; return key ? row[key] : '';}
-    function parseDate(input){if(!input) return ''; const s=String(input).trim(); const direct=new Date(s); if(!isNaN(direct)) return direct.toISOString().slice(0,10); const m=s.match(/^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{2,4})$/); if(m){const dd=m[1].padStart(2,'0'), mm=m[2].padStart(2,'0'); let yyyy=m[3]; if(yyyy.length===2) yyyy='20'+yyyy; return `${yyyy}-${mm}-${dd}`;} return '';}
-    function parseNum(v){if(v==null||v==='') return ''; const n=parseFloat(String(v).replace(/\s/g,'').replace(',','.').replace(/[^0-9.-]/g,'')); return Number.isFinite(n)?n:'';}
-    function parseDurationToMinutes(v){if(v==null||v==='') return ''; const s=String(v).trim(); if(/^\d+(\.\d+)?$/.test(s)) return Math.round(parseFloat(s)); const parts=s.split(':').map(n=>n.trim()); if(parts.length===3) return Math.round(Number(parts[0])*60+Number(parts[1])+Number(parts[2])/60); if(parts.length===2) return Math.round(Number(parts[0])*60+Number(parts[1])); return parseNum(s);}
-    function importCsvData(){if(!csvData.length){byId('csvStatus').textContent='Ingen preview-data å importere.'; return;} const mode=val('csvMode')||'activity'; let imported=0, skipped=0; if(mode==='activity'){csvData.forEach(row=>{const date=parseDate(mapVal('date',row)); const type=mapVal('type',row)||'Garmin-import'; const duration=parseDurationToMinutes(mapVal('duration',row)); const steps=parseNum(mapVal('steps',row)); const calories=parseNum(mapVal('calories',row)); const note=mapVal('note',row)||'Importert fra CSV'; if(!date&&!duration&&!steps&&!calories){skipped++; return;} state.activities.unshift({id:cryptoRandom(),date:date||today,type,duration:duration||'',steps:steps||'',calories:calories||'',note}); imported++;});}
-      else {csvData.forEach(row=>{const date=parseDate(mapVal('date',row)); if(!date){skipped++; return;} const entry=state.garminDaily[date]||{}; const steps=parseNum(mapVal('steps',row)); const calories=parseNum(mapVal('calories',row)); const sleepHours=parseNum(mapVal('sleepHours',row)); const restingHr=parseNum(mapVal('restingHr',row)); const weight=parseNum(mapVal('weight',row)); state.garminDaily[date]={...entry, ...(steps!==''?{steps}:{}), ...(calories!==''?{calories}:{}), ...(sleepHours!==''?{sleepHours}:{}), ...(restingHr!==''?{restingHr}:{}), ...(weight!==''?{weight}:{}), source:'csv'}; if(weight!=='' && !state.weights.find(w=>w.date===date)){state.weights.push({id:cryptoRandom(),date,weight});} imported++;}); state.weights=[...state.weights].sort((a,b)=>String(a.date).localeCompare(String(b.date)));}
-      state.meta.lastGarminImport=new Date().toISOString(); renderAll(); scheduleSave(); byId('csvStatus').textContent=`Import ferdig. Importert: ${imported}. Hoppet over: ${skipped}.`; setStatus(`CSV importert (${mode}) – ${imported} rader`, 'success'); }
-    function clearCsvPreview(){csvData=[]; csvHeaders=[]; byId('csvMappingWrap').innerHTML=''; byId('csvPreviewHead').innerHTML=''; byId('csvPreviewBody').innerHTML=''; byId('csvStatus').textContent='Preview tømt.'; byId('csvFile').value='';}
-    function downloadTemplate(){const mode=val('csvMode')||'activity'; const csv = mode==='activity'
-      ? 'Date,Activity Type,Duration,Steps,Calories,Note\n2026-06-17,Gåtur,45,8200,340,Rolig økt\n2026-06-16,Golf,180,13000,900,18 hull'
-      : 'Date,Steps,Calories,SleepHours,RestingHR,Weight\n2026-06-17,8432,2741,7.1,51,119.4\n2026-06-16,10221,2890,6.8,52,119.8';
-      const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=mode==='activity'?'garmin-aktivitet-mal.csv':'garmin-daglig-mal.csv'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),500);
-    }
-
-    // App actions
-    function saveProfile(){state.profile.displayName=val('displayName'); state.profile.heightCm=num('heightCm',197); state.profile.age=val('age'); state.profile.sex=val('sex'); state.profile.startWeight=num('startWeight',120); state.profile.currentWeight=num('currentWeight',120); state.profile.goalWeight=num('goalWeight',110); state.profile.why=val('whyText'); saveState(currentUser?.uid||'demo'); renderAll(); if(currentUser&&state.profile.displayName&&auth) updateProfile(currentUser,{displayName:state.profile.displayName}).catch(()=>{}); scheduleSave();}
-    function logWeight(){saveProfile(); const entry={id:cryptoRandom(),date:val('weighDate')||today,weight:num('currentWeight',state.profile.currentWeight)}; state.profile.currentWeight=entry.weight; state.weights.push(entry); const map=new Map(); state.weights.forEach(item=>map.set(item.date,item)); state.weights=[...map.values()].sort((a,b)=>String(a.date).localeCompare(String(b.date))); renderAll(); scheduleSave();}
-    function saveGoals(){state.goals.activitiesPerWeek=num('goalActivitiesPerWeek',4); state.goals.minutesPerWeek=num('goalMinutesPerWeek',180); state.goals.stepsPerDay=num('goalStepsPerDay',8000); saveState(currentUser?.uid||'demo'); renderAll(); scheduleSave();}
-    function saveCheckin(){const c=state.checkins[today]||{habits:{}}; c.waterGlasses=num('waterGlasses',0); c.mood=val('dailyMood'); state.checkins[today]=c; saveState(currentUser?.uid||'demo'); renderAll(); scheduleSave();}
-    function addMeal(){const item={id:cryptoRandom(),date:val('mealDate')||today,type:val('mealType'),text:val('mealText'),calories:val('mealCalories'),protein:val('mealProtein'),note:val('mealNote')}; if(!item.text){alert('Skriv inn hva du spiste.'); return;} state.meals.unshift(item); ['mealText','mealCalories','mealProtein','mealNote'].forEach(id=>byId(id).value=''); renderAll(); scheduleSave();}
-    function addActivity(){const item={id:cryptoRandom(),date:val('activityDate')||today,type:val('activityType'),duration:val('activityDuration'),steps:val('activitySteps'),calories:val('activityCalories'),note:val('activityNote')}; if(!item.duration&&!item.steps&&!item.calories){alert('Legg inn minutter, skritt eller kalorier.'); return;} state.activities.unshift(item); ['activityDuration','activitySteps','activityCalories','activityNote'].forEach(id=>byId(id).value=''); renderAll(); scheduleSave();}
-    function exportJson(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='vektreise-rtdb-pro-backup.json'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),500);}
-    function importJson(file){if(!file) return; const reader=new FileReader(); reader.onload=()=>{try{state=mergeDeep(defaultState(),JSON.parse(reader.result)); saveState(currentUser?.uid||'demo'); renderAll(); scheduleSave(); setStatus('JSON importert','success');}catch{alert('Kunne ikke lese JSON-filen.');}}; reader.readAsText(file);}
-
-    // Bindings
-    document.querySelectorAll('[data-tab]').forEach(el=>el.onclick=()=>setTab(el.dataset.tab));
-    byId('authActionBtn').onclick=authAction;
-    byId('saveProfileBtn').onclick=saveProfile;
-    byId('logWeightBtn').onclick=logWeight;
-    byId('saveGoalsBtn').onclick=saveGoals;
-    byId('saveCheckinBtn').onclick=saveCheckin;
-    byId('addMealBtn').onclick=addMeal;
-    byId('addActivityBtn').onclick=addActivity;
-    byId('quoteBtn').onclick=()=>setText('quoteText',quotes[Math.floor(Math.random()*quotes.length)]);
-    byId('exportBtn').onclick=exportJson;
-    byId('importBtn').onclick=()=>byId('importFile').click();
-    byId('importFile').onchange=e=>importJson(e.target.files?.[0]);
-    byId('syncBtn').onclick=()=>syncNow(false);
-    byId('logoutBtn').onclick=async()=>{if(auth&&currentUser) await signOut(auth); else byId('authOverlay').classList.remove('hidden');};
-    byId('parseCsvBtn').onclick=loadCsvPreview;
-    byId('importCsvBtn').onclick=importCsvData;
-    byId('clearPreviewBtn').onclick=clearCsvPreview;
-    byId('downloadTemplateBtn').onclick=downloadTemplate;
-    window.addEventListener('online',()=>{addHistory('Nettleseren rapporterer ONLINE'); if(cloudEnabled&&currentUser&&state.meta.pendingCloudSync) syncNow(false);});
-    window.addEventListener('offline',()=>{addHistory('Nettleseren rapporterer OFFLINE'); setStatus('Nettleseren er offline – fortsetter lokalt','warn');});
-
-    renderHabitGrid();
-    renderAll();
-    setText('quoteText',quotes[Math.floor(Math.random()*quotes.length)]);
-    initFirebase();
-  </script>
+document.querySelectorAll('[data-tab]').forEach(btn=>btn.onclick=()=>setTab(btn.dataset.tab));
+initFirebase();
+renderState();
+</script>
 </body>
 </html>
